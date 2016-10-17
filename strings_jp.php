@@ -96,5 +96,3 @@ define(S_SQLDBSF, 'mysql_select_db失敗<br>');	//database select failure
 define(S_TCREATE, 'テーブルを作成します<br>\n');	//creating table
 define(S_TCREATEF, 'テーブル作成失敗<br>');		//table creation failed
 define(S_SQLFAIL, 'sql失敗<br>');		//SQL Failure
-?>
-
