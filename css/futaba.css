@@ -21,6 +21,9 @@ a:hover {
         text-decoration:underline;
         font-family:serif;
 }
+img {
+        margin: 10px;
+}
 .adminbar {
         text-align:right;
         background:inherit;

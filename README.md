@@ -1,7 +1,7 @@
 # Fikaba 
-Version 000003
+Version 000004
 
-Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, now that it's basically dead.
+Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
 ## Instances
 I want to list some examples of sites running fikaba. If you are using fikaba, please make a pull request or otherwise contact me to add your site to the (for now empty) list below.
@@ -15,6 +15,8 @@ Some of the differences between futallaby and fikaba are:
 * html5 instead of xhtml
 * style picker
 * capcodes
+* image replies
+* the possibility to reply to any thread as an administrator, and not just create new threads
 
 and more to come
 

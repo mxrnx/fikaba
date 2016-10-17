@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000003
+# Fikaba 000004
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -170,7 +170,27 @@ function updatelog($resno=0){
       // Main creation
       $dat.="<table><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
       $dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
-      $dat.="<span class=\"commentpostername\">$name</span> $now No.$no &nbsp; \n";
+      $dat.="<span class=\"commentpostername\">$name</span> $now No.$no &nbsp;<br /> \n";
+    if($ext){ // TODO: test
+      $size = $fsize;//file size displayed in alt text
+      if($w && $h){//when there is size...
+        if(@is_file(THUMB_DIR.$tim.'s.jpg')){
+          $imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".THUMB_DIR.$tim.'s.jpg'.
+      "\" border=\"0\" align=\"left\" width=\"$w\" height=\"$h\" hspace=\"20\" alt=\"".$size." B\" /></a>";
+        }else{
+          $imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src.
+      "\" border=\"0\" align=\"left\" width=\"$w\" height=\"$h\" hspace=\"20\" alt=\"".$size." B\" /></a>";
+        }
+      }else{
+        $imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src.
+      "\" border=\"0\" align=\"left\" hspace=\"20\" alt=\"".$size." B\" /></a><br /><br />";
+      }
+      if(@is_file(THUMB_DIR.$tim.'s.jpg')){
+        $dat.="$imgsrc<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span>";
+      }else{
+        $dat.="$imgsrc<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>";
+      }
+    }
       $dat.="<blockquote>$com</blockquote>";
       $dat.="</td></tr></table>\n";
     }
@@ -307,17 +327,20 @@ if($no){$dat.='<input type="hidden" name="resto" value="'.$no.'" />
 ';}
 $dat.='<table>
 <tr><td class="postblock" align="left">'.S_NAME.'</td><td align="left"><input type="text" name="name" size="28" /></td></tr>';
-if($admin){$dat.='<tr><td class="postblock" align="left">'.S_CAPCODE.'</td><td align="left"><input type="text" name="capcode" size="28" /></td></tr>';}
+if($admin){
+  $dat.='<tr><td class="postblock" align="left">'.S_CAPCODE.'</td><td align="left"><input type="text" name="capcode" size="28" /></td></tr>
+<tr><td class="postblock" align="left">'.S_REPLYTO.'</td><td align="left"><input type="text" name="resto" size="28" value="0" /></td></tr>';
+}
 $dat.='<tr><td class="postblock" align="left">'.S_EMAIL.'</td><td align="left"><input type="text" name="email" size="28" /></td></tr>
 <tr><td class="postblock" align="left">'.S_SUBJECT.'</td><td align="left"><input type="text" name="sub" size="35" />
 <input type="submit" value="'.S_SUBMIT.'" /></td></tr>
 <tr><td class="postblock" align="left">'.S_COMMENT.'</td><td align="left"><textarea name="com" cols="48" rows="4"></textarea></td></tr>
 ';
-if(!$resno){
+//if(!$resno){
 $dat.='<tr><td class="postblock" align="left">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />
 [<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]</td></tr>
-';}
+';//}
 $dat.='<tr><td align="left" class="postblock" align="left">'.S_DELPASS.'</td><td align="left"><input type="password" name="pwd" size="8" maxlength="8" value="" />'.S_DELEXPL.'</td></tr>
 <tr><td colspan="2">
 <div align="left" class="rules">'.S_RULES.'</div></td></tr></table></form></div></div><hr />';

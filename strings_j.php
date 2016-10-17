@@ -7,6 +7,7 @@ define(S_POSTING, 'レス送信モード');
 define(S_NOTAGS, 'タグがつかえます');
 define(S_NAME, 'おなまえ');
 define(S_CAPCODE, 'Capcode');										//TODO moonspeak translation
+define(S_REPLYTO, 'Reply to');										//TODO
 define(S_EMAIL, 'E-mail');
 define(S_SUBJECT, '題　　名');
 define(S_SUBMIT, '送信する');
