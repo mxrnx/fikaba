@@ -33,8 +33,11 @@ td {
 .adminbar {
         text-align:right;
         background:inherit;
-        clear:both;
+        /*clear:both;*/
         float:right;
+}
+.styles {
+	float: left;
 }
 .logo {
         clear:both;
