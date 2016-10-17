@@ -7,7 +7,7 @@
 # Based on GazouBBS, Futaba, and Futallaby
 
 include "config.php";
-include "strings_e.php";		//String resource file
+include "strings_".LANGUAGE.".php";		//String resource file
 
 extract($_POST);
 extract($_GET);

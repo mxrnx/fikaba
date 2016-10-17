@@ -1,5 +1,6 @@
 <?php
 define(TITLE, 'Fikaba-powered image board');		//Name of this image board
+define(LANGUAGE, 'en');			//Language. Fikaba provides en and jp by default
 define(SQLLOG, 'CHANGEME');		//Table (NOT DATABASE) used by image board
 define(SQLHOST, 'localhost');		//MySQL server address, usually localhost
 define(SQLUSER, 'CHANGEME');		//MySQL user (must be changed)
