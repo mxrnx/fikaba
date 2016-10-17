@@ -28,5 +28,10 @@ define(PROXY_CHECK, 0);		//Enable proxy check (1: yes  0: no)
 define(DISP_ID, 0);		//Display user IDs (1: yes  0: no)
 define(BR_CHECK, 15);		//Max lines per post (0 = no limit)
 define(TRIPKEY, '#');		//this character is displayed before tripcodes
-define(CSSFILE, 'futaba.css');	//location of the css file
+//define(CSSFILE, 'futaba.css');	//location of the css file (DEPRECATED as of Fikaba 000002)
+define(CSSDEFAULT, 'Futaba');		// The name of the stylesheet to be used by default
+define(CSSHTML, '<link rel="alternate stylesheet" type="text/css" href="css/futaba.css" title="Futaba" />
+<link rel="alternate stylesheet" type="text/css" href="css/burichan.css" title="Burichan" />');
+define(STYLESHTML, '[<a href="#" onClick="changeStyle(\'Futaba\')">Futaba</a>]
+[<a href="#" onClick="changeStyle(\'Burichan\')">Burichan</a>]');
 ?>
