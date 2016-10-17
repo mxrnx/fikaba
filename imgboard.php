@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000006
+# Fikaba 000007
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -107,7 +107,9 @@ function updatelog($resno=0){
 			// URL and link
 			if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 			$com = auto_link($com);
-			$com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
+			$com = eregi_replace("&gt;", "\>", $com);
+			$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2' class=\"reflink\">&gt;&gt;\\2</a>", $com);
+			$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 			// Picture file name
 			$img = $path.$tim.$ext;
 			$src = IMG_DIR.$tim.$ext;
@@ -163,9 +165,13 @@ function updatelog($resno=0){
 				if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 				$com = auto_link($com);
 				//$com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<font color=".RE_COL.">\\2</font>", $com);
-				$com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
+				//$com = eregi_replace("(^|>)&gt;&gt;([^<]*)", "\\1<a href='".PHP_SELF."#\\2' class=\"reflink\">&gt;&gt;\\2</a>", $com);
+				//$com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
+				$com = eregi_replace("&gt;", ">", $com);
+				$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2' class=\"reflink\">&gt;&gt;\\2</a>", $com);
+				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 				// Main creation
-				$dat.="<table><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
+				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
 				$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
 				$dat.="<span class=\"commentpostername\">$name</span> $now No.$no &nbsp;<br /> \n";
 				if($ext){ // TODO: test
@@ -501,9 +507,9 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	if($pxck=="on" && PROXY_CHECK){
 		if(proxy_connect('80') == 1){
 			error(S_PROXY80,$dest);
-	} elseif(proxy_connect('8080') == 1){
-		error(S_PROXY8080,$dest);
-	}
+		} elseif(proxy_connect('8080') == 1){
+			error(S_PROXY8080,$dest);
+		}
 	}
 
 	// No, path, time, and url format
@@ -511,9 +517,9 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	if($pwd==""){
 		if($pwdc==""){
 			$pwd=rand();$pwd=substr($pwd,0,8);
-	}else{
-		$pwd=$pwdc;
-	}
+		}else{
+			$pwd=$pwdc;
+		}
 	}
 
 	$c_pass = $pwd;
@@ -524,9 +530,9 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	if(DISP_ID){
 		if($email&&DISP_ID==1){
 			$now .= " ID:???";
-	}else{
-		$now.=" ID:".substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+9*60*60)),'id'),-8);
-	}
+		}else{
+			$now.=" ID:".substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+9*60*60)),'id'),-8);
+		}
 	}
 	//Text plastic surgery (rorororor)
 	$email= CleanStr($email);  $email=ereg_replace("[\r\n]","",$email);
