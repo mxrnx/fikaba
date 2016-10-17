@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000001
+# Fikaba 000002
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -131,7 +131,7 @@ function updatelog($resno=0){
     }
     //  Main creation
     $dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span>   \n";
-    $dat.="Name <span class=\"postername\">$name</span> $now No.$no &nbsp; \n";
+    $dat.="<span class=\"postername\">$name</span> $now No.$no &nbsp; \n";
     if(!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
     $dat.="\n<blockquote>$com</blockquote>";
 
@@ -220,6 +220,8 @@ l();
         $dat.="</form></td>";
       }else{$dat.="<td>".S_LASTPG."</td>";}
         $dat.="</tr></table><br clear=\"all\" />\n";
+    } else { // in res display mode
+      $dat.="<table></table><br clear=\"all\" />\n";
     }
     foot($dat);
     if($resno){echo $dat;break;}
@@ -264,7 +266,9 @@ if (SHOWTITLETXT == 1) {
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
-<link rel="stylesheet" type="text/css" href="'.CSSFILE.'" title="Standard Futaba" />
+<script type="text/javascript" src="js/style.js"></script>
+'.CSSHTML.'
+<script type="text/javascript">changeStyle("'.CSSDEFAULT.'");</script>
 <title>'.TITLE.'</title>
 <script type="text/javascript"><!--
 function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(i=0;i<forms.length;i++){if(forms[i].pwd)with(forms[i]){if(!pwd.value)pwd.value=P;}if(forms[i].name)with(forms[i]){if(!name.value)name.value=N;}}}};function getCookie(key, tmp1, tmp2, xx1, xx2, xx3) {tmp1 = " " + document.cookie + ";";xx1 = xx2 = 0;len = tmp1.length;	while (xx1 < len) {xx2 = tmp1.indexOf(";", xx1);tmp2 = tmp1.substring(xx1 + 1, xx2);xx3 = tmp2.indexOf("=");if (tmp2.substring(0, xx3) == key) {return(unescape(tmp2.substring(xx3 + 1, xx2 - xx1 - 1)));}xx1 = xx2 + 1;}return("");}
@@ -272,6 +276,9 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 </head>
 <body>
  '.$titlebar.'
+<div class="styles">
+'.STYLESHTML.'
+</div>
 <div class="adminbar">
 [<a href="'.HOME.'" target="_top">'.S_HOME.'</a>]
 [<a href="'.PHP_SELF.'?mode=admin">'.S_ADMIN.'</a>]
@@ -283,7 +290,7 @@ function form(&$dat,$resno,$admin=""){
   $maxbyte = MAX_KB * 1024;
   $no=$resno;
   if($resno){
-    $msg .= "[<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]\n";
+    //$msg .= "[<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]\n";
     $msg .= "<div class=\"theading passvalid\">".S_POSTING." [<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]</div>\n";
   }
   if($admin){
@@ -317,10 +324,11 @@ $dat.='<tr><td align="left" class="postblock" align="left">'.S_DELPASS.'</td><td
 
 /* Footer */
 function foot(&$dat){
-  $dat.='
-<div class="footer">'.S_FOOT.'</div>
+  //$dat.="<hr /><br clear=\"left\" />\n
+  $dat.="
+<div class=\"footer\">".S_FOOT."</div>
 
-</body></html>';
+</body></html>";
 }
 function error($mes,$dest=''){ /* Hey guys, what's going on in this function?  Since I don't see it so often, I'll leave the tags alone for now.*/
   global $upfile_name,$path;
@@ -805,9 +813,9 @@ function valid($pass){
 
   head($dat);
   echo $dat;
-  echo "[<a href=\"".PHP_SELF2."\">".S_RETURNS."</a>]\n";
+  //echo "[<a href=\"".PHP_SELF2."\">".S_RETURNS."</a>]\n";
   echo "[<a href=\"".PHP_SELF."\">".S_LOGUPD."</a>]\n";
-  echo "<div class=\"passvalid\">".S_MANAMODE."</div>\n";
+  echo "<div class=\"passvalid\">".S_MANAMODE." [<a href=\"".PHP_SELF2."\">".S_RETURNS."</a>]</div>\n";
   echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
   // Mana login form
   if(!$pass){

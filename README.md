@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000001
+Version 000002
 
 Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, now that it's basically dead.
 
@@ -8,8 +8,16 @@ Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, 
 Some of the differences between futallaby and fikaba are:
 
 * html5 instead of xhtml
+* style picker
 
 and more to come
+
+## Installation
+1. Place the files from this repository in a folder on your webserver
+2. Edit/move config.example.php to config.php and edit it
+3. Make sure IMG\_DIR and THUMB\_DIR exist and chmod them to 777
+4. Navigate to imgboard.php in your browser
+5. Pour yourself some puerh and admire your professional adminship
 
 ## License
 See the file LICENSE.
