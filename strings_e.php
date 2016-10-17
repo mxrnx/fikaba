@@ -19,7 +19,7 @@ define(S_RULES, '<ul><li>Supported file types are: GIF, JPG, PNG</li>
 <li>Images greater than '.MAX_W.'x'.MAX_H.' pixels will be thumbnailed.</li></ul>');				//Prints rules under posting section
 define(S_REPORTERR, 'Error: Cannot find reply.');							//Returns error when a reply (res) cannot be found
 define(S_THUMB, 'Thumbnail displayed, click image for full size.');					//Prints instructions for viewing real source
-define(S_PICNAME, 'File : ');										//Prints text before upload name/link
+define(S_PICNAME, 'File: ');										//Prints text before upload name/link
 define(S_REPLY, 'Reply');										//Prints text for reply link
 define(S_OLD, 'Marked for deletion (old).');								//Prints text to be displayed before post is marked for deletion, see: retention
 define(S_RESU, 'Post');											//Prints post?
@@ -44,7 +44,7 @@ define(S_STRREF, 'Error: String refused.');								//Returns error when a string
 define(S_UNJUST, 'Error: Unjust POST.');								//Returns error on an unjust POST - prevents floodbots or ways not using POST method?
 define(S_NOPIC, 'Error: No file selected.');								//Returns error for no file selected and override unchecked
 define(S_NOTEXT, 'Error: No text entered.');								//Returns error for no text entered in to subject/comment
-define(S_MANAGEMENT, 'Manager : ');									//Defines prefix for Manager Post name
+define(S_MANAGEMENT, 'Manager: ');									//Defines prefix for Manager Post name
 define(S_DELETION, 'Deletion');										//Prints deletion message with quotes?
 define(S_TOOLONG, 'Error: Field too long.');								//Returns error for too many characters in a given field
 define(S_UNUSUAL, 'Error: Abnormal reply.');								//Returns error for abnormal reply? (this is a mystery!)
