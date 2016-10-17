@@ -3,6 +3,11 @@ Version 000002
 
 Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, now that it's basically dead.
 
+## Instances
+I want to list some examples of sites running fikaba. If you are using fikaba, please make a pull request or otherwise contact me to add your site to the (for now empty) list below.
+
+* none yet
+
 ## Differences
 
 Some of the differences between futallaby and fikaba are:
