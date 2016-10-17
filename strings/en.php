@@ -76,13 +76,14 @@ define(S_LOGUPD, 'Update');										//Updates the log/SQLDB by accessing the PH
 define(S_MANAMODE, 'Manager Mode');									//Prints heading on top of Manager page
 define(S_MANAREPDEL, 'Management Panel');								//Defines Management Panel radio button--allows the user to view the management panel (overview of all posts)
 define(S_MANAPOST, 'Manager Post');									//Defines Manager Post radio button--allows the user to post using HTML code in the comment box
+define(S_MANABAN, 'Ban');										//Defines Manager Ban radio button
 define(S_MANASUB, 'Submit');										//Defines name for submit button in Manager Mode
 define(S_DELLIST, 'Management Panel');									//Prints sub-heading of Management Panel
 define(S_ITDELETES, 'Delete');										//Defines for deletion button in Management Panel
 define(S_MDRESET, 'Reset');										//Defines name for field reset button in Management Panel
 define(S_MDONLYPIC, 'File Only');									//Sets whether or not to delete only file, or entire post/thread
 define(S_MDTABLE1, '<th>Delete?</th><th>Post No.</th><th>Time</th><th>Subject</th>');			//Explains field names for Management Panel (Delete?->Subject)
-define(S_MDTABLE2, '<th>Name</th><th>Comment</th><th>Host</th><th>Size<br>(Bytes)</th><th>md5</th><th>Reply #</th><th>Timestamp (s)</th><th>Timestamp (ms)</th>');	//Explains names for Management Panel (Name->md5)
+define(S_MDTABLE2, '<th>Name</th><th>IP</th><th>Comment</th><th>Host</th><th>Size<br>(Bytes)</th><th>md5</th><th>Reply #</th><th>Timestamp (s)</th><th>Timestamp (ms)</th>');	//Explains names for Management Panel (Name->md5)
 define(S_RESET, 'Reset');										//Sets name for field reset button (global)
 define(S_IMGSPACEUSAGE, 'Space used: ');						//Prints space used KB by the board under Management Panel
 define(S_CANNOTWRITE, 'Error: Cannot write to directory.<br>');						//Returns error when the script cannot write to the directory, this is used on initial setup--check your chmod (777)
@@ -94,3 +95,12 @@ define(S_SQLDBSF, 'Database error, check SQL settings<br>');	//database select f
 define(S_TCREATE, 'Creating table!<br>\n');	//creating table
 define(S_TCREATEF, 'Unable to create table!<br>');		//table creation failed
 define(S_SQLFAIL, 'Critical SQL problem!<br>');		//SQL Failure
+
+/* ban-specific */
+define(S_BANRENZOKU, 'Error: you are banned. Post discarded. Check on the status of your ban <a href="?mode=banned">here</a>.');	//Error shown to banned user when they try to post
+define(S_BANNEDMESSAGE, 'You are banned!');
+define(S_BANTIME, 'You were banned on: ');
+define(S_BANEXPIRE, 'Your ban expires on: ');
+define(S_MANABANIP, 'IP: ');
+define(S_MANABANEXP, 'Expires in (days): ');
+define(S_BANEXPERROR, 'Please give a number of days to ban this user for.');
