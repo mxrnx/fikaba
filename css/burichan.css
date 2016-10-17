@@ -195,4 +195,5 @@ td {
 }
 .righted {
 	text-align: right;
+	float: right;
 }
