@@ -94,4 +94,3 @@ define(S_SQLDBSF, 'Database error, check SQL settings<br>');	//database select f
 define(S_TCREATE, 'Creating table!<br>\n');	//creating table
 define(S_TCREATEF, 'Unable to create table!<br>');		//table creation failed
 define(S_SQLFAIL, 'Critical SQL problem!<br>');		//SQL Failure
-?>

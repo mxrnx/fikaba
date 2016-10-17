@@ -35,4 +35,3 @@ define(CSSHTML, '<link rel="alternate stylesheet" type="text/css" href="css/futa
 <link rel="alternate stylesheet" type="text/css" href="css/burichan.css" title="Burichan" />');
 define(STYLESHTML, '[<a href="#" onClick="changeStyle(\'Futaba\')">Futaba</a>]
 [<a href="#" onClick="changeStyle(\'Burichan\')">Burichan</a>]');
-?>
