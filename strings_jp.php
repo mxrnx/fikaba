@@ -34,7 +34,7 @@ define(S_PREV, '前のページ');
 define(S_FIRSTPG, '最初のページ');
 define(S_NEXT, '次のページ');
 define(S_LASTPG, '最後のページ');
-define(S_FOOT, '- <a href="http://php.s3.to" target=_blank>GazouBBS</a> + <a href="http://www.2chan.net/" target=_blank>futaba</a> + <a href="http://www.mapored.com/futallaby/" target=_blank>futallaby</a> -'); 
+define(S_FOOT, '- <a href="http://php.s3.to" target="_blank">GazouBBS</a> + <a href="http://www.2chan.net/" target="_blank">futaba</a> + <a href="http://www.1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="https://github.com/knarka/fikaba" target="_blank">fikaba</a> -'); //Prints footer (leave these credits)
 define(S_RELOAD, 'リロード');
 define(S_UPFAIL, 'アップロードに失敗しました<br>サーバがサポートしていない可能性があります');
 define(S_NOREC, 'アップロードに失敗しました<br>画像ファイル以外は受け付けません');
