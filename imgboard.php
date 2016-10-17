@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000005
+# Fikaba 000006
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -63,14 +63,14 @@ function updatelog($resno=0){
 		if($result){
 			$find = mysql_fetch_row($result);
 			mysql_free_result($result);
-    }
-    if(!$find) error(S_REPORTERR);
-  }
-  if($resno){
-	  if(!$treeline=mysql_call("select * from ".SQLLOG." where root>0 and no=".$resno." order by root desc")){echo S_SQLFAIL;}
-  }else{
-	  if(!$treeline=mysql_call("select * from ".SQLLOG." where root>0 order by root desc")){echo S_SQLFAIL;}
-  }
+		}
+	if(!$find) error(S_REPORTERR);
+	}
+	if($resno){
+		if(!$treeline=mysql_call("select * from ".SQLLOG." where root>0 and no=".$resno." order by root desc")){echo S_SQLFAIL;}
+	}else{
+		if(!$treeline=mysql_call("select * from ".SQLLOG." where root>0 order by root desc")){echo S_SQLFAIL;}
+	}
 
   //Finding the last entry number
   if(!$result=mysql_call("select max(no) from ".SQLLOG)){echo S_SQLFAIL;}
@@ -105,30 +105,27 @@ function updatelog($resno=0){
 	    if(!$no){break;}
 
 	    // URL and link
-	    if($email) $name = "<a href=\"mailto:$email\">$name</a>";
-    $com = auto_link($com);
-    $com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
-    // Picture file name
-    $img = $path.$tim.$ext;
-    $src = IMG_DIR.$tim.$ext;
-    // img tag creation
-    $imgsrc = "";
-    if($ext){
-	    $size = $fsize;//file size displayed in alt text
-	    if($w && $h){//when there is size...
-		    if(@is_file(THUMB_DIR.$tim.'s.jpg')){
-			    $imgsrc = "    <span class=\"thumbnailmsg\">".S_THUMB."</span><br /><a href=\"".$src."\" target=\"_blank\"><img src=\"".THUMB_DIR.$tim.'s.jpg'.
-				    "\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a><br />";
-	}else{
-		$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src.
-			"\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a><br />";
+	if($email) $name = "<a href=\"mailto:$email\">$name</a>";
+	$com = auto_link($com);
+	$com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
+	// Picture file name
+	$img = $path.$tim.$ext;
+	$src = IMG_DIR.$tim.$ext;
+	// img tag creation
+	$imgsrc = "";
+	if($ext){
+		$size = $fsize;//file size displayed in alt text
+		if($w && $h){//when there is size...
+			if(@is_file(THUMB_DIR.$tim.'s.jpg')){
+				$imgsrc = "    <span class=\"thumbnailmsg\">".S_THUMB."</span><br /><a href=\"".$src."\" target=\"_blank\"><img src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a><br />";
+			}else{
+				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a><br />";
+			}
+		}else{
+			$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" alt=\"".$size." B\" /></a><br />";
+		}
+	$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>$imgsrc";
 	}
-      }else{
-	      $imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src.
-		      "\" alt=\"".$size." B\" /></a><br />";
-      }
-      $dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>$imgsrc";
-    }
     //  Main creation
     $dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span>   \n";
     $dat.="<span class=\"postername\">$name</span> $now No.$no &nbsp; \n";
@@ -172,6 +169,7 @@ function updatelog($resno=0){
       $dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
       $dat.="<span class=\"commentpostername\">$name</span> $now No.$no &nbsp;<br /> \n";
       if($ext){ // TODO: test
+	      $src = IMG_DIR.$tim.$ext;
 	      $size = $fsize;//file size displayed in alt text
 	      if($w && $h){//when there is size...
 		      if(@is_file(THUMB_DIR.$tim.'s.jpg')){
