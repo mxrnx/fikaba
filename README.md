@@ -28,7 +28,8 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 * The possibility to reply to any thread as a manager
 
 ### Planned features
-In order of importance
+In order of importance:
+
 1. Banning
 2. Reference links to other posts (>>###)
 3. Fancy bans (USER WAS BANNED FOR THIS POST)
