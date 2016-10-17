@@ -275,7 +275,7 @@ if (SHOWTITLEIMG == 1) {
 	$titlepart.= '<img src="'.TITLEIMG.'" alt="'.TITLE.'" />';
 	if (SHOWTITLETXT == 1) {$titlepart.= '<br />';}
 } else if (SHOWTITLEIMG == 2) {
-	$titlepart.= '<img src="'.TITLEIMG.'" onclick="this.src=this.src;" alt="'.TITLE.'" />';
+	$titlepart.= '<img src="'.(include(TITLEIMG)).'" onclick="this.src=this.src;" alt="'.TITLE.'" />';
 	if (SHOWTITLETXT == 1) {$titlepart.= '<br />';}
 }
 if (SHOWTITLETXT == 1) {
