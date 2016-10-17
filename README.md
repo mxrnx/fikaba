@@ -3,25 +3,39 @@ Version 000006
 
 Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
+So far, fikaba is database-compatible with futallaby 040103. I cannot promise it will stay this way, however.
+
 ## Instances
 I want to list some examples of sites running fikaba. If you are using fikaba, please make a pull request or otherwise contact me to add your site to the (for now empty) list below.
 
 * none yet
 
-## Differences
+## Features
+### Features inherited from futallaby
+* MySQL database
+* Highly configurable
+* Image posting, automatic thumbnailing
+* Manager panel
+* Raw HTML posts for managers
+* Citations
+* User post deletion
 
-Some of the differences between futallaby and fikaba are:
+### Features that fikaba does, but futallaby does not have
+* Valid html5 instead of xhtml
+* Style picker
+* Capcodes
+* Image replies
+* The possibility to reply to any thread as a manager
 
-* valid html5 instead of xhtml
-* style picker
-* capcodes
-* image replies
-* the possibility to reply to any thread as an administrator, and not just create new threads
-
-and more to come
+### Planned features
+In order of importance
+1. Banning
+2. Reference links to other posts (>>###)
+3. Fancy bans (USER WAS BANNED FOR THIS POST)
+4. WebM support
 
 ## Installation
-1. Place the files from this repository in a folder on your webserver
+1. Place the files from this repository in a folder on your webserver and set permissions of that folder to 777
 2. Edit/move config.example.php to config.php and edit it
 3. Make sure IMG\_DIR and THUMB\_DIR exist and chmod them to 777
 4. Navigate to imgboard.php in your browser
