@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000007
+Version 000008
 
 Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
