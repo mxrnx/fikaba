@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000004
+Version 000005
 
 Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
@@ -12,7 +12,7 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 
 Some of the differences between futallaby and fikaba are:
 
-* html5 instead of xhtml
+* valid html5 instead of xhtml
 * style picker
 * capcodes
 * image replies
