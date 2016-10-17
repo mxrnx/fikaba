@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000007
+# Fikaba 000008
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
