@@ -27,13 +27,15 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 * Image replies
 * The possibility to reply to any thread as a manager
 * Post references (>>###)
+* IP bans
 
 ### Planned features
 In order of importance:
 
-1. Banning
-3. Fancy bans (USER WAS BANNED FOR THIS POST)
-4. WebM support
+1. Unbanning
+2. Fancy bans (USER WAS BANNED FOR THIS POST)
+3. WebM support
+4. Reporting
 
 ## Installation
 1. Place the files from this repository in a folder on your webserver and set permissions of that folder to 777

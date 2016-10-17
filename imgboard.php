@@ -7,7 +7,7 @@
 # Based on GazouBBS, Futaba, and Futallaby
 
 include "config.php";
-include "strings_".LANGUAGE.".php";		//String resource file
+include "strings/".LANGUAGE.".php";		//String resource file
 
 extract($_POST);
 extract($_GET);
@@ -30,9 +30,9 @@ if(!$con=mysql_connect(SQLHOST,SQLUSER,SQLPASS)){
 $db_id=mysql_select_db(SQLDB,$con);
 if(!$db_id){echo S_SQLDBSF;}
 
-if (!table_exist(SQLLOG)) {
-	echo (SQLLOG.S_TCREATE);
-	$result = mysql_call("create table ".SQLLOG." (primary key(no),
+if (!table_exist(POSTTABLE)) {
+	echo (POSTTABLE.S_TCREATE);
+	$result = mysql_call("create table ".POSTTABLE." (primary key(no),
 		no    int not null auto_increment,
 		now   text,
 		name  text,
@@ -49,8 +49,23 @@ if (!table_exist(SQLLOG)) {
 		md5   text,
 		fsize int,
 		root  timestamp,
-		resto int)");
+		resto int,
+		ip    text)");
 	if(!$result){echo S_TCREATEF;}
+}
+
+if (!table_exist(BANTABLE)){
+	echo (BANTABLE.S_TCREATE);
+	$result = mysql_call("create table ".BANTABLE." (ip text not null,
+		start int,
+		expires int)");
+	if(!$result){echo S_TCREATEF;}
+}
+
+function humantime($time){
+	$youbi = array(S_SUN, S_MON, S_TUE, S_WED, S_THU, S_FRI, S_SAT);
+	$yd = $youbi[gmdate("w", $time+9*60*60)] ;
+	return gmdate("y/m/d",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
 }
 
 function updatelog($resno=0){
@@ -59,7 +74,7 @@ function updatelog($resno=0){
 	$find = false;
 	$resno=(int)$resno;
 	if($resno){
-		$result = mysql_call("select * from ".SQLLOG." where root>0 and no=$resno");
+		$result = mysql_call("select * from ".POSTTABLE." where root>0 and no=$resno");
 		if($result){
 			$find = mysql_fetch_row($result);
 			mysql_free_result($result);
@@ -67,13 +82,13 @@ function updatelog($resno=0){
 		if(!$find) error(S_REPORTERR);
 	}
 	if($resno){
-		if(!$treeline=mysql_call("select * from ".SQLLOG." where root>0 and no=".$resno." order by root desc")){echo S_SQLFAIL;}
+		if(!$treeline=mysql_call("select * from ".POSTTABLE." where root>0 and no=".$resno." order by root desc")){echo S_SQLFAIL;}
 	}else{
-		if(!$treeline=mysql_call("select * from ".SQLLOG." where root>0 order by root desc")){echo S_SQLFAIL;}
+		if(!$treeline=mysql_call("select * from ".POSTTABLE." where root>0 order by root desc")){echo S_SQLFAIL;}
 	}
 
 	//Finding the last entry number
-	if(!$result=mysql_call("select max(no) from ".SQLLOG)){echo S_SQLFAIL;}
+	if(!$result=mysql_call("select max(no) from ".POSTTABLE)){echo S_SQLFAIL;}
 	$row=mysql_fetch_array($result);
 	$lastno=(int)$row[0];
 	mysql_free_result($result);
@@ -101,7 +116,7 @@ function updatelog($resno=0){
 		$dat.='<form action="'.PHP_SELF.'" method="post">';
 	
 		for($i = $st; $i < $st+PAGE_DEF; $i++){
-			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,)=mysql_fetch_row($treeline);
+			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=mysql_fetch_row($treeline);
 			if(!$no) break;
 	
 			// URL and link
@@ -139,7 +154,7 @@ function updatelog($resno=0){
 				$dat.="<span class=\"oldpost\">".S_OLD."</span><br />\n";
 			}
 	
-			if(!$resline=mysql_call("select * from ".SQLLOG." where resto=".$no." order by no")) echo S_SQLFAIL;
+			if(!$resline=mysql_call("select * from ".POSTTABLE." where resto=".$no." order by no")) echo S_SQLFAIL;
 			$countres=mysql_num_rows($resline);
 	
 			if(!$resno){
@@ -152,7 +167,7 @@ function updatelog($resno=0){
 	
 			while($resrow=mysql_fetch_row($resline)){
 				if($s>0){$s--;continue;}
-				list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,)=$resrow;
+				list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$resrow;
 				if(!$no){break;}
 	
 				if($sub=="No Subject"){
@@ -259,7 +274,7 @@ function updatelog($resno=0){
 }
 
 function mysql_call($query){
-	$ret=mysql_query($query);
+	$ret=mysql_query($query) or die(mysql_error());
 	if(!$ret){
 		#echo "error!!<br />";
 		echo $query."<br />";
@@ -369,8 +384,10 @@ function  proxy_connect($port) {
 	if(!$fp){return 0;}else{return 1;}
 }
 
-function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$resto){
+function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$resto){
 	global $path,$badstring,$badfile,$badip,$pwdc,$textonly,$admin;
+
+	if(isbanned($ip)) error(S_BANRENZOKU);
 
 	// time
 	$time = time();
@@ -423,21 +440,21 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 		error(S_TOOBIG,$dest);
 	}
 	if($upfile_name&&$_FILES["upfile"]["size"]==0){
-		error(S_TOOBIGORNONE,$dest);
+		error(S_TOOBIGORNONE."<br />$upfile_name",$dest);
 	}
 
 	//The last result number
-	if(!$result=mysql_call("select max(no) from ".SQLLOG)){echo S_SQLFAIL;}
+	if(!$result=mysql_call("select max(no) from ".POSTTABLE)){echo S_SQLFAIL;}
 	$row=mysql_fetch_array($result);
 	$lastno=(int)$row[0];
 	mysql_free_result($result);
 
 	// Number of log lines
-	if(!$result=mysql_call("select no,ext,tim from ".SQLLOG." where no<=".($lastno-LOG_MAX))){echo S_SQLFAIL;}
+	if(!$result=mysql_call("select no,ext,tim from ".POSTTABLE." where no<=".($lastno-LOG_MAX))){echo S_SQLFAIL;}
 	else{
 		while($resrow=mysql_fetch_row($result)){
 			list($dno,$dext,$dtim)=$resrow;
-			if(!mysql_call("delete from ".SQLLOG." where no=".$dno)){echo S_SQLFAIL;}
+			if(!mysql_call("delete from ".POSTTABLE." where no=".$dno)){echo S_SQLFAIL;}
 			if($dext){
 				if(is_file($path.$dtim.$dext)) unlink($path.$dtim.$dext);
 				if(is_file(THUMB_DIR.$dtim.'s.jpg')) unlink(THUMB_DIR.$dtim.'s.jpg');
@@ -449,7 +466,7 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	$find = false;
 	$resto=(int)$resto;
 	if($resto){
-		if(!$result = mysql_call("select * from ".SQLLOG." where root>0 and no=$resto")){echo S_SQLFAIL;}
+		if(!$result = mysql_call("select * from ".POSTTABLE." where root>0 and no=$resto")){echo S_SQLFAIL;}
 		else{
 			$find = mysql_fetch_row($result);
 			mysql_free_result($result);
@@ -586,7 +603,7 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	}
 
 	// Read the log
-	$query="select time from ".SQLLOG." where com='".mysql_escape_string($com)."' ".
+	$query="select time from ".POSTTABLE." where com='".mysql_escape_string($com)."' ".
 		"and host='".mysql_escape_string($host)."' ".
 		"and no>".($lastno-20);  //the same
 	if(!$result=mysql_call($query)){echo S_SQLFAIL;}
@@ -594,7 +611,7 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	mysql_free_result($result);
 	if($row&&!$upfile_name)error(S_RENZOKU3,$dest);
 
-	$query="select time from ".SQLLOG." where time>".($time - RENZOKU)." ".
+	$query="select time from ".POSTTABLE." where time>".($time - RENZOKU)." ".
 		"and host='".mysql_escape_string($host)."' ";  //from precontribution
 	if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 	$row=mysql_fetch_array($result);
@@ -604,7 +621,7 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	// Upload processing
 	if($dest&&file_exists($dest)){
 
-		$query="select time from ".SQLLOG." where time>".($time - RENZOKU2)." ".
+		$query="select time from ".POSTTABLE." where time>".($time - RENZOKU2)." ".
 			"and host='".mysql_escape_string($host)."' ";  //from precontribution
 		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 	$row=mysql_fetch_array($result);
@@ -612,7 +629,7 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	if($row&&$upfile_name)error(S_RENZOKU2,$dest);
 
 	//Duplicate image check
-	$result = mysql_call("select tim,ext,md5 from ".SQLLOG." where md5='".$md5."'");
+	$result = mysql_call("select tim,ext,md5 from ".POSTTABLE." where md5='".$md5."'");
 	if($result){
 		list($timp,$extp,$md5p) = mysql_fetch_row($result);
 		mysql_free_result($result);
@@ -626,16 +643,16 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 	$restoqu=(int)$resto;
 	if($resto){ //res,root processing
 		$rootqu="0";
-		if(!$resline=mysql_call("select * from ".SQLLOG." where resto=".$resto)){echo S_SQLFAIL;}
+		if(!$resline=mysql_call("select * from ".POSTTABLE." where resto=".$resto)){echo S_SQLFAIL;}
 		$countres=mysql_num_rows($resline);
 	mysql_free_result($resline);
 	if(!stristr($email,'sage') && $countres < MAX_RES){
-		$query="update ".SQLLOG." set root=now() where no=$resto"; //age
+		$query="update ".POSTTABLE." set root=now() where no=$resto"; //age
 		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 	}
 	}else{$rootqu="now()";} //now it is root
 
-	$query="insert into ".SQLLOG." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fsize,root,resto) values (".
+	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fsize,root,resto,ip) values (".
 		"'".$now."',".
 		"'".mysql_escape_string($name)."',".
 		"'".mysql_escape_string($email)."',".
@@ -651,7 +668,8 @@ function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$
 		"'".$md5."',".
 		(int)$fsize.",".
 		$rootqu.",".
-		(int)$resto.")";
+		(int)$resto.",
+		\"".$_SERVER['REMOTE_ADDR']."\")";
 	if(!$result=mysql_call($query)){echo S_SQLFAIL;}  //post registration
 
 	//Cookies
@@ -811,7 +829,7 @@ function usrdel($no,$pwd){
 
 	$flag = FALSE;
 	for($i = 0; $i<$countdel; $i++){
-		if(!$result=mysql_call("select no,ext,tim,pwd,host from ".SQLLOG." where no=".$delno[$i])){echo S_SQLFAIL;}
+		if(!$result=mysql_call("select no,ext,tim,pwd,host from ".POSTTABLE." where no=".$delno[$i])){echo S_SQLFAIL;}
 		else{
 			while($resrow=mysql_fetch_row($result)){
 				list($dno,$dext,$dtim,$dpass,$dhost)=$resrow;
@@ -820,7 +838,7 @@ function usrdel($no,$pwd){
 					$flag = TRUE;
 					$delfile = $path.$dtim.$dext;	//path to delete
 					if(!$onlyimgdel){
-						if(!mysql_call("delete from ".SQLLOG." where no=".$dno)){echo S_SQLFAIL;} //sql is broke
+						if(!mysql_call("delete from ".POSTTABLE." where no=".$dno)){echo S_SQLFAIL;} //sql is broke
 		}
 		if(is_file($delfile)) unlink($delfile);//Deletion
 		if(is_file(THUMB_DIR.$dtim.'s.jpg')) unlink(THUMB_DIR.$dtim.'s.jpg');//Deletion
@@ -845,12 +863,32 @@ function valid($pass){
 	// Mana login form
 	if(!$pass){
 		echo "<div class=\"passvalid\"><input type=radio name=admin value=del checked>".S_MANAREPDEL;
-		echo "<input type=radio name=admin value=post>".S_MANAPOST."<p>";
+		echo "<input type=radio name=admin value=post>".S_MANAPOST;
+		echo "<input type=radio name=admin value=ban>".S_MANABAN."<p>";
 		echo "<input type=hidden name=mode value=admin>\n";
 		echo "<input type=password name=pass size=8>";
 		echo "<input type=submit value=\"".S_MANASUB."\"></div></form>\n";
 		die("</body></html>");
 	}
+}
+
+function adminban($pass){
+	global $banip,$banexp;
+	if($banip!=''){
+		$banexp=(int)$banexp;
+		if($banexp=='') error(S_BANEXPERROR);
+		insertban($banip,$banexp);
+		die("<p>User at ip $banip was banned for $banexp days.</p>");
+	}
+	echo('<div class="centered">'."\n");
+	echo "<input type=hidden name=mode value=admin />\n";
+	echo "<input type=hidden name=admin value=ban />\n";
+	echo "<input type=hidden name=pass value='".$pass."' />\n";
+	echo "\n<table><tbody>";
+	echo('<tr><td class="postblock">'.S_MANABANIP.'</td><td><input type="text" size="28" name="banip" /></td></tr>');
+	echo('<tr><td class="postblock">'.S_MANABANEXP.'</td><td><input value="7" type="number" size="28" name="banexp" />');
+	echo("<input type=submit value=\"".S_MANASUB."\" /></td></tr></tbody></table></div></form>\n");
+	die('</body></html>');
 }
 
 /* Admin deletion */
@@ -863,10 +901,10 @@ function admindel($pass){
 		if($item[1]=='delete'){array_push($delno,$item[0]);$delflag=TRUE;}
 	}
 	if($delflag){
-		if(!$result=mysql_call("select * from ".SQLLOG."")){echo S_SQLFAIL;}
+		if(!$result=mysql_call("select * from ".POSTTABLE."")){echo S_SQLFAIL;}
 	$find = FALSE;
 	while($row=mysql_fetch_row($result)){
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,)=$row;
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
 		if($onlyimgdel==on){
 			if(array_search($no,$delno)){//only a picture is deleted
 				$delfile = $path.$tim.$ext;	//only a picture is deleted
@@ -876,7 +914,7 @@ function admindel($pass){
 		}else{
 			if(array_search($no,$delno)){//It is empty when deleting
 				$find = TRUE;
-				if(!mysql_call("delete from ".SQLLOG." where no=".$no)){echo S_SQLFAIL;}
+				if(!mysql_call("delete from ".POSTTABLE." where no=".$no)){echo S_SQLFAIL;}
 				$delfile = $path.$tim.$ext;	//Delete file
 		if(is_file($delfile)) unlink($delfile);//Delete
 		if(is_file(THUMB_DIR.$tim.'s.jpg')) unlink(THUMB_DIR.$tim.'s.jpg');//Delete
@@ -900,12 +938,12 @@ function admindel($pass){
 	echo S_MDTABLE2;
 	echo "</tr>\n";
 
-	if(!$result=mysql_call("select * from ".SQLLOG." order by no desc")){echo S_SQLFAIL;}
+	if(!$result=mysql_call("select * from ".POSTTABLE." order by no desc")){echo S_SQLFAIL;}
 	$j=0;
 	while($row=mysql_fetch_row($result)){
 		$j++;
 		$img_flag = FALSE;
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto)=$row;
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
 		// Format
 		$now=ereg_replace('.{2}/(.*)$','\1',$now);
 		$now=ereg_replace('\(.*\)',' ',$now);
@@ -932,7 +970,7 @@ function admindel($pass){
 
 	echo "<tr class=$class><td><input type=checkbox name=\"$no\" value=delete></td>";
 	echo "<td>$no</td><td>$now</td><td>$sub</td>";
-	echo "<td>$name</td><td>$com</td>";
+	echo "<td>$name</td><td>$ip</td><td>$com</td>";
 	echo "<td>$host</td><td>$clip($size)</td><td>$md5</td><td>$resto</td><td>$tim</td><td>$time</td>\n";
 	echo "</tr>\n";
 	}
@@ -946,20 +984,79 @@ function admindel($pass){
 	die("</body></html>");
 }
 
+function insertban($ip, $days){
+	$time = time();
+	$daylength = 60*60*24;
+	$expires = $time + ($daylength * $days);
+	$query="insert into ".BANTABLE." (ip,start,expires) values (
+		'".$_SERVER['REMOTE_ADDR']."',
+		'$time',
+		'$expires')";
+	if(!$result=mysql_call($query)){echo S_SQLFAIL;}  //post registration*/
+}
+
+function isbanned($ip){ // check ban, returning true or false
+	$result = mysql_call("select * from ".BANTABLE);
+	$banned=false;
+	while($row=mysql_fetch_row($result)){
+		list($bip,$time,$expires)=$row;
+		if($ip==$bip){
+			//echo($bip);
+			return true;
+		}
+	}
+	mysql_free_result($result);
+	return false;
+}
+
+function checkban($ip) {
+	$result = mysql_call("select * from ".BANTABLE);
+	$banned=false;
+	while($row=mysql_fetch_row($result)){
+		list($bip,$time,$expires)=$row;
+		if($ip==$bip){
+			error(S_BANNEDMESSAGE."<br />\n".S_BANTIME.humantime($time)."<br />\n".S_BANEXPIRE.humantime($expires));
+		}
+	}
+	if(!$banned) error("You ($ip) are not banned....yet.");
+	mysql_free_result($result);
+}
+
+function removeban($ip) {
+	$result = mysql_call("select * from ".BANTABLE);
+	$banned=false;
+	while($row=mysql_fetch_row($result)){
+		list($bip,$time,$expires)=$row;
+		if($ip==$bip){
+			$result = mysql_call("delete from ".BANTABLE."where IP = ".$ip);
+			$banned=true;
+			break;
+		}
+	}
+	if(!$banned) error("No such ban '$ip'");
+	mysql_free_result($result);
+}
+
 /*-----------Main-------------*/
+$ip = $_SERVER['REMOTE_ADDR'];
 switch($mode){
 case 'regist':
-	regist($name,$capcode,$email,$sub,$com,'',$pwd,$upfile,$upfile_name,$resto);
+	regist($ip,$name,$capcode,$email,$sub,$com,'',$pwd,$upfile,$upfile_name,$resto);
 	break;
 case 'admin':
 	valid($pass);
 	if($admin=="del") admindel($pass);
+	if($admin=="ban") adminban($pass);
 	if($admin=="post"){
 		echo "</form>";
 		form($post,$res,1);
 		echo $post;
 		die("</body></html>");
 	}
+	if($admin=="rban") removeban($ip, $pass);
+	break;
+case 'banned':
+	checkban($ip);
 	break;
 case 'usrdel':
 	usrdel($no,$pwd);
