@@ -23,6 +23,12 @@ a:hover {
 }
 img {
 	margin: 10px;
+	border: 0;
+	float: left;
+	clear: none;
+}
+td {
+	text-align: left;
 }
 .adminbar {
         text-align:right;
@@ -168,4 +174,22 @@ img {
 	font-size:9px;
 	font-family:sans-serif;
 	color:#000000;
+}
+.leftclear {
+	clear: left;
+}
+.allclear {
+	clear: all;
+}
+.nowrap {
+	white-space: nowrap;
+}
+.centered {
+	text-align: center;
+}
+.lefted {
+	text-align: left;
+}
+.righted {
+	text-align: right;
 }
