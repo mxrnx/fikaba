@@ -306,7 +306,7 @@ function form(&$dat,$resno,$admin=""){
 	$no=$resno;
 	if($resno){
 		//$msg .= "[<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]\n";
-		$msg .= "<div class=\"theading passvalid\">".S_POSTING." [<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]</div>\n";
+		$msg .= "<div class=\"theading passvalid\">".S_POSTING." [<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]</div><br />\n";
 	}
 	if($admin){
 		$hidden = "<input type=hidden name=admin value=\"".ADMIN_PASS."\">";
