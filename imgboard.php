@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000002
+# Fikaba 000003
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -306,8 +306,9 @@ function form(&$dat,$resno,$admin=""){
 if($no){$dat.='<input type="hidden" name="resto" value="'.$no.'" />
 ';}
 $dat.='<table>
-<tr><td class="postblock" align="left">'.S_NAME.'</td><td align="left"><input type="text" name="name" size="28" /></td></tr>
-<tr><td class="postblock" align="left">'.S_EMAIL.'</td><td align="left"><input type="text" name="email" size="28" /></td></tr>
+<tr><td class="postblock" align="left">'.S_NAME.'</td><td align="left"><input type="text" name="name" size="28" /></td></tr>';
+if($admin){$dat.='<tr><td class="postblock" align="left">'.S_CAPCODE.'</td><td align="left"><input type="text" name="capcode" size="28" /></td></tr>';}
+$dat.='<tr><td class="postblock" align="left">'.S_EMAIL.'</td><td align="left"><input type="text" name="email" size="28" /></td></tr>
 <tr><td class="postblock" align="left">'.S_SUBJECT.'</td><td align="left"><input type="text" name="sub" size="35" />
 <input type="submit" value="'.S_SUBMIT.'" /></td></tr>
 <tr><td class="postblock" align="left">'.S_COMMENT.'</td><td align="left"><textarea name="com" cols="48" rows="4"></textarea></td></tr>
@@ -351,8 +352,8 @@ function  proxy_connect($port) {
   if(!$fp){return 0;}else{return 1;}
 }
 /* Regist */
-function regist($name,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$resto){
-  global $path,$badstring,$badfile,$badip,$pwdc,$textonly;
+function regist($name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$resto){
+  global $path,$badstring,$badfile,$badip,$pwdc,$textonly,$admin;
 
   // time
   $time = time();
@@ -556,9 +557,14 @@ if(strlen($url) > 10) error(S_UNUSUAL,$dest);
     $name.=TRIPKEY.substr(crypt($cap,$salt),-10)."";
   }
 
- if(!$name) $name=S_ANONAME;
- if(!$com) $com=S_ANOTEXT;
- if(!$sub) $sub=S_ANOTITLE; 
+  if(!$name) $name=S_ANONAME;
+  if(!$com) $com=S_ANOTEXT;
+  if(!$sub) $sub=S_ANOTITLE; 
+
+  // Add capcode
+  if($admin==ADMIN_PASS){
+    $name.=" $capcode";
+  }
 
   // Read the log
   $query="select time from ".SQLLOG." where com='".mysql_escape_string($com)."' ".
@@ -923,7 +929,7 @@ function admindel($pass){
 /*-----------Main-------------*/
 switch($mode){
   case 'regist':
-    regist($name,$email,$sub,$com,'',$pwd,$upfile,$upfile_name,$resto);
+    regist($name,$capcode,$email,$sub,$com,'',$pwd,$upfile,$upfile_name,$resto);
     break;
   case 'admin':
     valid($pass);

@@ -6,6 +6,7 @@ define(S_RETURN, 'Return');										//Returns to image board
 define(S_POSTING, 'Posting mode: Reply');								//Prints message in red bar atop the reply screen
 define(S_NOTAGS, 'HTML tags are allowed.');								//Prints message on Management Board
 define(S_NAME, 'Name');											//Describes name field
+define(S_CAPCODE, 'Capcode');										//Describes capcode field
 define(S_EMAIL, 'E-mail');										//Describes e-mail field
 define(S_SUBJECT, 'Subject');										//Describes subject field
 define(S_SUBMIT, 'Submit');										//Describes submit button
