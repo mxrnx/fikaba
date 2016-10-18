@@ -868,9 +868,9 @@ function valid($pass){
 	//echo "[<a href=\"".PHP_SELF2."\">".S_RETURNS."</a>]\n";
 	//echo "[<a href=\"".PHP_SELF."\">".S_LOGUPD."</a>]\n";
 	echo "<div class=\"passvalid\">".S_MANAMODE." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a> <a href=\"".PHP_SELF."\">[".S_LOGUPD."]</a>\n</div>";
-	echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
 	// Mana login form
 	if(!$pass){
+		echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
 		echo "<div class=\"passvalid\"><input type=radio name=admin value=del checked>".S_MANAREPDEL;
 		echo "<input type=radio name=admin value=post>".S_MANAPOST;
 		echo "<input type=radio name=admin value=ban>".S_MANABAN."<p>";
@@ -895,6 +895,7 @@ function adminban($pass){
 		die("<p>User banned.</p>");
 	}
 	echo('<div class="centered">'."\n");
+	echo "<p><form style='display: inline-block;' action=\"".PHP_SELF."\" method=\"post\">\n";
 	echo "<input type=hidden name=mode value=admin />\n";
 	echo "<input type=hidden name=admin value=ban />\n";
 	echo "<input type=hidden name=pass value='".$pass."' />\n";
@@ -907,7 +908,7 @@ function adminban($pass){
 	echo('<tr><td class="postblock">'.S_MANARMP.'</td><td><input value="7" type="checkbox" name="rmp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANARMALLP.'</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANAUNBAN.'</td><td><input value="7" type="checkbox" name="unban" value="on" /></td></tr>');
-	echo("</tbody></table></div></form>\n");
+	echo("</tbody></table></form></div>\n");
 	die('</body></html>');
 }
 
@@ -946,6 +947,7 @@ function admindel($pass){
 	}
 	}
 	// Deletion screen display
+	echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
 	echo "<input type=hidden name=mode value=admin>\n";
 	echo "<input type=hidden name=admin value=del>\n";
 	echo "<input type=hidden name=pass value=\"$pass\">\n";
