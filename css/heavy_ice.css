@@ -100,7 +100,7 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	margin-bottom: 5px;
 }
 .passvalid {
-	width: 25%;
+	width: 45%;
 }
 .postblocktitle, .passvalid {
 	background: #E04000 none repeat scroll 0% 0%;
