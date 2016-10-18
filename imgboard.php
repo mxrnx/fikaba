@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000010
+# Fikaba 000011
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -701,7 +701,12 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	}
 	updatelog();
 
-	echo "<html><head><meta http-equiv=\"refresh\" content=\"1;URL=".PHP_SELF2."\" /></head>";
+	
+	if(stristr($email,'nonoko') || !$resto){
+		echo "<html><head><meta http-equiv=\"refresh\" content=\"1;URL=".PHP_SELF2."\" /></head>";
+	}else{
+		echo "<html><head><meta http-equiv=\"refresh\" content=\"1;URL=".PHP_SELF."?res=$resto\" /></head>";
+	}
 	echo "<body>$mes ".S_SCRCHANGE."</body></html>";
 }
 
