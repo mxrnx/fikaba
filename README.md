@@ -1,7 +1,7 @@
 # Fikaba 
 Version 000011
 
-Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
+Fikaba is an imageboard engine forked from futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
 ~~So far, fikaba is database-compatible with futallaby 040103. I cannot promise it will stay this way, however.~~
 
@@ -46,6 +46,9 @@ In order of importance:
 3. Make sure IMG\_DIR and THUMB\_DIR exist and chmod them to 777
 4. Navigate to imgboard.php in your browser
 5. Pour yourself some puerh and admire your professional adminship
+
+## Contributing
+I'll accept useful shit, I guess. The only thing I'm really looking for is someone that understands moonspeak, to keep jp.php updated as more strings get added.
 
 ## License
 See the file LICENSE.
