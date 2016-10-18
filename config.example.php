@@ -33,6 +33,8 @@ define(TRIPKEY, '#');		//this character is displayed before tripcodes
 //define(CSSFILE, 'futaba.css');	//location of the css file (DEPRECATED as of Fikaba 000002)
 define(CSSDEFAULT, 'Futaba');		// The name of the stylesheet to be used by default
 define(CSSHTML, '<link rel="alternate stylesheet" type="text/css" href="css/futaba.css" title="Futaba" />
-<link rel="alternate stylesheet" type="text/css" href="css/burichan.css" title="Burichan" />');
+<link rel="alternate stylesheet" type="text/css" href="css/burichan.css" title="Burichan" />
+<link rel="alternate stylesheet" type="text/css" href="css/heavy_ice.css" title="heavy_ice" />');
 define(STYLESHTML, '[<a href="#" onClick="changeStyle(\'Futaba\')">Futaba</a>]
-[<a href="#" onClick="changeStyle(\'Burichan\')">Burichan</a>]');
+[<a href="#" onClick="changeStyle(\'Burichan\')">Burichan</a>]
+[<a href="#" onClick="changeStyle(\'heavy_ice\')">heavy_ice</a>]');
