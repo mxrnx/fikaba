@@ -138,8 +138,8 @@ td {
 .filetitle {
 	background:inherit;
 	font-size:18px;
-	font-family:serif;
-	color:#CC1105;
+	font-family:serif !important;
+	color:#CC1105 !important;
 	font-weight:800;
 }
 .postername {
@@ -211,4 +211,38 @@ td {
 .righted {
 	text-align: right;
 	float:right;
+}
+.catthread{
+	max-width:180px;
+	max-height:180px;
+	width:180px;
+	height:180px;
+	border-color:black;
+	border-style:solid;
+	border-width:2px;
+	text-align:center;
+	font-size:12px;
+}
+.catthumb{
+	max-width:160px;
+	max-height:160px;
+	width:auto;
+	height:auto;
+}
+.cattitle{
+	text-decoration:none;
+}
+.cattitle:hover{
+	text-decoration:none;
+}
+.catthread img{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	float: none !important;
+}
+.cattable{
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
 }

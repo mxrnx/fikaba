@@ -112,3 +112,5 @@ define(S_MANAUNBAN, 'Unban instead of ban');
 define(S_BANEXPERROR, 'Please give a number of days to ban this user for.');
 define(S_NOSUCHPOST, 'The post you\'re trying to ban for does not exist.');
 define(S_BANEXPIRED, 'Your ban has expired, and has been removed from the database.');
+define(S_CATALOG, "View mode: Catalog");
+define(S_CATALOGBUTTON, "Catalog");

@@ -66,7 +66,7 @@ table {
 input[type="text"]:focus, input[type="password"], input[type="number"], textarea:focus {
     border: 1px solid #888 !important;
 }
-input[type="submit"], input[type="reset"] {
+input[type="file"], input[type="submit"], input[type="reset"] {
     background: #333 none repeat scroll 0% 0%;
     border: 1px solid #666;
     color: #CCC;
@@ -176,4 +176,39 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	width:100%;
 	padding:0px;
 	color:#800000;
+}
+.catthread{
+	max-width:180px;
+	max-height:180px;
+	width:180px;
+	height:180px;
+	text-align:center;
+	font-size:12px;
+	background: #0D1010 none repeat scroll 0% 0% !important;
+	color: #D2E7E8 !important;
+	border: 1px solid #D2E7E8;
+	box-shadow: 1px 1px #0D1010;
+}
+.catthumb{
+	max-width:160px;
+	max-height:160px;
+	width:auto;
+	height:auto;
+}
+.catthread img{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	float: none !important;
+}
+.cattitle{
+	text-decoration:none;
+}
+.cattitle:hover{
+	text-decoration:none;
+}
+.cattable{
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
 }
