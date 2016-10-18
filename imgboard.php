@@ -188,8 +188,8 @@ function updatelog($resno=0){
 				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 				// Main creation
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
-				$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
-				$dat.="<span class=\"commentpostername\">$name</span> $now No.$no &nbsp;<br /> \n";
+				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
+				$dat.="<span class=\"commentpostername\">$name</span> $now No.$no &nbsp;<br /></span> \n";
 				if($ext){ // TODO: test
 					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
@@ -197,13 +197,13 @@ function updatelog($resno=0){
 						if(@is_file(THUMB_DIR.$tim.'s.jpg')){
 							$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a>";
 						}else{
-							$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a>";
+							$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a><br />";
 						}
 					}else{
 						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" alt=\"".$size." B\" /></a><br /><br />";
 					}
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
-						$dat.="$imgsrc<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span>";
+						$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
 					}else{
 						$dat.="$imgsrc<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>";
 					}
