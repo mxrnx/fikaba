@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000009
+Version 000010
 
 Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
@@ -19,6 +19,9 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 * Raw HTML posts for managers
 * Citations
 * User post deletion
+* Flood detection
+* Proxy detection
+* User IDs
 
 ### Features that fikaba does, but futallaby does not have
 * Valid html5 instead of xhtml
@@ -32,10 +35,9 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 ### Planned features
 In order of importance:
 
-1. Unbanning
-2. WebM support
-3. Reporting
-4. Inline image expansion
+1. WebM support
+2. Reporting
+3. Inline image expansion
 
 ## Installation
 1. Place the files from this repository in a folder on your webserver and set permissions of that folder to 777
