@@ -59,6 +59,12 @@ td {
         font-size:10px;
         font-family:sans-serif;
 }
+.postblocktitle {
+        background:#800000;
+        color:#EA8;
+        font-weight:800;
+	text-align: center;
+}
 .postblock {
         background:#EEAA88;
         color:#800000;
