@@ -1074,7 +1074,8 @@ function isbanned($ip){ // check ban, returning true or false
 		list($bip,$time,$expires,$reason)=$row;
 		if($ip==$bip){
 			//echo($bip);
-			return true;
+			if((int)$expires<time()){ removeban($ip);}
+			else{return true;}
 		}
 	}
 	mysql_free_result($result);
@@ -1087,7 +1088,10 @@ function checkban($ip) {
 	while($row=mysql_fetch_row($result)){
 		list($bip,$time,$expires,$reason)=$row;
 		if($ip==$bip){
-			error(S_BANNEDMESSAGE."<br />\n".S_BANTIME.humantime($time)."<br />\n".S_BANEXPIRE.humantime($expires));
+			if((int)$expires<time()){
+				removeban($ip);
+				error(S_BANEXPIRED);
+			}else{ error(S_BANNEDMESSAGE."<br />\n".S_BANTIME.humantime($time)."<br />\n".S_BANEXPIRE.humantime($expires)); }
 		}
 	}
 	if(!$banned) error("You ($ip) are not banned....yet.");
@@ -1100,7 +1104,7 @@ function removeban($ip) {
 	while($row=mysql_fetch_row($result)){
 		list($bip,$time,$expires,$reason)=$row;
 		if($ip==$bip){
-			$result = mysql_call("delete from ".BANTABLE."where IP = ".$ip);
+			$result = mysql_call("delete from ".BANTABLE." where `ip` = '".$ip."'");
 			$banned=true;
 			break;
 		}
