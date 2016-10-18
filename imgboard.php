@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000009
+# Fikaba 000010
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -124,7 +124,7 @@ function updatelog($resno=0){
 			if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 			$com = auto_link($com);
 			$com = eregi_replace("&gt;", "\>", $com);
-			$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2' class=\"reflink\">&gt;&gt;\\2</a>", $com);
+			$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a>", $com);
 			$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 			// Picture file name
 			$img = $path.$tim.$ext;
@@ -184,7 +184,7 @@ function updatelog($resno=0){
 				//$com = eregi_replace("(^|>)&gt;&gt;([^<]*)", "\\1<a href='".PHP_SELF."#\\2' class=\"reflink\">&gt;&gt;\\2</a>", $com);
 				//$com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 				$com = eregi_replace("&gt;", ">", $com);
-				$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2' class=\"reflink\">&gt;&gt;\\2</a>", $com);
+				$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a>", $com);
 				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 				// Main creation
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
@@ -726,15 +726,14 @@ function thumb($path,$tim,$ext){
 		unlink($path.$tim.'.png');
 		if(!$im_in)return;
 		break;
-case 2 : $im_in = @ImageCreateFromJPEG($fname);
-if(!$im_in){return;}
-break;
-case 3 :
-	if(!function_exists("ImageCreateFromPNG"))return;
-	$im_in = @ImageCreateFromPNG($fname);
-	if(!$im_in){return;}
-	break;
-default : return;
+	case 2 : $im_in = @ImageCreateFromJPEG($fname);
+		if(!$im_in){return;} break;
+	case 3 :
+		if(!function_exists("ImageCreateFromPNG"))return;
+		$im_in = @ImageCreateFromPNG($fname);
+		if(!$im_in){return;}
+		break;
+	default : return;
 	}
 	// Resizing
 	if ($size[0] > $width || $size[1] >$height) {
