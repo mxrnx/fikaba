@@ -101,6 +101,9 @@ define(S_BANRENZOKU, 'Error: you are banned. Post discarded. Check on the status
 define(S_BANNEDMESSAGE, 'You are banned!');
 define(S_BANTIME, 'You were banned on: ');
 define(S_BANEXPIRE, 'Your ban expires on: ');
-define(S_MANABANIP, 'IP: ');
+define(S_MANABANIP, 'IP or post no.: ');
 define(S_MANABANEXP, 'Expires in (days): ');
+define(S_MANABANPUBMSG, 'Public reason (only if no. ban): ');
+define(S_MANABANPRIVMSG, 'Private reason: ');
 define(S_BANEXPERROR, 'Please give a number of days to ban this user for.');
+define(S_NOSUCHPOST, 'The post you\'re trying to ban for does not exist.');

@@ -44,30 +44,14 @@ td {
         text-align:center;
         background:inherit;
         font-size:24pt;
-        color:#AF0A0F;
+        color:#800000;
         width:100%;
-}
-.theader {
-        background:#0010E0;
-        color:#FFFFFF;
-        width:100%;
-}
-.postarea {
-        background:inherit;
-}
-.rules {
-        font-size:10px;
-        font-family:sans-serif;
-}
-.postblock {
-        background:#9988EE;
-        color:#000000;
-        font-weight:800;
 }
 .footer {
         text-align:center;
         font-size:10px;
         font-family:sans-serif;
+	margin-top: 45px;
 }
 .passvalid {
 	background:#9988EE;

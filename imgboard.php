@@ -58,7 +58,8 @@ if (!table_exist(BANTABLE)){
 	echo (BANTABLE.S_TCREATE);
 	$result = mysql_call("create table ".BANTABLE." (ip text not null,
 		start int,
-		expires int)");
+		expires int,
+		reason text)");
 	if(!$result){echo S_TCREATEF;}
 }
 
@@ -873,21 +874,29 @@ function valid($pass){
 }
 
 function adminban($pass){
-	global $banip,$banexp;
+	global $banip,$banexp,$banpubmsg,$banprivmsg;
 	if($banip!=''){
-		$banexp=(int)$banexp;
 		if($banexp=='') error(S_BANEXPERROR);
-		insertban($banip,$banexp);
-		die("<p>User at ip $banip was banned for $banexp days.</p>");
+		if(strpos($banip, '.')){
+			$banmode = 1;
+		}else{
+			$banexp=(int)$banexp;
+			$banmode = 0;
+		}
+		insertban($banip,$banexp,$banpubmsg,$banprivmsg,$banmode); // 0 is IP mode, 1 is post no. mode
+		die("<p>User banned.</p>");
 	}
 	echo('<div class="centered">'."\n");
 	echo "<input type=hidden name=mode value=admin />\n";
 	echo "<input type=hidden name=admin value=ban />\n";
 	echo "<input type=hidden name=pass value='".$pass."' />\n";
 	echo "\n<table><tbody>";
-	echo('<tr><td class="postblock">'.S_MANABANIP.'</td><td><input type="text" size="28" name="banip" /></td></tr>');
-	echo('<tr><td class="postblock">'.S_MANABANEXP.'</td><td><input value="7" type="number" size="28" name="banexp" />');
-	echo("<input type=submit value=\"".S_MANASUB."\" /></td></tr></tbody></table></div></form>\n");
+	echo('<tr><td class="postblock">'.S_MANABANIP.'</td><td><input type="text" size="28" name="banip" />');
+	echo("<input type=submit value=\"".S_MANASUB."\" /></td></tr>");
+	echo('<tr><td class="postblock">'.S_MANABANEXP.'</td><td><input value="7" type="number" size="5" name="banexp" /></td></tr>');
+	echo('<tr><td class="postblock">'.S_MANABANPUBMSG.'</td><td><textarea rows="3" cols="33" name="banpubmsg"></textarea></td></tr>');
+	echo('<tr><td class="postblock">'.S_MANABANPRIVMSG.'</td><td><textarea rows="3" cols="33" name="banprivmsg"></textarea></td></tr>');
+	echo("</tbody></table></div></form>\n");
 	die('</body></html>');
 }
 
@@ -984,22 +993,56 @@ function admindel($pass){
 	die("</body></html>");
 }
 
-function insertban($ip, $days){
+function insertban($target,$days,$pubmsg,$privmsg,$bantype){
 	$time = time();
 	$daylength = 60*60*24;
 	$expires = $time + ($daylength * $days);
-	$query="insert into ".BANTABLE." (ip,start,expires) values (
-		'".$_SERVER['REMOTE_ADDR']."',
+	if($bantype==0){
+		$result = mysql_call("select * from ".POSTTABLE);
+		while($row=mysql_fetch_row($result)){
+			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
+			if($target==(int)$no){
+				$banip=$ip;
+				break;
+			}
+		}
+		if(!isset($banip)){error(S_NOSUCHPOST);}
+	}else{
+		$banip=$target;
+	}
+	//die("banip $banip");
+	mysql_free_result($result);
+
+	if($pubmsg){
+		$pubmsg = strtoupper($pubmsg);
+		$pubmsg = "<br /><br /><span style=\"color: red; font-weight: bold;\">($pubmsg)</span>";
+		$query="update ".POSTTABLE."
+			set com=concat(com,'$pubmsg')
+			where no='$no'";
+		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+		mysql_free_result($result);
+		$query="update ".POSTTABLE."
+			set root='0'
+			where no='$no'";
+		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+		mysql_free_result($result);
+		die($no);
+	}
+
+	 $query="insert into ".BANTABLE." (ip,start,expires,reason) values (
+		'$banip',
 		'$time',
-		'$expires')";
-	if(!$result=mysql_call($query)){echo S_SQLFAIL;}  //post registration*/
+		'$expires',
+		'$privmsg')";
+	if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+	mysql_free_result($result);
 }
 
 function isbanned($ip){ // check ban, returning true or false
 	$result = mysql_call("select * from ".BANTABLE);
 	$banned=false;
 	while($row=mysql_fetch_row($result)){
-		list($bip,$time,$expires)=$row;
+		list($bip,$time,$expires,$reason)=$row;
 		if($ip==$bip){
 			//echo($bip);
 			return true;
@@ -1013,7 +1056,7 @@ function checkban($ip) {
 	$result = mysql_call("select * from ".BANTABLE);
 	$banned=false;
 	while($row=mysql_fetch_row($result)){
-		list($bip,$time,$expires)=$row;
+		list($bip,$time,$expires,$reason)=$row;
 		if($ip==$bip){
 			error(S_BANNEDMESSAGE."<br />\n".S_BANTIME.humantime($time)."<br />\n".S_BANEXPIRE.humantime($expires));
 		}
@@ -1026,7 +1069,7 @@ function removeban($ip) {
 	$result = mysql_call("select * from ".BANTABLE);
 	$banned=false;
 	while($row=mysql_fetch_row($result)){
-		list($bip,$time,$expires)=$row;
+		list($bip,$time,$expires,$reason)=$row;
 		if($ip==$bip){
 			$result = mysql_call("delete from ".BANTABLE."where IP = ".$ip);
 			$banned=true;
