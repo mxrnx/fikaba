@@ -3,7 +3,7 @@
 Migrating from futallaby should be relatively painless. Login to your MySQL server and execute the following:
 
 ```sql
-use YOURDATABSE;
+use YOURDATABASE;
 alter table YOURPOSTTABLE add ip text;
 ```
 
