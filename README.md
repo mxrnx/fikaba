@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000010
+Version 000011
 
 Fikaba is a fork of futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
@@ -31,6 +31,7 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 * The possibility to reply to any thread as a manager
 * Post references (>>###)
 * IP bans
+* noko/nonoko (noko by default)
 
 ### Planned features
 In order of importance:
