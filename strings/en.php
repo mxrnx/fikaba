@@ -5,6 +5,7 @@ define(S_ADMIN, 'Manage');										//Forwards to Management Panel
 define(S_RETURN, 'Return');										//Returns to image board
 define(S_POSTING, 'Posting mode: Reply');								//Prints message in red bar atop the reply screen
 define(S_NOTAGS, 'HTML tags are allowed.');								//Prints message on Management Board
+define(S_NEWTHREAD, 'New thread');									//Header for new thread form
 define(S_NAME, 'Name');											//Describes name field
 define(S_CAPCODE, 'Capcode');										//Describes capcode field (admin)
 define(S_REPLYTO, 'Reply to');										//Describes reply to field (admin)

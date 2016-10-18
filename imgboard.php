@@ -303,7 +303,7 @@ function head(&$dat){
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
 <script type="text/javascript" src="js/style.js"></script>
 '.CSSHTML.'
-<script type="text/javascript">changeStyle("'.CSSDEFAULT.'");</script>
+<script type="text/javascript">getUserFav("'.CSSDEFAULT.'");</script>
 <title>'.TITLE.'</title>
 <script type="text/javascript"><!--
 function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(i=0;i<forms.length;i++){if(forms[i].pwd)with(forms[i]){if(!pwd.value)pwd.value=P;}if(forms[i].name)with(forms[i]){if(!name.value)name.value=N;}}}};function getCookie(key, tmp1, tmp2, xx1, xx2, xx3) {tmp1 = " " + document.cookie + ";";xx1 = xx2 = 0;len = tmp1.length;	while (xx1 < len) {xx2 = tmp1.indexOf(";", xx1);tmp2 = tmp1.substring(xx1 + 1, xx2);xx3 = tmp2.indexOf("=");if (tmp2.substring(0, xx3) == key) {return(unescape(tmp2.substring(xx3 + 1, xx2 - xx1 - 1)));}xx1 = xx2 + 1;}return("");}
@@ -338,8 +338,9 @@ function form(&$dat,$resno,$admin=""){
 		'.$hidden.'
 		<input type="hidden" name="MAX_FILE_SIZE" value="'.$maxbyte.'" />';
 	if($no){$dat.='<input type="hidden" name="resto" value="'.$no.'" />';}
-	$dat.='<table>
-	<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" size="28" /></td></tr>';
+	$dat.='<table>';
+	if(!$resno) { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_NEWTHREAD.'</td></tr>'; }
+	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" size="28" /></td></tr>';
 	if($admin){
 		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="text" name="capcode" size="28" /></td></tr>
 		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="28" value="0" /></td></tr>';

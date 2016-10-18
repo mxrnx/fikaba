@@ -47,6 +47,12 @@ td {
         color:#800000;
         width:100%;
 }
+.postblocktitle {
+        background:#D6DAF0;
+        color:#000;
+        font-weight:800;
+	text-align: center;
+}
 .footer {
         text-align:center;
         font-size:10px;
