@@ -146,7 +146,7 @@ function updatelog($resno=0){
 			}
 			//  Main creation
 			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span>   \n";
-			$dat.="<span class=\"postername\">$name</span> $now No.$no &nbsp; \n";
+			$dat.="<span class=\"postername\">$name</span> $now <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp; \n";
 			if(!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
 			$dat.="\n<blockquote>$com</blockquote>";
 	
@@ -189,7 +189,7 @@ function updatelog($resno=0){
 				// Main creation
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
-				$dat.="<span class=\"commentpostername\">$name</span> $now No.$no &nbsp;<br /></span> \n";
+				$dat.="<span class=\"commentpostername\">$name</span> $now <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
 				if($ext){ // TODO: test
 					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
@@ -308,6 +308,7 @@ function head(&$dat){
 <script type="text/javascript"><!--
 function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(i=0;i<forms.length;i++){if(forms[i].pwd)with(forms[i]){if(!pwd.value)pwd.value=P;}if(forms[i].name)with(forms[i]){if(!name.value)name.value=N;}}}};function getCookie(key, tmp1, tmp2, xx1, xx2, xx3) {tmp1 = " " + document.cookie + ";";xx1 = xx2 = 0;len = tmp1.length;	while (xx1 < len) {xx2 = tmp1.indexOf(";", xx1);tmp2 = tmp1.substring(xx1 + 1, xx2);xx3 = tmp2.indexOf("=");if (tmp2.substring(0, xx3) == key) {return(unescape(tmp2.substring(xx3 + 1, xx2 - xx1 - 1)));}xx1 = xx2 + 1;}return("");}
 //--></script>
+<script type="text/javascript">function addref(postid) {document.getElementById("com").value += ">>" + postid + "\n";}</script>
 </head>
 	<body>
 	'.$titlebar.'
@@ -348,7 +349,7 @@ function form(&$dat,$resno,$admin=""){
 	$dat.='<tr><td class="postblock">'.S_EMAIL.'</td><td><input type="text" name="email" size="28" /></td></tr>
 	<tr><td class="postblock">'.S_SUBJECT.'</td><td><input type="text" name="sub" size="35" />
 	<input type="submit" value="'.S_SUBMIT.'" /></td></tr>
-	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea name="com" cols="48" rows="4"></textarea></td></tr>';
+	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="48" rows="4"></textarea></td></tr>';
 	$dat.='<tr><td class="postblock">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />
 [<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]</td></tr>';
