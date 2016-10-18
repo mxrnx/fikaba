@@ -327,7 +327,7 @@ function form(&$dat,$resno,$admin=""){
 	$no=$resno;
 	if($resno){
 		//$msg .= "[<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]\n";
-		$msg .= "<div class=\"theading passvalid\">".S_POSTING." [<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]</div><br />\n";
+		//$msg .= "<div class=\"theading passvalid\">".S_POSTING." [<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]</div><br />\n";
 	}
 	if($admin){
 		$hidden = "<input type=hidden name=admin value=\"".ADMIN_PASS."\">";
@@ -341,6 +341,7 @@ function form(&$dat,$resno,$admin=""){
 	if($no){$dat.='<input type="hidden" name="resto" value="'.$no.'" />';}
 	$dat.='<table>';
 	if(!$resno) { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_NEWTHREAD.'</td></tr>'; }
+	else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
 	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" size="28" /></td></tr>';
 	if($admin){
 		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="text" name="capcode" size="28" /></td></tr>
@@ -351,9 +352,9 @@ function form(&$dat,$resno,$admin=""){
 	<input type="submit" value="'.S_SUBMIT.'" /></td></tr>
 	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="48" rows="4"></textarea></td></tr>';
 	$dat.='<tr><td class="postblock">'.S_UPLOADFILE.'</td>
-<td><input type="file" name="upfile" size="35" />
-[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]</td></tr>';
-	$dat.='<tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="8" maxlength="8" value="" />'.S_DELEXPL.'</td></tr>
+<td><input type="file" name="upfile" size="35" />';
+	if(!$resno){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
+	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="8" maxlength="8" value="" />'.S_DELEXPL.'</td></tr>
 <tr><td colspan="2">
 <div class="rules lefted">'.S_RULES.'</div></td></tr></table></form></div></div><hr />';
 }

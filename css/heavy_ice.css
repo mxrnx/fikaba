@@ -1,0 +1,176 @@
+/*
+ * heavy_ice.css
+ * designed by kalyx
+ * adapted for fikaba by knarka
+ */
+
+body {
+	color: #D2E7E8;
+	font-family: sans-serif;
+	font-size: 12px;
+	display: block;
+	padding-top: 6px;
+	background: #0D1010 none repeat scroll 0% 0%;
+	font-family: sans-serif;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+a, a:visited {
+	color: #D2E7E8;
+	text-transform: uppercase;
+	font-size: 10px;
+	text-decoration: none;
+}
+a:hover{
+	color: #e8d928;
+}
+.postblocktitle a, .postblocktitle a:visited {
+	color: #000;
+}
+.postblocktitle a:hover{
+	color: #fff;
+}
+.filetitle, .replytitle {
+	font-size: 12px;
+	font-family: sans-serif;
+	color: #E8D928;
+	font-weight: 800;
+}
+.postername, .commentpostername {
+	color: #D2E7E8;
+	font-weight: 800;
+}
+.reflink {
+	font-size: 10px;
+}
+img {
+	margin: 10px;
+	border: 0;
+	float: left;
+	clear: none;
+	border: 1px solid #D2E7E8;
+	box-shadow: 2px 2px #D2E7E8;
+	padding: 0px;
+	border-radius: 0px;
+	margin-bottom: 5px;
+}
+td {
+	text-align: left;
+}
+table {
+	margin-left: 1.8em;
+}
+input[type="text"]:focus, input[type="password"], input[type="number"], textarea:focus {
+    border: 1px solid #888 !important;
+}
+input[type="submit"], input[type="reset"] {
+    background: #333 none repeat scroll 0% 0%;
+    border: 1px solid #666;
+    color: #CCC;
+}
+input[type="text"], input[type="password"], input[type="number"], textarea {
+    background: #0D1010 none repeat scroll 0% 0%;
+    border: 1px solid #D2E7E8;
+    color: #CCC;
+}
+.adminbar {
+        text-align:right;
+        background:inherit;
+        float:right;
+}
+.styles {
+	float: left;
+}
+.logo {
+        clear:both;
+        text-align:center;
+        background:inherit;
+        font-size:24pt;
+        width:100%;
+	text-transform: uppercase;
+}
+.reply {
+	border: 1px solid #D2E7E8;
+	box-shadow: 2px 2px #D2E7E8;
+	padding: 4px;
+	border-radius: 0px;
+	margin-bottom: 5px;
+}
+.passvalid {
+	width: 25%;
+}
+.postblocktitle, .passvalid {
+	background: #E04000 none repeat scroll 0% 0%;
+	border: 0px solid #FF6C33;
+	color: #EEE;
+	text-align: center;
+	height: 15px;
+	padding: 1px 1px 4px;
+	margin-left: auto;
+	margin-right: auto;
+	font-weight: bold;
+	font-size: 14px;
+}
+.doubledash {
+	display:none;
+}
+.postblock, .managehead {
+	background: #0D1010 none repeat scroll 0% 0% !important;
+	color: #D2E7E8 !important;
+	border: 1px solid #D2E7E8;
+	box-shadow: 1px 1px #0D1010;
+	text-align: right;
+	font-weight: bold;
+}
+.managehead { text-align: center !important; }
+.leftclear {
+	clear: left;
+}
+.allclear {
+	clear: all;
+}
+.nowrap {
+	white-space: nowrap;
+}
+.centered {
+	text-align: center;
+}
+.lefted {
+	text-align: left;
+}
+.righted {
+	text-align: right;
+	float:right;
+}
+.footer {
+        text-align:center;
+        font-size:12px;
+	margin-top: 45px;
+}
+.delbuttons {
+	background:inherit;
+	text-align:center;
+	padding-bottom:4px;
+}
+.dellist {
+	background:inherit;
+	text-align:center;
+}
+.row1 {
+	background:#E04000;
+	font-family:sans-serif;
+	font-size:12px;
+	color:#EEE;
+}
+.row2 {
+        background:#0D1010;
+        font-family:sans-serif;
+        font-size:12px;
+	color:#EEE;
+}
+.postlists {
+	background:#EEE;
+	width:100%;
+	padding:0px;
+	color:#800000;
+}
