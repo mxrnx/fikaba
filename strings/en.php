@@ -25,7 +25,7 @@ define(S_THUMB, 'Thumbnail displayed, click image for full size.');					//Prints
 define(S_PICNAME, 'File: ');										//Prints text before upload name/link
 define(S_REPLY, 'Reply');										//Prints text for reply link
 define(S_OLD, 'Marked for deletion (old).');								//Prints text to be displayed before post is marked for deletion, see: retention
-define(S_RESU, 'Post');											//Prints post?
+define(S_RESU, 'Post');											//Prints post? [OBSOLETE]
 define(S_ABBR, ' posts omitted. Click Reply to view.');						//Prints text to be shown when replies are hidden
 define(S_REPDEL, 'Delete Post ');									//Prints text next to S_DELPICONLY (left)
 define(S_DELPICONLY, 'File Only');									//Prints text next to checkbox for file deletion (right)
