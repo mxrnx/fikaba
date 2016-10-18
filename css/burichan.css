@@ -21,6 +21,14 @@ a:hover {
         text-decoration:underline;
         font-family:sans-serif;
 }
+.reflink, .reflink:visited {
+	color:#000;
+	text-decoration:none;
+}
+.reflink:hover {
+        color:#2222CC;
+	text-decoration:none;
+}
 img {
 	margin: 10px;
 	border: 0;
