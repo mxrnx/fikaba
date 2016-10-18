@@ -874,7 +874,7 @@ function valid($pass){
 }
 
 function adminban($pass){
-	global $banip,$banexp,$banpubmsg,$banprivmsg;
+	global $banip,$banexp,$banpubmsg,$banprivmsg,$rmp,$rmallp,$unban;
 	if($banip!=''){
 		if($banexp=='') error(S_BANEXPERROR);
 		if(strpos($banip, '.')){
@@ -883,7 +883,7 @@ function adminban($pass){
 			$banexp=(int)$banexp;
 			$banmode = 0;
 		}
-		insertban($banip,$banexp,$banpubmsg,$banprivmsg,$banmode); // 0 is IP mode, 1 is post no. mode
+		insertban($banip,$banexp,$banpubmsg,$banprivmsg,$banmode,$rmp,$rmallp,$unban); // 0 is IP mode, 1 is post no. mode
 		die("<p>User banned.</p>");
 	}
 	echo('<div class="centered">'."\n");
@@ -896,6 +896,9 @@ function adminban($pass){
 	echo('<tr><td class="postblock">'.S_MANABANEXP.'</td><td><input value="7" type="number" size="5" name="banexp" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANABANPUBMSG.'</td><td><textarea rows="3" cols="33" name="banpubmsg"></textarea></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANABANPRIVMSG.'</td><td><textarea rows="3" cols="33" name="banprivmsg"></textarea></td></tr>');
+	echo('<tr><td class="postblock">'.S_MANARMP.'</td><td><input value="7" type="checkbox" name="rmp" value="on" /></td></tr>');
+	echo('<tr><td class="postblock">'.S_MANARMALLP.'</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');
+	echo('<tr><td class="postblock">'.S_MANAUNBAN.'</td><td><input value="7" type="checkbox" name="unban" value="on" /></td></tr>');
 	echo("</tbody></table></div></form>\n");
 	die('</body></html>');
 }
@@ -993,7 +996,7 @@ function admindel($pass){
 	die("</body></html>");
 }
 
-function insertban($target,$days,$pubmsg,$privmsg,$bantype){
+function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
 	$time = time();
 	$daylength = 60*60*24;
 	$expires = $time + ($daylength * $days);
@@ -1006,14 +1009,14 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype){
 				break;
 			}
 		}
-		if(!isset($banip)){error(S_NOSUCHPOST);}
+		if(!isset($banip)){die(S_NOSUCHPOST);}
 	}else{
 		$banip=$target;
 	}
 	//die("banip $banip");
 	mysql_free_result($result);
 
-	if($pubmsg){
+	if($pubmsg && !$unban){
 		$pubmsg = strtoupper($pubmsg);
 		$pubmsg = "<br /><br /><span style=\"color: red; font-weight: bold;\">($pubmsg)</span>";
 		$query="update ".POSTTABLE."
@@ -1029,13 +1032,32 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype){
 		die($no);
 	}
 
-	 $query="insert into ".BANTABLE." (ip,start,expires,reason) values (
-		'$banip',
-		'$time',
-		'$expires',
-		'$privmsg')";
-	if(!$result=mysql_call($query)){echo S_SQLFAIL;}
-	mysql_free_result($result);
+	if(!$unban){
+		echo('banning user');
+		$query="insert into ".BANTABLE." (ip,start,expires,reason) values (
+			'$banip',
+			'$time',
+			'$expires',
+			'$privmsg')";
+		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+		mysql_free_result($result);
+	}else{
+		echo('unbanning user');
+		$query="delete from ".BANTABLE." where `ip`='$banip'";
+		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+		mysql_free_result($result);
+	}
+
+	if($rmp && $bantype==0){
+		$query="delete from ".POSTTABLE." where `no`='$target'";
+		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+		mysql_free_result($result);
+	}
+	if($rmallp){
+		$query="delete from ".POSTTABLE." where `ip`='$banip'";
+		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+		mysql_free_result($result);
+	}
 }
 
 function isbanned($ip){ // check ban, returning true or false
