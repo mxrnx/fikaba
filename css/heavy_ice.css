@@ -24,6 +24,9 @@ a, a:visited {
 a:hover{
 	color: #e8d928;
 }
+.unkfunc {
+	color:#E8D928;
+}
 .postblocktitle a, .postblocktitle a:visited {
 	color: #000;
 }
