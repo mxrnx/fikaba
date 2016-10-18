@@ -105,5 +105,8 @@ define(S_MANABANIP, 'IP or post no.: ');
 define(S_MANABANEXP, 'Expires in (days): ');
 define(S_MANABANPUBMSG, 'Public reason (only if no. ban): ');
 define(S_MANABANPRIVMSG, 'Private reason: ');
+define(S_MANARMP, 'Remove post? ');
+define(S_MANARMALLP, 'Remove all posts by this IP? ');
+define(S_MANAUNBAN, 'Unban instead of ban');
 define(S_BANEXPERROR, 'Please give a number of days to ban this user for.');
 define(S_NOSUCHPOST, 'The post you\'re trying to ban for does not exist.');
