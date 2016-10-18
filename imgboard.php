@@ -159,10 +159,10 @@ function updatelog($resno=0){
 			$countres=mysql_num_rows($resline);
 	
 			if(!$resno){
-				$s=$countres - 10;
+				$s=$countres - COLLAPSENUM;
 				if($s<0){$s=0;}
 				elseif($s>0){
-					$dat.="<span class=\"omittedposts\">".S_RESU.$s.S_ABBR."</span><br />\n";
+					$dat.="<span class=\"omittedposts\">".$s.S_ABBR."</span><br />\n";
 				}
 			}else{$s=0;}
 	

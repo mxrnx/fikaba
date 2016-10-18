@@ -29,6 +29,7 @@ define(USE_THUMB, 1);		//Use thumbnails (1: yes  0: no)
 define(PROXY_CHECK, 0);		//Enable proxy check (1: yes  0: no)
 define(DISP_ID, 0);		//Display user IDs (1: yes  0: no)
 define(BR_CHECK, 15);		//Max lines per post (0 = no limit)
+define(COLLAPSENUM, 3);		//Number of replies to show in the index
 define(TRIPKEY, '#');		//this character is displayed before tripcodes
 //define(CSSFILE, 'futaba.css');	//location of the css file (DEPRECATED as of Fikaba 000002)
 define(CSSDEFAULT, 'Futaba');		// The name of the stylesheet to be used by default
