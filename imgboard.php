@@ -342,15 +342,15 @@ function form(&$dat,$resno,$admin=""){
 	$dat.='<table>';
 	if(!$resno) { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_NEWTHREAD.'</td></tr>'; }
 	else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
-	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" size="28" /></td></tr>';
+	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" size="35" /></td></tr>';
 	if($admin){
-		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="text" name="capcode" size="28" /></td></tr>
-		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="28" value="0" /></td></tr>';
+		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="text" name="capcode" size="35" /></td></tr>
+		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
 	}
-	$dat.='<tr><td class="postblock">'.S_EMAIL.'</td><td><input type="text" name="email" size="28" /></td></tr>
+	$dat.='<tr><td class="postblock">'.S_EMAIL.'</td><td><input type="text" name="email" size="35" /></td></tr>
 	<tr><td class="postblock">'.S_SUBJECT.'</td><td><input type="text" name="sub" size="35" />
 	<input type="submit" value="'.S_SUBMIT.'" /></td></tr>
-	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="48" rows="4"></textarea></td></tr>';
+	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="50" rows="4"></textarea></td></tr>';
 	$dat.='<tr><td class="postblock">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />';
 	if(!$resno){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
@@ -865,8 +865,8 @@ function valid($pass){
 	head($dat);
 	echo $dat;
 	//echo "[<a href=\"".PHP_SELF2."\">".S_RETURNS."</a>]\n";
-	echo "[<a href=\"".PHP_SELF."\">".S_LOGUPD."</a>]\n";
-	echo "<div class=\"passvalid\">".S_MANAMODE." [<a href=\"".PHP_SELF2."\">".S_RETURNS."</a>]</div>\n";
+	//echo "[<a href=\"".PHP_SELF."\">".S_LOGUPD."</a>]\n";
+	echo "<div class=\"passvalid\">".S_MANAMODE." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a> <a href=\"".PHP_SELF."\">[".S_LOGUPD."]</a>\n</div>";
 	echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
 	// Mana login form
 	if(!$pass){
