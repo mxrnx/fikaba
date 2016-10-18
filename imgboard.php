@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000011
+# Fikaba 000012
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -98,14 +98,14 @@ function updatelog($resno=0){
 	if(!$counttree){
 		$logfilename=PHP_SELF2;
 		$dat='';
-			head($dat);
-			form($dat,$resno);
-			$fp = fopen($logfilename, "w");
-			set_file_buffer($fp, 0);
-			rewind($fp);
-			fputs($fp, $dat);
-			fclose($fp);
-			chmod($logfilename,0666);
+		head($dat);
+		form($dat,$resno);
+		$fp = fopen($logfilename, "w");
+		set_file_buffer($fp, 0);
+		rewind($fp);
+		fputs($fp, $dat);
+		fclose($fp);
+		chmod($logfilename,0666);
 	}
 	for($page=0;$page<$counttree;$page+=PAGE_DEF){
 		$dat='';
@@ -317,6 +317,7 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	</div>
 	<div class="adminbar">
 	[<a href="'.HOME.'" target="_top">'.S_HOME.'</a>]
+	[<a href="'.PHP_SELF.'?mode=catalog" target="_top">'.S_CATALOGBUTTON.'</a>]
 	[<a href="'.PHP_SELF.'?mode=admin">'.S_ADMIN.'</a>]
 	</div>
 	<div class="logo">'.$titlepart.'</div><hr /><br /><br />';
@@ -354,7 +355,7 @@ function form(&$dat,$resno,$admin=""){
 	$dat.='<tr><td class="postblock">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />';
 	if(!$resno){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
-	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="8" maxlength="8" value="" />'.S_DELEXPL.'</td></tr>
+	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="18" maxlength="8" value="" /> '.S_DELEXPL.'</td></tr>
 <tr><td colspan="2">
 <div class="rules lefted">'.S_RULES.'</div></td></tr></table></form></div></div><hr />';
 }
@@ -1113,6 +1114,42 @@ function removeban($ip) {
 	mysql_free_result($result);
 }
 
+function catalog(){
+	$dat = '';
+	head($dat);
+	$dat.="<div class=\"passvalid\">".S_CATALOG." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div><br />\n";
+	$dat.="<table class='cattable'><tbody><tr>";
+	$i=0;
+	$result = mysql_call("select * from ".POSTTABLE." order by root desc");
+	while($row=mysql_fetch_row($result)){
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
+		if((int)$resto==0){
+			if($i%5==0) $dat.='</tr><tr>';
+			$dat.="<td class='catthread'>";
+			if($ext){
+				$size = $fsize;//file size displayed in alt text
+				if($w && $h){//when there is size...
+					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
+						$imgsrc = "<img class='catthumb' src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /><br />";
+					}else{
+						$imgsrc = "<img class='catthumb' src=\"$src\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /><br />";
+					}
+				}else{
+					$imgsrc = "<img class='catthumb' src=\"$src\" alt=\"".$size." B\" /><br />";
+				}
+				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
+			}
+			if(strlen($com)>55) $com = substr($com,0,54)."...";
+			$dat.="<a href='".PHP_SELF."?res=$no' class='cattitle filetitle'>$sub</a><br /><span class='catcont'>$com</span></td>";
+			$i++;
+		}
+	}
+	mysql_free_result($result);
+	$dat.="</tr></tbody></table>";
+	foot($dat);
+	echo($dat);
+}
+
 /*-----------Main-------------*/
 $ip = $_SERVER['REMOTE_ADDR'];
 switch($mode){
@@ -1133,6 +1170,9 @@ case 'admin':
 	break;
 case 'banned':
 	checkban($ip);
+	break;
+case 'catalog':
+	catalog();
 	break;
 case 'usrdel':
 	usrdel($no,$pwd);

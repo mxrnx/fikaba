@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000011
+Version 000012
 
 Fikaba is an imageboard engine forked from futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
@@ -32,13 +32,15 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 * Post references (>>###)
 * IP bans
 * noko/nonoko (noko by default)
+* Catalogs
 
 ### Planned features
 In order of importance:
 
 1. WebM support
-2. Reporting
-3. Inline image expansion
+2. json API
+3. Reporting
+4. Inline image expansion
 
 ## Installation
 1. Place the files from this repository in a folder on your webserver and set permissions of that folder to 777

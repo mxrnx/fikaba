@@ -196,3 +196,36 @@ td {
 	text-align: right;
 	float: right;
 }
+.catthread{
+	max-width:180px;
+	max-height:180px;
+	width:180px;
+	height:180px;
+	border-color:black;
+	border-style:solid;
+	border-width:2px;
+	text-align:center;
+	font-size:12px;
+}
+.catthumb{
+	max-width:160px;
+	max-height:160px;
+	width:auto;
+	height:auto;
+}
+.cattitle:hover{
+	text-decoration:none;
+	color:#0F0C5D;
+	font-family:serif;
+}
+.catthread img{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	float: none !important;
+}
+.cattable{
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+}
