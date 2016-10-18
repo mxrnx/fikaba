@@ -3,7 +3,7 @@ Version 000012
 
 Fikaba is an imageboard engine forked from futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
-~~So far, fikaba is database-compatible with futallaby 040103. I cannot promise it will stay this way, however.~~
+[See here for info on migrating from futallaby](https://github.com/knarka/fikaba/blob/master/docs/migrate.md)
 
 ## Instances
 I want to list some examples of sites running fikaba. If you are using fikaba, please make a pull request or otherwise contact me to add your site to the (for now empty) list below.
