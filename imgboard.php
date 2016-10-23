@@ -50,7 +50,8 @@ if (!table_exist(POSTTABLE)) {
 		fsize int,
 		root  timestamp,
 		resto int,
-		ip    text)");
+		ip    text,
+		id    text)");
 	if(!$result){echo S_TCREATEF;}
 }
 
@@ -117,7 +118,7 @@ function updatelog($resno=0){
 		$dat.='<form action="'.PHP_SELF.'" method="post">';
 	
 		for($i = $st; $i < $st+PAGE_DEF; $i++){
-			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=mysql_fetch_row($treeline);
+			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=mysql_fetch_row($treeline);
 			if(!$no) break;
 	
 			// URL and link
@@ -144,9 +145,11 @@ function updatelog($resno=0){
 				}
 				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>$imgsrc";
 			}
+			if(DISP_ID){ $userid = "ID:$id"; }
+			else{ $userid = ""; }
 			//  Main creation
 			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span>   \n";
-			$dat.="<span class=\"postername\">$name</span> $now <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp; \n";
+			$dat.="<span class=\"postername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp; \n";
 			if(!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
 			$dat.="\n<blockquote>$com</blockquote>";
 	
@@ -168,7 +171,7 @@ function updatelog($resno=0){
 	
 			while($resrow=mysql_fetch_row($resline)){
 				if($s>0){$s--;continue;}
-				list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$resrow;
+				list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$resrow;
 				if(!$no){break;}
 	
 				if($sub=="No Subject"){
@@ -186,10 +189,12 @@ function updatelog($resno=0){
 				$com = eregi_replace("&gt;", ">", $com);
 				$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a>", $com);
 				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
+				if(DISP_ID){ $userid = "ID:$id"; }
+				else{ $userid = ""; }
 				// Main creation
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
-				$dat.="<span class=\"commentpostername\">$name</span> $now <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
+				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
 				if($ext){ // TODO: test
 					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
@@ -549,13 +554,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	$youbi = array(S_SUN, S_MON, S_TUE, S_WED, S_THU, S_FRI, S_SAT);
 	$yd = $youbi[gmdate("w", $time+9*60*60)] ;
 	$now = gmdate("y/m/d",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
-	if(DISP_ID){
-		if($email&&DISP_ID==1){
-			$now .= " ID:???";
-		}else{
-			$now.=" ID:".substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+9*60*60)),'id'),-8);
-		}
-	}
+	$posterid = substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+9*60*60)),'id'),-8);
 	//Text plastic surgery (rorororor)
 	$email= CleanStr($email);  $email=ereg_replace("[\r\n]","",$email);
 	$sub  = CleanStr($sub);    $sub  =ereg_replace("[\r\n]","",$sub);
@@ -657,7 +656,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	}
 	}else{$rootqu="now()";} //now it is root
 
-	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fsize,root,resto,ip) values (".
+	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fsize,root,resto,ip,id) values (".
 		"'".$now."',".
 		"'".mysql_escape_string($name)."',".
 		"'".mysql_escape_string($email)."',".
@@ -674,7 +673,8 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 		(int)$fsize.",".
 		$rootqu.",".
 		(int)$resto.",
-		\"".$_SERVER['REMOTE_ADDR']."\")";
+		\"".$_SERVER['REMOTE_ADDR']."\",
+		'$posterid')";
 	if(!$result=mysql_call($query)){echo S_SQLFAIL;}  //post registration
 
 	//Cookies
@@ -965,7 +965,7 @@ function admindel($pass){
 	while($row=mysql_fetch_row($result)){
 		$j++;
 		$img_flag = FALSE;
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$row;
 		// Format
 		$now=ereg_replace('.{2}/(.*)$','\1',$now);
 		$now=ereg_replace('\(.*\)',' ',$now);
