@@ -32,9 +32,10 @@ function jsoncatalog() {
 	$posts = array();
 	$result = mysql_call("select * from ".POSTTABLE." order by root desc");
 	while($row=mysql_fetch_row($result)){
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$row;
 		if((int)$resto!=0) continue;
-		$posts[] = array("no" => $no, "now" => $now, "name" => $name, "email" => $email, "sub" => $sub, "com" => $com, "ext" => $ext, "w" => $w, "h" => $h, "tim" => $tim, "time" => $time, "md5" => $md5, "fsize" => $fsize, "root" => $root, "resto" => $resto);
+		if(!DISP_ID) $id='';
+		$posts[] = array("no" => $no, "now" => $now, "name" => $name, "email" => $email, "sub" => $sub, "com" => $com, "ext" => $ext, "w" => $w, "h" => $h, "tim" => $tim, "time" => $time, "md5" => $md5, "fsize" => $fsize, "root" => $root, "resto" => $resto, "id" => $id);
 	}
 	mysql_free_result($result);
 	return $posts;
@@ -45,14 +46,16 @@ function jsonres($res) {
 	if(!isset($res) || $res==0) die('Malformed request');
 	$result = mysql_call("select * from ".POSTTABLE." where root>0 and no=".$res." order by root desc");
 	while($row=mysql_fetch_row($result)){
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
-		$posts[] = array("no" => $no, "now" => $now, "name" => $name, "email" => $email, "sub" => $sub, "com" => $com, "ext" => $ext, "w" => $w, "h" => $h, "tim" => $tim, "time" => $time, "md5" => $md5, "fsize" => $fsize, "root" => $root, "resto" => $resto);
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$row;
+		if(!DISP_ID) $id='';
+		$posts[] = array("no" => $no, "now" => $now, "name" => $name, "email" => $email, "sub" => $sub, "com" => $com, "ext" => $ext, "w" => $w, "h" => $h, "tim" => $tim, "time" => $time, "md5" => $md5, "fsize" => $fsize, "root" => $root, "resto" => $resto, "id" => $id);
 	}
 	mysql_free_result($result);
 	$result = mysql_call("select * from ".POSTTABLE." where resto=".$res." order by root desc");
 	while($row=mysql_fetch_row($result)){
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
-		$posts[] = array("no" => $no, "now" => $now, "name" => $name, "email" => $email, "sub" => $sub, "com" => $com, "ext" => $ext, "w" => $w, "h" => $h, "tim" => $tim, "time" => $time, "md5" => $md5, "fsize" => $fsize, "root" => $root, "resto" => $resto);
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$row;
+		if(!DISP_ID) $id='';
+		$posts[] = array("no" => $no, "now" => $now, "name" => $name, "email" => $email, "sub" => $sub, "com" => $com, "ext" => $ext, "w" => $w, "h" => $h, "tim" => $tim, "time" => $time, "md5" => $md5, "fsize" => $fsize, "root" => $root, "resto" => $resto, "id" => $id);
 	}
 	mysql_free_result($result);
 	return $posts;
