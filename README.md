@@ -11,36 +11,14 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 * none yet
 
 ## Features
-### Features inherited from futallaby
-* MySQL database
-* Highly configurable
-* Image posting, automatic thumbnailing
-* Manager panel
-* Raw HTML posts for managers
-* Citations
-* User post deletion
-* Flood detection
-* Proxy detection
-* User IDs
-
-### Features that fikaba does, but futallaby does not have
-* Valid html5 instead of xhtml
-* Style picker
-* Capcodes
-* Image replies
-* The possibility to reply to any thread as a manager
-* Post references (>>###)
-* IP bans
-* noko/nonoko (noko by default)
-* Catalogs
+* Valid HTML5
+* Admin panel for bans/deletion
 * [JSON API](https://github.com/knarka/fikaba/blob/master/docs/api.md)
-
-### Planned features
-In order of importance:
-
-1. Janitors
-2. WebM support
-3. Inline image expansion
+* Tripcodes, capcodes
+* Highly configurable
+* Post references
+* Flood/proxy check
+* [...and more](https://github.com/knarka/fikaba/blob/master/docs/features.md)
 
 ## Installation
 1. Place the files from this repository in a folder on your webserver and set permissions of that folder to 777
