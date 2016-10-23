@@ -872,9 +872,9 @@ function valid($pass){
 	if(!$pass){
 		echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
 		echo "<div class=\"passvalid\"><input type=radio name=admin value=del checked>".S_MANAREPDEL;
-		echo "<input type=radio name=admin value=post>".S_MANAPOST;
-		echo "<input type=radio name=admin value=ban>".S_MANABAN."<p>";
-		echo "<input type=hidden name=mode value=admin>\n";
+		echo " <input type=radio name=admin value=ban />".S_MANABAN;
+		echo " <input type=radio name=admin value=post />".S_MANAPOST.'</p>';
+		echo "<input type=hidden name=mode value=admin />\n";
 		echo "<input type=password name=pass size=8>";
 		echo "<input type=submit value=\"".S_MANASUB."\"></div></form>\n";
 		die("</body></html>");
