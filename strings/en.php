@@ -75,9 +75,9 @@ define(S_WRONGPASS, 'Error: Management password incorrect.');						//Returns err
 define(S_RETURNS, 'Return');										//Returns to HTML file instead of PHP--thus no log/SQLDB update occurs
 define(S_LOGUPD, 'Update');										//Updates the log/SQLDB by accessing the PHP file
 define(S_MANAMODE, 'Manager Mode');									//Prints heading on top of Manager page
-define(S_MANAREPDEL, 'Management Panel');								//Defines Management Panel radio button--allows the user to view the management panel (overview of all posts)
+define(S_MANAREPDEL, 'Deletion Panel');								//Defines Management Panel radio button--allows the user to view the management panel (overview of all posts)
+define(S_MANABAN, 'Ban Panel');										//Defines Manager Ban radio button
 define(S_MANAPOST, 'Manager Post');									//Defines Manager Post radio button--allows the user to post using HTML code in the comment box
-define(S_MANABAN, 'Ban');										//Defines Manager Ban radio button
 define(S_MANASUB, 'Submit');										//Defines name for submit button in Manager Mode
 define(S_DELLIST, 'Management Panel');									//Prints sub-heading of Management Panel
 define(S_ITDELETES, 'Delete');										//Defines for deletion button in Management Panel
