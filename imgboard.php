@@ -31,7 +31,7 @@ $db_id=mysql_select_db(SQLDB,$con);
 if(!$db_id){echo S_SQLDBSF;}
 
 if (!table_exist(POSTTABLE)) {
-	echo (POSTTABLE.S_TCREATE);
+	echo (POSTTABLE.': '.S_TCREATE);
 	$result = mysql_call("create table ".POSTTABLE." (primary key(no),
 		no    int not null auto_increment,
 		now   text,
@@ -55,7 +55,7 @@ if (!table_exist(POSTTABLE)) {
 }
 
 if (!table_exist(BANTABLE)){
-	echo (BANTABLE.S_TCREATE);
+	echo (BANTABLE.': '.S_TCREATE);
 	$result = mysql_call("create table ".BANTABLE." (ip text not null,
 		start int,
 		expires int,
