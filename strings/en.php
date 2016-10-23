@@ -93,7 +93,7 @@ define(S_NOTREAD, 'Error: Cannot read from directory.<br>');						//Returns erro
 define(S_NOTDIR, 'Error: Directory does not exist.<br>');						//Returns error when the script cannot find/read from the directory (does not exist/isn't directory), the chmod (777) is wrong
 define(S_SQLCONF, 'MySQL connection failure');		//MySQL connection failure
 define(S_SQLDBSF, 'Database error, check SQL settings<br>');	//database select failure
-define(S_TCREATE, 'Creating table!<br>\n');	//creating table
+define(S_TCREATE, "Creating table!<br>\n");	//creating table
 define(S_TCREATEF, 'Unable to create table!<br>');		//table creation failed
 define(S_SQLFAIL, 'Critical SQL problem!<br>');		//SQL Failure
 
