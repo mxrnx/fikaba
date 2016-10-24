@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000014
+# Fikaba 000015
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -154,9 +154,9 @@ function updatelog($resno=0){
 			$dat.="\n<blockquote>$com</blockquote>";
 	
 			// Deletion pending
-			if($lastno-LOG_MAX*0.95>$no){
+			/*if($lastno-LOG_MAX*0.95>$no){
 				$dat.="<span class=\"oldpost\">".S_OLD."</span><br />\n";
-			}
+			}*/
 	
 			if(!$resline=mysql_call("select * from ".POSTTABLE." where resto=".$no." order by no")) echo S_SQLFAIL;
 			$countres=mysql_num_rows($resline);
@@ -460,18 +460,26 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	mysql_free_result($result);
 
 	// Number of log lines
-	if(!$result=mysql_call("select no,ext,tim from ".POSTTABLE." where no<=".($lastno-LOG_MAX))){echo S_SQLFAIL;}
-	else{
-		while($resrow=mysql_fetch_row($result)){
-			list($dno,$dext,$dtim)=$resrow;
-			if(!mysql_call("delete from ".POSTTABLE." where no=".$dno)){echo S_SQLFAIL;}
-			if($dext){
-				if(is_file($path.$dtim.$dext)) unlink($path.$dtim.$dext);
-				if(is_file(THUMB_DIR.$dtim.'s.jpg')) unlink(THUMB_DIR.$dtim.'s.jpg');
-		}
+	$result=mysql_call("select * from ".POSTTABLE." where resto=0");
+	if(!$resto){$threadcount = 1;}
+	else{$threadcount = 0;}
+	while($resrow=mysql_fetch_row($result)){
+		$threadcount++;
 	}
 	mysql_free_result($result);
+
+	/* Purge old threads */
+	$result=mysql_call("select no from ".POSTTABLE." where resto=0 order by root asc");
+	while($threadcount>THREADLIMIT){
+		list($dno)=mysql_fetch_row($result);
+		if(!mysql_call("delete from ".POSTTABLE." where no=".$dno)){echo S_SQLFAIL;}
+		if($dext){
+			if(is_file($path.$dtim.$dext)) unlink($path.$dtim.$dext);
+			if(is_file(THUMB_DIR.$dtim.'s.jpg')) unlink(THUMB_DIR.$dtim.'s.jpg');
+		}
+		$threadcount--;
 	}
+	mysql_free_result($result);
 
 	$find = false;
 	$resto=(int)$resto;
@@ -650,7 +658,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 		if(!$resline=mysql_call("select * from ".POSTTABLE." where resto=".$resto)){echo S_SQLFAIL;}
 		$countres=mysql_num_rows($resline);
 	mysql_free_result($resline);
-	if(!stristr($email,'sage') && $countres < MAX_RES){
+	if(!stristr($email,'sage') && $countres < BUMPLIMIT){
 		$query="update ".POSTTABLE." set root=now() where no=$resto"; //age
 		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 	}
