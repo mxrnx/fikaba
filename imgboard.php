@@ -469,9 +469,9 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	mysql_free_result($result);
 
 	/* Purge old threads */
-	$result=mysql_call("select no from ".POSTTABLE." where resto=0 order by root asc");
+	$result=mysql_call("select no,ext,tim from ".POSTTABLE." where resto=0 order by root asc");
 	while($threadcount>THREADLIMIT){
-		list($dno)=mysql_fetch_row($result);
+		list($dno,$dext,$dtim)=mysql_fetch_row($result);
 		if(!mysql_call("delete from ".POSTTABLE." where no=".$dno)){echo S_SQLFAIL;}
 		if($dext){
 			if(is_file($path.$dtim.$dext)) unlink($path.$dtim.$dext);
