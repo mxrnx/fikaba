@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000015
+# Fikaba 000016
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -290,6 +290,7 @@ function mysql_call($query){
 }
 
 function head(&$dat){
+	global $STYLES;
 	$titlepart = '';
 	if (SHOWTITLEIMG == 1) {
 		$titlepart.= '<img src="'.TITLEIMG.'" alt="'.TITLE.'" />';
@@ -306,9 +307,11 @@ function head(&$dat){
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
 <meta charset="utf-8" />
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
-<script type="text/javascript" src="js/style.js"></script>
-'.CSSHTML.'
-<script type="text/javascript">getUserFav("'.CSSDEFAULT.'");</script>
+<script type="text/javascript" src="js/style.js"></script>';
+	foreach($STYLES as $stylename => $stylefile){
+		$dat.='<link rel="alternate stylesheet" type="text/css" href="'.$stylefile.'" title="'.$stylename.'" />';
+	}
+	$dat.='<script type="text/javascript">getUserFav("'.CSSDEFAULT.'");</script>
 <title>'.TITLE.'</title>
 <script type="text/javascript"><!--
 function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(i=0;i<forms.length;i++){if(forms[i].pwd)with(forms[i]){if(!pwd.value)pwd.value=P;}if(forms[i].name)with(forms[i]){if(!name.value)name.value=N;}}}};function getCookie(key, tmp1, tmp2, xx1, xx2, xx3) {tmp1 = " " + document.cookie + ";";xx1 = xx2 = 0;len = tmp1.length;	while (xx1 < len) {xx2 = tmp1.indexOf(";", xx1);tmp2 = tmp1.substring(xx1 + 1, xx2);xx3 = tmp2.indexOf("=");if (tmp2.substring(0, xx3) == key) {return(unescape(tmp2.substring(xx3 + 1, xx2 - xx1 - 1)));}xx1 = xx2 + 1;}return("");}
@@ -317,9 +320,11 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 </head>
 	<body>
 	'.$titlebar.'
-	<div class="styles">
-	'.STYLESHTML.'
-	</div>
+	<div class="styles">';
+	foreach($STYLES as $stylename => $stylefile){
+		$dat.='[<a href="#" onClick="changeStyle(\''.$stylename.'\')">'.$stylename.'</a>] ';
+	}
+	$dat.='</div>
 	<div class="adminbar">
 	[<a href="'.HOME.'" target="_top">'.S_HOME.'</a>]
 	[<a href="'.PHP_SELF.'?mode=catalog" target="_top">'.S_CATALOGBUTTON.'</a>]
