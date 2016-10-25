@@ -86,7 +86,7 @@ function updatelog($resno=0){
 	if($resno){
 		if(!$treeline=mysql_call("select * from ".POSTTABLE." where root>0 and no=".$resno." order by root desc")){echo S_SQLFAIL;}
 	}else{
-		if(!$treeline=mysql_call("select * from ".POSTTABLE." where root>0 order by root desc")){echo S_SQLFAIL;}
+		if(!$treeline=mysql_call("select * from ".POSTTABLE." where root>0 order and resto=0 by root desc")){echo S_SQLFAIL;}
 	}
 
 	//Finding the last entry number
