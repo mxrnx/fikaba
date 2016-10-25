@@ -16,8 +16,6 @@ define(SQLUSER, 'CHANGEME');			//MySQL user (must be changed)
 define(SQLPASS, 'CHANGEME');			//MySQL user's password (must be changed)
 define(SQLDB, 'CHANGEME');			//Database used by image board
 
-define(ADMIN_PASS, 'CHANGEME');			//Admin password  (CHANGE THIS YO)
-
 // File-related settings
 define(IMG_DIR, 'src/');			//Image directory (needs to be 777)
 define(THUMB_DIR,'thumb/');			//Thumbnail directory (needs to be 777)
