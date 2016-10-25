@@ -124,3 +124,5 @@ define(S_ACCDEL, 'Can delete posts? ');
 define(S_ACCBAN, 'Can ban users? ');
 define(S_ACCCAP, 'Can post with capcode? ');
 define(S_ACCACC, 'Can create new accounts? ');
+
+define(S_VERSION, 'version');
