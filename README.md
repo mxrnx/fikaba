@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000017
+Version 000018
 
 Fikaba is an imageboard engine forked from futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
@@ -25,7 +25,8 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 2. Edit/move config.example.php to config.php and edit it
 3. Make sure IMG\_DIR and THUMB\_DIR exist and chmod them to 777
 4. Navigate to imgboard.php in your browser
-5. Pour yourself some puerh and admire your professional adminship
+5. Log in to the default admin account (password REPLACEME) and create a new account
+6. Pour yourself some puerh and admire your professional adminship
 
 ## Contributing
 I'll accept useful shit, I guess. The only thing I'm really looking for is someone that understands moonspeak, to keep jp.php updated as more strings get added.

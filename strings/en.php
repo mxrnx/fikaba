@@ -76,9 +76,11 @@ define(S_MANALOGGEDIN, 'You are now logged in.');
 define(S_RETURNS, 'Return');										//Returns to HTML file instead of PHP--thus no log/SQLDB update occurs
 define(S_LOGUPD, 'Update');										//Updates the log/SQLDB by accessing the PHP file
 define(S_MANAMODE, 'Manager Mode');									//Prints heading on top of Manager page
+define(S_LOGOUT, 'Logout');										//Logout button in management panel
 define(S_MANAREPDEL, 'Deletion Panel');								//Defines Management Panel radio button--allows the user to view the management panel (overview of all posts)
 define(S_MANABAN, 'Ban Panel');										//Defines Manager Ban radio button
 define(S_MANAPOST, 'Manager Post');									//Defines Manager Post radio button--allows the user to post using HTML code in the comment box
+define(S_MANAACCS, 'Account Management');								//Defines button for adding/removing manager accoutns
 define(S_MANASUB, 'Submit');										//Defines name for submit button in Manager Mode
 define(S_DELLIST, 'Management Panel');									//Prints sub-heading of Management Panel
 define(S_ITDELETES, 'Delete');										//Defines for deletion button in Management Panel
@@ -115,3 +117,10 @@ define(S_NOSUCHPOST, 'The post you\'re trying to ban for does not exist.');
 define(S_BANEXPIRED, 'Your ban has expired, and has been removed from the database.');
 define(S_CATALOG, "View mode: Catalog");
 define(S_CATALOGBUTTON, "Catalog");
+define(S_NOPERMISSION, 'You do not have the necessary permissions to do that.');		// text showed when illegally trying to manage accounts
+define(S_ACCCREATED, 'Account created succesfully!');
+
+define(S_ACCDEL, 'Can delete posts? ');
+define(S_ACCBAN, 'Can ban users? ');
+define(S_ACCCAP, 'Can post with capcode? ');
+define(S_ACCACC, 'Can create new accounts? ');

@@ -1,5 +1,5 @@
 <?php
-# Fikaba 000017
+# Fikaba 000018
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -67,15 +67,15 @@ if (!table_exist(BANTABLE)){
 
 if (!table_exist(MANATABLE)){
 	echo (MANATABLE.': '.S_TCREATE);
-	$result = mysql_call("create table ".MANATABLE." (password text not null,
+	$result = mysql_call("create table ".MANATABLE." (name text not null,
+		password text not null,
 		capcode text not null,
 		candel int not null,
 		canban int not null,
 		cancap int not null,
-		cansql int not null,
 		canacc int not null)");
 	if(!$result){echo S_TCREATEF;}
-	$query="insert into ".MANATABLE." (password,capcode,candel,canban,cancap,cansql,canacc) values ('REPLACEME','',0,0,0,0,1)";
+	$query="insert into ".MANATABLE." (name,password,capcode,candel,canban,cancap,canacc) values ('DUMMY', 'REPLACEME','',0,0,0,1)";
 	if(!$result=mysql_call($query)){echo S_SQLFAIL;}  //post registration
 	mysql_free_result($result);
 }
@@ -368,11 +368,13 @@ function form(&$dat,$resno,$admin=""){
 		<input type="hidden" name="MAX_FILE_SIZE" value="'.$maxbyte.'" />';
 	if($no){$dat.='<input type="hidden" name="resto" value="'.$no.'" />';}
 	$dat.='<table>';
-	if(!$resno) { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_NEWTHREAD.'</td></tr>'; }
-	else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
+	if(!$admin){
+		if(!$resno) { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_NEWTHREAD.'</td></tr>'; }
+		else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
+	}
 	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" size="35" /></td></tr>';
 	if($admin && $_SESSION['cancap']){
-		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="text" name="capcode" size="35" /></td></tr>
+		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" size="35" /></td></tr>
 		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
 	}
 	$dat.='<tr><td class="postblock">'.S_EMAIL.'</td><td><input type="text" name="email" size="35" /></td></tr>
@@ -638,8 +640,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 			if($_SESSION['cancap'])
 				$name.=$_SESSION['capcode'];
 		}else{
-			session_unset();
-			session_destroy();
+			stopsession();
 		}
 	}
 
@@ -896,13 +897,21 @@ function usrdel($no,$pwd){
 	if(!$flag) error(S_BADDELPASS);
 }
 
+function stopsession(){
+	session_unset();
+	session_destroy(); 
+}
+
 function adminhead(){
 	head($dat);
 	echo $dat;
-	echo "<div class=\"passvalid\">".S_MANAMODE." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a> <a href=\"".PHP_SELF."\">[".S_LOGUPD."]</a>\n";
-	echo("<br />[<a href='".PHP_SELF."?mode=admin&admin=del'>".S_MANAREPDEL."</a>] ");
+	echo("<div class='passvalid'>".S_MANAMODE." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div>\n");
+	echo("<div class='manabuttons'>[<a href='".PHP_SELF."'>".S_LOGUPD."</a>] ");
+	echo("[<a href='".PHP_SELF."?mode=admin&admin=del'>".S_MANAREPDEL."</a>] ");
 	echo("[<a href='".PHP_SELF."?mode=admin&admin=ban'>".S_MANABAN."</a>] ");
-	echo("[<a href='".PHP_SELF."?mode=admin&admin=post'>".S_MANAPOST."</a>]</div>");
+	echo("[<a href='".PHP_SELF."?mode=admin&admin=post'>".S_MANAPOST."</a>] ");
+	echo("[<a href='".PHP_SELF."?mode=admin&admin=acc'>".S_MANAACCS."</a>] ");
+	echo("[<a href='".PHP_SELF."?mode=admin&admin=logout'>".S_LOGOUT."</a>]</div>");
 }
 
 /*password validation */
@@ -911,30 +920,32 @@ function valid($pass){
 	if(isset($_SESSION['capcode'])) return;
 	head($dat);
 	echo $dat;
-	echo "<div class=\"passvalid\">".S_MANAMODE." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a> <a href=\"".PHP_SELF."\">[".S_LOGUPD."]</a>\n</div>";
+	echo "<div class='passvalid'>".S_MANAMODE." <a href='".PHP_SELF2."'>[".S_RETURNS."]</a> \n</div>";
 	if($pass){
-		$result = mysql_call("select password,capcode,candel,canban,cancap from ".MANATABLE);
+		$result = mysql_call("select password,capcode,candel,canban,cancap,canacc from ".MANATABLE);
 		while($row=mysql_fetch_row($result)){
-			list($password,$capcode,$candel,$canban,$cancap)=$row;
+			list($password,$capcode,$candel,$canban,$cancap,$canacc)=$row;
 			if($pass == $password){
 				$_SESSION["capcode"] = $capcode;
 				$_SESSION["candel"] = $candel;
 				$_SESSION["canban"] = $canban;
 				$_SESSION["cancap"] = $cancap;
-				echo("<div class=\"passvalid\">".S_MANALOGGEDIN."</div>");
+				$_SESSION["canacc"] = $canacc;
+				echo("<div class='passvalid'>".S_MANALOGGEDIN."</div>");
+				echo("<meta http-equiv=\"refresh\" content=\"2;URL=".PHP_SELF."?mode=admin\" />");
 				die("</body></html>");
 			}
 		}
-		error(S_WRONGPASS);
+		die(S_WRONGPASS);
 		mysql_free_result($result);
 	}
+
+	// Get rid of unnecessary session
+	stopsession();
 
 	// Mana login form
 	if(!$pass){
 		echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
-		/*echo "<div class=\"passvalid\"><input type=radio name=admin value=del checked>".S_MANAREPDEL;
-		echo " <input type=radio name=admin value=ban />".S_MANABAN;
-		echo " <input type=radio name=admin value=post />".S_MANAPOST.'</p>';*/
 		echo "<input type=hidden name=mode value=admin />\n";
 		echo "<input type=password name=pass size=8>";
 		echo "<input type=submit value=\"".S_MANASUB."\"></div></form>\n";
@@ -942,8 +953,50 @@ function valid($pass){
 	}
 }
 
+function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$accacc){
+	session_start();
+	if(!$_SESSION['canacc']) die(S_NOPERMISSION);
+	if(!$accname){
+		echo('<div class="centered">'."\n");
+		echo "<p><form style='display: inline-block;' action=\"".PHP_SELF."\" method=\"post\">\n";
+		echo "<input type=hidden name=mode value=admin />\n";
+		echo "<input type=hidden name=admin value=acc />\n";
+		echo "\n<table><tbody>";
+		echo('<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" size="28" name="accname" />');
+		echo(" <input type=submit value=\"".S_MANASUB."\" /></td></tr>");
+		echo('<tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" size="28" name="accpassword" /></td></tr>');
+		echo('<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="text" size="28" name="acccapcode" value=" ## Moderator" /></td></tr>');
+		echo('<tr><td class="postblock">'.S_ACCDEL.'</td><td><input type="checkbox" name="accdel" value=1 /></td></tr>');
+		echo('<tr><td class="postblock">'.S_ACCBAN.'</td><td><input type="checkbox" name="accban" value=1 /></td></tr>');
+		echo('<tr><td class="postblock">'.S_ACCCAP.'</td><td><input type="checkbox" name="acccap" value=1 /></td></tr>');
+		echo('<tr><td class="postblock">'.S_ACCACC.'</td><td><input type="checkbox" name="accacc" value=1 /></td></tr>');
+		echo("</tbody></table></form></div>\n");
+		die('</body></html>');
+	}
+	if(!$accdel) $accdel=0;
+	if(!$accban) $accban=0;
+	if(!$acccap) $acccap=0;
+	if(!$accacc) $accacc=0;
+	$query="insert into ".MANATABLE." (name,password,capcode,candel,canban,cancap,canacc) values (
+		'$accname',
+		'$accpassword',
+		'$acccapcode',
+		$accdel,
+		$accban,
+		$acccap,
+		$accacc)";
+	if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+	mysql_free_result($result);
+	$query="delete from ".MANATABLE." where name='DUMMY' and password='REPLACEME'";
+	if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+	mysql_free_result($result);
+	die("<p>".S_ACCCREATED."</p></body></html>");
+}
+
 function adminban(){
 	global $banip,$banexp,$banpubmsg,$banprivmsg,$rmp,$rmallp,$unban;
+	session_start();
+	if(!$_SESSION['canban']) die(S_NOPERMISSION);
 	if($banip!=''){
 		if($banexp=='') error(S_BANEXPERROR);
 		if(strpos($banip, '.')){
@@ -975,6 +1028,8 @@ function adminban(){
 /* Admin deletion */
 function admindel(){
 	global $path,$onlyimgdel;
+	session_start();
+	if(!$_SESSION['candel']) die(S_NOPERMISSION);
 	$delno = array(dummy);
 	$delflag = FALSE;
 	reset($_POST);
@@ -1219,17 +1274,24 @@ case 'regist':
 	break;
 case 'admin':
 	valid($pass);
+	session_start();
 	adminhead();
 	if(!$admin) $admin='del';
 	if($admin=="del") admindel();
 	if($admin=="ban") adminban();
 	if($admin=="post"){
+		if(!$_SESSION['cancap'])die(S_NOPERMISSION);
 		echo "</form>";
 		form($post,$res,1);
 		echo $post;
 		die("</body></html>");
 	}
+	if($admin=="logout"){
+		stopsession();
+		echo("<meta http-equiv=\"refresh\" content=\"0;URL=".PHP_SELF2."\" />");
+	}
 	if($admin=="rban") removeban($ip);
+	if($admin=="acc") adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$accacc);
 	//else adminpanel();
 	break;
 case 'banned':
