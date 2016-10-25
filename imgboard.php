@@ -6,14 +6,14 @@
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-include "config.php";
-include "strings/".LANGUAGE.".php";		//String resource file
-
 extract($_POST);
 extract($_GET);
 extract($_COOKIE);
 $upfile_name=$_FILES["upfile"]["name"];
 $upfile=$_FILES["upfile"]["tmp_name"];
+
+include "config.php";
+include "strings/".LANGUAGE.".php";		//String resource file
 
 $path = realpath("./").'/'.IMG_DIR;
 ignore_user_abort(TRUE);
@@ -86,7 +86,7 @@ function updatelog($resno=0){
 	if($resno){
 		if(!$treeline=mysql_call("select * from ".POSTTABLE." where root>0 and no=".$resno." order by root desc")){echo S_SQLFAIL;}
 	}else{
-		if(!$treeline=mysql_call("select * from ".POSTTABLE." where root>0 order and resto=0 by root desc")){echo S_SQLFAIL;}
+		if(!$treeline=mysql_call("select * from ".POSTTABLE." where root>0 and resto=0 order by root desc")){echo S_SQLFAIL;}
 	}
 
 	//Finding the last entry number
