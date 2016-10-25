@@ -72,6 +72,7 @@ define(S_NOTHREADERR, 'Error: Thread specified does not exist.');					//Returns 
 define(S_SCRCHANGE, 'Updating page.');									//Defines message to be displayed when post is successful									//
 define(S_BADDELPASS, 'Error: Password incorrect.');							//Returns error for wrong password (when user tries to delete file)
 define(S_WRONGPASS, 'Error: Management password incorrect.');						//Returns error for wrong password (when trying to access Manager modes)
+define(S_MANALOGGEDIN, 'You are now logged in.');
 define(S_RETURNS, 'Return');										//Returns to HTML file instead of PHP--thus no log/SQLDB update occurs
 define(S_LOGUPD, 'Update');										//Updates the log/SQLDB by accessing the PHP file
 define(S_MANAMODE, 'Manager Mode');									//Prints heading on top of Manager page

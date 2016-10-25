@@ -10,6 +10,7 @@ define(LANGUAGE, 'en');				//Language. Fikaba provides en and jp by default
 // Database settings
 define(POSTTABLE, 'CHANGEME');			//Post table (NOT DATABASE) used by image board
 define(BANTABLE, 'CHANGEME');			//Bans table (NOT DATABASE) used by fikaba
+define(MANATABLE, 'CHANGEME');			//Manager (admin, mod, janitor) table
 define(SQLHOST, 'localhost');			//MySQL server address, usually localhost
 define(SQLUSER, 'CHANGEME');			//MySQL user (must be changed)
 define(SQLPASS, 'CHANGEME');			//MySQL user's password (must be changed)
