@@ -39,6 +39,9 @@ a:hover{
 	color: #E8D928;
 	font-weight: 800;
 }
+.filesize {
+	padding-left:10px;
+}
 .postername, .commentpostername {
 	color: #D2E7E8;
 	font-weight: 800;
@@ -188,6 +191,10 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	color: #D2E7E8 !important;
 	border: 1px solid #D2E7E8;
 	box-shadow: 1px 1px #0D1010;
+}
+.thumbnailmsg{
+	padding-right:5px;
+	font-size:10px;
 }
 .catthumb{
 	max-width:160px;

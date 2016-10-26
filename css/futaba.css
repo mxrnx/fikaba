@@ -192,6 +192,7 @@ td {
 	font-size:9px;
 	font-family:sans-serif;
 	color:#800000;
+	padding-right:5px;
 }
 .leftclear {
 	clear: left;
