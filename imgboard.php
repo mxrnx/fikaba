@@ -171,11 +171,6 @@ function updatelog($resno=0){
 			if(!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
 			$dat.="\n<blockquote>$com</blockquote>";
 	
-			// Deletion pending
-			/*if($lastno-LOG_MAX*0.95>$no){
-				$dat.="<span class=\"oldpost\">".S_OLD."</span><br />\n";
-			}*/
-	
 			if(!$resline=mysql_call("select * from ".POSTTABLE." where resto=".$no." order by no")) echo S_SQLFAIL;
 			$countres=mysql_num_rows($resline);
 	
@@ -192,11 +187,8 @@ function updatelog($resno=0){
 				list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$resrow;
 				if(!$no){break;}
 	
-				if($sub=="No Subject"){
-					$replytitle = '';
-				}else{
+				if($sub)
 					$replytitle = "<span class=\"replytitle\">$sub</span>";
-				}
 	
 				// URL and e-mail
 				if($email) $name = "<a href=\"mailto:$email\">$name</a>";
@@ -1063,7 +1055,6 @@ function admindel(){
 	echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
 	echo "<input type=hidden name=mode value=admin>\n";
 	echo "<input type=hidden name=admin value=del>\n";
-	echo "<div class=\"dellist\">".S_DELLIST."</div>\n";
 	echo "<div class=\"delbuttons\"><input type=submit value=\"".S_ITDELETES."\">";
 	echo "<input type=reset value=\"".S_MDRESET."\"> ";
 	echo "[<input type=checkbox name=onlyimgdel value=on><!--checked-->".S_MDONLYPIC." ]</div>";

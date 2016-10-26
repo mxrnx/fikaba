@@ -24,9 +24,7 @@ define(S_REPORTERR, 'Error: Cannot find reply.');							//Returns error when a r
 define(S_THUMB, 'Thumbnail displayed, click image for full size.');					//Prints instructions for viewing real source
 define(S_PICNAME, 'File: ');										//Prints text before upload name/link
 define(S_REPLY, 'Reply');										//Prints text for reply link
-define(S_OLD, 'Marked for deletion (old).');								//Prints text to be displayed before post is marked for deletion, see: retention
-define(S_RESU, 'Post');											//Prints post? [OBSOLETE]
-define(S_ABBR, ' posts omitted. Click Reply to view.');						//Prints text to be shown when replies are hidden
+define(S_ABBR, ' posts omitted. Click Reply to view.');							//Prints text to be shown when replies are hidden
 define(S_REPDEL, 'Delete Post ');									//Prints text next to S_DELPICONLY (left)
 define(S_DELPICONLY, 'File Only');									//Prints text next to checkbox for file deletion (right)
 define(S_DELKEY, 'Password ');										//Prints text next to password field for deletion (left)
@@ -42,7 +40,7 @@ define(S_NOREC, 'Error: Cannot find record.');								//Returns error when recor
 define(S_SAMEPIC, 'Error: Duplicate md5 checksum detected.');						//Returns error when a md5 checksum dupe is detected
 define(S_TOOBIG, 'This image is too large!  Upload something smaller!');
 define(S_TOOBIGORNONE, 'Either this image is too big or there is no image at all.  Yeah.');
-define(S_UPGOOD, ' '.$upfile_name.' uploaded!<br><br>');					//Defines message to be displayed when file is successfully uploaded
+define(S_UPGOOD, ' '.$upfile_name.' uploaded!<br><br>');						//Defines message to be displayed when file is successfully uploaded
 define(S_STRREF, 'Error: String refused.');								//Returns error when a string is refused
 define(S_UNJUST, 'Error: Unjust POST.');								//Returns error on an unjust POST - prevents floodbots or ways not using POST method?
 define(S_NOPIC, 'Error: No file selected.');								//Returns error for no file selected and override unchecked
@@ -50,7 +48,7 @@ define(S_NOTEXT, 'Error: No text entered.');								//Returns error for no text 
 define(S_MANAGEMENT, 'Manager: ');									//Defines prefix for Manager Post name
 define(S_DELETION, 'Deletion');										//Prints deletion message with quotes?
 define(S_TOOLONG, 'Error: Field too long.');								//Returns error for too many characters in a given field
-define(S_UNUSUAL, 'Error: Abnormal reply.');								//Returns error for abnormal reply? (this is a mystery!)
+define(S_UNUSUAL, 'Error: Abnormal reply.');								//Returns error for too long $resto or $url (should never happen)
 define(S_BADHOST, 'Error: Host is banned.');								//Returns error for banned host ($badip string)
 define(S_PROXY80, 'Error: Proxy detected on :80.');							//Returns error for proxy detection on port 80
 define(S_PROXY8080, 'Error: Proxy detected on :8080.');							//Returns error for proxy detection on port 8080
@@ -62,8 +60,8 @@ define(S_THU, 'Thu');											//Defines abbreviation used for "Thursday"
 define(S_FRI, 'Fri');											//Defines abbreviation used for "Friday"
 define(S_SAT, 'Sat');											//Defines abbreviation used for "Saturday"
 define(S_ANONAME, 'Anonymous');										//Defines what to print if there is no text entered in the name field
-define(S_ANOTEXT, 'No Text');										//Defines what to print if there is no text entered in the comment field
-define(S_ANOTITLE, 'No Subject');									//Defines what to print if there is no text entered into subject field
+define(S_ANOTEXT, '');											//Defines what to print if there is no text entered in the comment field
+define(S_ANOTITLE, '');											//Defines what to print if there is no text entered into subject field
 define(S_RENZOKU, 'Error: Flood detected, post discarded.');						//Returns error for $sec/post spam filter
 define(S_RENZOKU2, 'Error: Flood detected, file discarded.');						//Returns error for $sec/upload spam filter
 define(S_RENZOKU3, 'Error: Flood detected.');								//Returns error for flood? (don't know the specifics)
@@ -74,33 +72,30 @@ define(S_BADDELPASS, 'Error: Password incorrect.');							//Returns error for wr
 define(S_WRONGPASS, 'Error: Management password incorrect.');						//Returns error for wrong password (when trying to access Manager modes)
 define(S_MANALOGGEDIN, 'You are now logged in.');
 define(S_RETURNS, 'Return');										//Returns to HTML file instead of PHP--thus no log/SQLDB update occurs
-define(S_LOGUPD, 'Update');										//Updates the log/SQLDB by accessing the PHP file
+define(S_LOGUPD, 'Rebuild');										//Updates the log/SQLDB by accessing the PHP file
 define(S_MANAMODE, 'Manager Mode');									//Prints heading on top of Manager page
 define(S_LOGOUT, 'Logout');										//Logout button in management panel
-define(S_MANAREPDEL, 'Deletion Panel');								//Defines Management Panel radio button--allows the user to view the management panel (overview of all posts)
-define(S_MANABAN, 'Ban Panel');										//Defines Manager Ban radio button
-define(S_MANAPOST, 'Manager Post');									//Defines Manager Post radio button--allows the user to post using HTML code in the comment box
+define(S_MANAREPDEL, 'Deletion Panel');									//Defines Management Panel button--allows the user to view the management panel (overview of all posts)
+define(S_MANABAN, 'Ban Panel');										//Defines Manager Ban button
+define(S_MANAPOST, 'Manager Post');									//Defines Manager Post button--allows the user to post using HTML code in the comment box
 define(S_MANAACCS, 'Account Management');								//Defines button for adding/removing manager accoutns
 define(S_MANASUB, 'Submit');										//Defines name for submit button in Manager Mode
-define(S_DELLIST, 'Management Panel');									//Prints sub-heading of Management Panel
 define(S_ITDELETES, 'Delete');										//Defines for deletion button in Management Panel
 define(S_MDRESET, 'Reset');										//Defines name for field reset button in Management Panel
 define(S_MDONLYPIC, 'File Only');									//Sets whether or not to delete only file, or entire post/thread
 define(S_MDTABLE1, '<th>Delete?</th><th>Post No.</th><th>Time</th><th>Subject</th>');			//Explains field names for Management Panel (Delete?->Subject)
 define(S_MDTABLE2, '<th>Name</th><th>IP</th><th>Comment</th><th>Host</th><th>Size<br>(Bytes)</th><th>md5</th><th>Reply #</th><th>Timestamp (s)</th><th>Timestamp (ms)</th>');	//Explains names for Management Panel (Name->md5)
 define(S_RESET, 'Reset');										//Sets name for field reset button (global)
-define(S_IMGSPACEUSAGE, 'Space used: ');						//Prints space used KB by the board under Management Panel
+define(S_IMGSPACEUSAGE, 'Space used: ');								//Prints space used KB by the board under Management Panel
 define(S_CANNOTWRITE, 'Error: Cannot write to directory.<br>');						//Returns error when the script cannot write to the directory, this is used on initial setup--check your chmod (777)
 define(S_NOTWRITE, 'Error: Cannot write to directory.<br>');						//Returns error when the script cannot write to the directory, the chmod (777) is wrong
 define(S_NOTREAD, 'Error: Cannot read from directory.<br>');						//Returns error when the script cannot read from the directory, the chmod (777) is wrong
 define(S_NOTDIR, 'Error: Directory does not exist.<br>');						//Returns error when the script cannot find/read from the directory (does not exist/isn't directory), the chmod (777) is wrong
-define(S_SQLCONF, 'MySQL connection failure');		//MySQL connection failure
-define(S_SQLDBSF, 'Database error, check SQL settings<br>');	//database select failure
-define(S_TCREATE, "Creating table!<br>\n");	//creating table
-define(S_TCREATEF, 'Unable to create table!<br>');		//table creation failed
-define(S_SQLFAIL, 'Critical SQL problem!<br>');		//SQL Failure
-
-/* ban-specific */
+define(S_SQLCONF, 'MySQL connection failure');								//MySQL connection failure
+define(S_SQLDBSF, 'Database error, check SQL settings<br>');						//Database select failure
+define(S_TCREATE, "Creating table!<br>\n");								//Creating table
+define(S_TCREATEF, 'Unable to create table!<br>');							//Table creation failed
+define(S_SQLFAIL, 'Critical SQL problem!<br>');								//SQL Failure
 define(S_BANRENZOKU, 'Error: you are banned. Post discarded. Check on the status of your ban <a href="?mode=banned">here</a>.');	//Error shown to banned user when they try to post
 define(S_BANNEDMESSAGE, 'You are banned!');
 define(S_BANTIME, 'You were banned on: ');
@@ -117,12 +112,10 @@ define(S_NOSUCHPOST, 'The post you\'re trying to ban for does not exist.');
 define(S_BANEXPIRED, 'Your ban has expired, and has been removed from the database.');
 define(S_CATALOG, "View mode: Catalog");
 define(S_CATALOGBUTTON, "Catalog");
-define(S_NOPERMISSION, 'You do not have the necessary permissions to do that.');		// text showed when illegally trying to manage accounts
+define(S_NOPERMISSION, 'You do not have the necessary permissions to do that.');			// text showed when illegally trying to access some part of the management panel
 define(S_ACCCREATED, 'Account created succesfully!');
-
 define(S_ACCDEL, 'Can delete posts? ');
 define(S_ACCBAN, 'Can ban users? ');
 define(S_ACCCAP, 'Can post with capcode? ');
 define(S_ACCACC, 'Can create new accounts? ');
-
 define(S_VERSION, 'version');
