@@ -21,8 +21,8 @@ a, a:visited {
 	font-size: 10px;
 	text-decoration: none;
 }
-a:hover{
-	color: #e8d928;
+a:hover,.admddel,.admbban,.admppost,.admaacc {
+	color: #e8d928 !important;
 }
 .unkfunc {
 	color:#E8D928;
