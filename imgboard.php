@@ -899,14 +899,15 @@ function stopsession(){
 }
 
 function adminhead(){
+	global $admin;
 	head($dat);
 	echo $dat;
 	echo("<div class='passvalid'>".S_MANAMODE." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div>\n");
 	echo("<div class='manabuttons'>[<a href='".PHP_SELF."'>".S_LOGUPD."</a>] ");
-	echo("[<a href='".PHP_SELF."?mode=admin&admin=del'>".S_MANAREPDEL."</a>] ");
-	echo("[<a href='".PHP_SELF."?mode=admin&admin=ban'>".S_MANABAN."</a>] ");
-	echo("[<a href='".PHP_SELF."?mode=admin&admin=post'>".S_MANAPOST."</a>] ");
-	echo("[<a href='".PHP_SELF."?mode=admin&admin=acc'>".S_MANAACCS."</a>] ");
+	echo("[<a class='admd$admin' href='".PHP_SELF."?mode=admin&admin=del'>".S_MANAREPDEL."</a>] ");
+	echo("[<a class='admb$admin' href='".PHP_SELF."?mode=admin&admin=ban'>".S_MANABAN."</a>] ");
+	echo("[<a class='admp$admin' href='".PHP_SELF."?mode=admin&admin=post'>".S_MANAPOST."</a>] ");
+	echo("[<a class='adma$admin' href='".PHP_SELF."?mode=admin&admin=acc'>".S_MANAACCS."</a>] ");
 	echo("[<a href='".PHP_SELF."?mode=admin&admin=logout'>".S_LOGOUT."</a>]</div>");
 }
 
@@ -1262,8 +1263,8 @@ case 'regist':
 case 'admin':
 	valid($pass);
 	session_start();
-	adminhead();
 	if(!$admin) $admin='del';
+	adminhead();
 	if($admin=="del") admindel();
 	if($admin=="ban") adminban();
 	if($admin=="post"){
