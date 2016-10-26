@@ -218,9 +218,10 @@ function updatelog($resno=0){
 						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" alt=\"".$size." B\" /></a><br /><br />";
 					}
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
-						$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
 					}else{
-						$dat.="$imgsrc<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <br />$imgsrc";
+						//$dat.="$imgsrc<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>";
 					}
 				}
 				$dat.="<blockquote>$com</blockquote>";
