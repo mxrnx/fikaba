@@ -1156,7 +1156,6 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
 			where no='$no'";
 		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 		mysql_free_result($result);
-		die($no);
 	}
 
 	if(!$unban){
