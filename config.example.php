@@ -26,8 +26,9 @@ define(MAX_H,  250);				//Images exceeding this height will be thumbnailed
 define(PAGE_DEF, 5);				//Threads per page
 define(THREADLIMIT,  40);			//Maxium number of entries
 define(BUMPLIMIT, 50);				//Maximum topic bumps
-define(PHP_SELF, 'imgboard.php');		//Name of main script file
-define(PHP_SELF2, 'index.html');		//Name of main htm file
+define(ECHOALL, false);				//Do not write index to file, but echo directly (4chan-style)
+define(PHP_SELF, 'imgboard.php');		//Name of main script file (if ECHOALL, you probably want 'index.php')
+define(PHP_SELF2, 'index.html');		//Name of main html file (point to PHP_SELF if ECHOALL)
 define(PHP_EXT, '.html');			//Extension used for board pages after first
 define(USE_THUMB, true);			//Use thumbnails
 

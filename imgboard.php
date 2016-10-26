@@ -284,6 +284,7 @@ function updatelog($resno=0){
 			$dat.="<table></table><br class=\"allclear\" />\n";
 		}
 		foot($dat);
+		if(ECHOALL){echo $dat;break;}
 		if($resno){echo $dat;break;}
 		if($page==0){$logfilename=PHP_SELF2;}
 		else{$logfilename=$page/PAGE_DEF.PHP_EXT;}
@@ -355,12 +356,8 @@ function form(&$dat,$resno,$admin=""){
 	session_start();
 	$maxbyte = MAX_KB * 1024;
 	$no=$resno;
-	if($resno){
-		//$msg .= "[<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]\n";
-		//$msg .= "<div class=\"theading passvalid\">".S_POSTING." [<a href=\"".PHP_SELF2."\">".S_RETURN."</a>]</div><br />\n";
-	}
 	if($admin){
-		$hidden = "<input type=hidden name=admin value=\"".ADMIN_PASS."\">";
+		//$hidden = "<input type=hidden name=admin value=\"".ADMIN_PASS."\">";
 		$msg = "<em>".S_NOTAGS."</em>"; /* Note to self:  Find out where this happened. */
 	}
 	$dat.=$msg.'<div class="centered"><div class="postarea">
@@ -1061,8 +1058,6 @@ function admindel(){
 		}
 	}
 	mysql_free_result($result);
-	if($find){//log renewal
-	}
 	}
 	// Deletion screen display
 	echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
@@ -1098,7 +1093,7 @@ function admindel(){
 			$img_flag = TRUE;
 			$clip = "<a href=\"".IMG_DIR.$tim.$ext."\" target=\"_blank\">".$tim.$ext."</a><br />";
 			$size = $fsize;
-			$all += $size;			//total calculation
+			$all += $size;
 			$md5= substr($md5,0,10);
 	}else{
 		$clip = "";
@@ -1148,11 +1143,6 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
 		$pubmsg = "<br /><br /><span style=\"color: red; font-weight: bold;\">($pubmsg)</span>";
 		$query="update ".POSTTABLE."
 			set com=concat(com,'$pubmsg')
-			where no='$no'";
-		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
-		mysql_free_result($result);
-		$query="update ".POSTTABLE."
-			set root='0'
 			where no='$no'";
 		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 		mysql_free_result($result);
@@ -1309,6 +1299,6 @@ default:
 		updatelog($res);
 	}else{
 		updatelog();
-		echo "<meta http-equiv=\"refresh\" content=\"0;URL=".PHP_SELF2."\" />";
+		if(!ECHOALL)echo "<meta http-equiv=\"refresh\" content=\"0;URL=".PHP_SELF2."\" />";
 	}
 }
