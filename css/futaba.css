@@ -16,7 +16,7 @@ a:visited {
         font-family:serif;
 }
 a:hover,.admddel,.admbban,.admppost,.admaacc {
-        color:#DD0000;
+        color:#DD0000!important;
         background:inherit;
         text-decoration:underline;
         font-family:serif;
