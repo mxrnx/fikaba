@@ -31,6 +31,7 @@ define(PHP_SELF, 'imgboard.php');		//Name of main script file (if ECHOALL, you p
 define(PHP_SELF2, 'index.html');		//Name of main html file (point to PHP_SELF if ECHOALL)
 define(PHP_EXT, '.html');			//Extension used for board pages after first
 define(USE_THUMB, true);			//Use thumbnails
+define(FORCEIMAGE, false);			//Whether or not threads must start with an image
 
 // Spam/flood protection
 define(RENZOKU, 5);				//Seconds between posts (floodcheck)

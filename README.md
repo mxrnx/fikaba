@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000019
+Version 000020
 
 Fikaba is an imageboard engine forked from futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
@@ -12,7 +12,7 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 
 ## Features
 * Valid HTML5
-* Admin panel for bans/deletion
+* Fairly advanced admin/moderator/janitor panel
 * [JSON API](https://github.com/knarka/fikaba/blob/master/docs/api.md)
 * Tripcodes, capcodes
 * Highly configurable
