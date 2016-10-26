@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000019
+# Fikaba 000020
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000019');
+define(VERSION, '000020');
 
 extract($_POST);
 extract($_GET);
@@ -205,7 +205,7 @@ function updatelog($resno=0){
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
-				if($ext){ // TODO: test
+				if($ext){
 					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
 					if($w && $h){//when there is size...
@@ -365,7 +365,7 @@ function form(&$dat,$resno,$admin=""){
 	}
 	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" size="35" /></td></tr>';
 	if($admin && $_SESSION['cancap']){
-		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" size="35" /></td></tr>
+		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" checked="checked" size="35" /></td></tr>
 		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
 	}
 	$dat.='<tr><td class="postblock">'.S_EMAIL.'</td><td><input type="text" name="email" size="35" /></td></tr>
@@ -374,7 +374,7 @@ function form(&$dat,$resno,$admin=""){
 	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="50" rows="4"></textarea></td></tr>';
 	$dat.='<tr><td class="postblock">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />';
-	if(!$resno){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
+	if(!$resno && !FORCEIMAGE){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
 	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="18" maxlength="8" value="" /> '.S_DELEXPL.'</td></tr>
 <tr><td colspan="2">
 <div class="rules lefted">'.S_RULES.'</div></td></tr></table></form></div></div><hr />';
@@ -516,7 +516,10 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	if(!$com||ereg("^[ |Å@|\t]*$",$com)) $com="";
 	if(!$sub||ereg("^[ |Å@|]*$",$sub))   $sub="";
 
-	if(!$resto&&!$textonly&&!is_file($dest)) error(S_NOPIC,$dest);
+	if(!$resto&&!is_file($dest)){
+		if(FORCEIMAGE||!$textonly) error(S_NOPIC,$dest);
+		//else $textonly = "on";
+	}
 	if(!$com&&!is_file($dest)) error(S_NOTEXT,$dest);
 
 	$name=ereg_replace(S_MANAGEMENT,"\"".S_MANAGEMENT."\"",$name);
@@ -1008,7 +1011,7 @@ function adminban(){
 	echo('<tr><td class="postblock">'.S_MANABANIP.'</td><td><input type="text" size="28" name="banip" />');
 	echo("<input type=submit value=\"".S_MANASUB."\" /></td></tr>");
 	echo('<tr><td class="postblock">'.S_MANABANEXP.'</td><td><input value="7" type="number" size="5" name="banexp" /></td></tr>');
-	echo('<tr><td class="postblock">'.S_MANABANPUBMSG.'</td><td><textarea rows="3" cols="33" name="banpubmsg"></textarea></td></tr>');
+	echo('<tr><td class="postblock">'.S_MANABANPUBMSG.'</td><td><textarea rows="3" cols="33" name="banpubmsg">user was banned for this post</textarea></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANABANPRIVMSG.'</td><td><textarea rows="3" cols="33" name="banprivmsg"></textarea></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANARMP.'</td><td><input value="7" type="checkbox" name="rmp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANARMALLP.'</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');
