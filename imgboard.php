@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000020
+# Fikaba 000021
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000020');
+define(VERSION, '000021');
 
 extract($_POST);
 extract($_GET);
