@@ -28,6 +28,9 @@ I want to list some examples of sites running fikaba. If you are using fikaba, p
 5. Log in to the default admin account (password REPLACEME) and create a new account
 6. Pour yourself some puerh and admire your professional adminship
 
+## Updating
+[See here](https://github.com/knarka/fikaba/blob/master/docs/update.md)
+
 ## Contributing
 I'll accept useful shit, I guess. The only thing I'm really looking for is someone that understands moonspeak, to keep jp.php updated as more strings get added.
 
