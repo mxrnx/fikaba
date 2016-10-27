@@ -1232,7 +1232,7 @@ function catalog(){
 	while($row=mysql_fetch_row($result)){
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
 		if((int)$resto==0){
-			if($i%5==0) $dat.='</tr><tr>';
+			if($i%10==0) $dat.='</tr><tr>';
 			$dat.="<td class='catthread'>";
 			if($ext){
 				$size = $fsize;//file size displayed in alt text

@@ -179,22 +179,29 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	padding:0px;
 	color:#800000;
 }
-.catthread{
-	float: left;
-	max-width:180px;
-	max-height:180px;
-	width:180px;
-	height:180px;
-	text-align:center;
-	font-size:12px;
-	background: #0D1010 none repeat scroll 0% 0% !important;
-	color: #D2E7E8 !important;
-	border: 1px solid #D2E7E8;
-	box-shadow: 1px 1px #0D1010;
-}
 .thumbnailmsg{
 	padding-right:5px;
 	font-size:10px;
+}
+.manabuttons{
+	text-align:center;
+	padding-top:6px;
+	font-size:14px !important;
+}
+.catthread{
+	float: none;
+	max-width:160px;
+	max-height:180px;
+	width:160px;
+	height:180px;
+	border-color:#555;
+	border-style:solid;
+	border-width:2px;
+	text-align:center;
+	font-size:12px;
+	padding-top:10px;
+	vertical-align:top;
+	margin:3px;
 }
 .catthumb{
 	max-width:160px;
@@ -202,25 +209,20 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	width:auto;
 	height:auto;
 }
+.cattitle,.cattitle:hover{
+	text-decoration:none;
+	font-size:12px;
+}
 .catthread img{
+	max-height:40%;
+	max-width:99%;
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
 	float: none !important;
 }
-.cattitle{
-	text-decoration:none;
-}
-.cattitle:hover{
-	text-decoration:none;
-}
 .cattable{
-	width:90%;
+	width:96%;
 	margin-left:auto;
 	margin-right:auto;
-}
-.manabuttons{
-	text-align:center;
-	padding-top:6px;
-	font-size:14px !important;
 }

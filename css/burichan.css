@@ -197,17 +197,24 @@ td {
 	text-align: right;
 	float: right;
 }
+.manabuttons{
+	text-align:center;
+	padding-top:6px;
+}
 .catthread{
-	float: left;
-	max-width:180px;
+	float: none;
+	max-width:160px;
 	max-height:180px;
-	width:180px;
+	width:160px;
 	height:180px;
-	border-color:black;
+	border-color:#87d;
 	border-style:solid;
 	border-width:2px;
 	text-align:center;
 	font-size:12px;
+	padding-top:10px;
+	vertical-align:top;
+	margin:2px;
 }
 .catthumb{
 	max-width:160px;
@@ -215,23 +222,20 @@ td {
 	width:auto;
 	height:auto;
 }
-.cattitle:hover{
+.cattitle,.cattitle:hover{
 	text-decoration:none;
-	color:#0F0C5D;
-	font-family:serif;
+	font-size:12px;
 }
 .catthread img{
+	max-height:40%;
+	max-width:99%;
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
 	float: none !important;
 }
 .cattable{
-	width:90%;
+	width:96%;
 	margin-left:auto;
 	margin-right:auto;
-}
-.manabuttons{
-	text-align:center;
-	padding-top:6px;
 }
