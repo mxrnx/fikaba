@@ -248,30 +248,30 @@ function updatelog($resno=0){
 		$dat.="<table><tr>";
 		if($prev >= 0){
 			if($prev==0){
-				$dat.="<form action=\"".PHP_SELF2."\" method=\"get\" /><td>";
-		}else{
-			$dat.="<form action=\"".$prev/PAGE_DEF.PHP_EXT."\" method=\"get>\" /<td>";
-		}
-		$dat.="<input type=\"submit\" value=\"".S_PREV."\" />";
-		$dat.="</td></form>";
-			}else{$dat.="<td>".S_FIRSTPG."</td>";}
-	
-			$dat.="<td>";
-			for($i = 0; $i < $counttree ; $i+=PAGE_DEF){
-				if($i&&!($i%(PAGE_DEF*2))){$dat.=" ";}
-		if($st==$i){$dat.="[".($i/PAGE_DEF)."] ";}
-		else{
-			if($i==0){$dat.="[<a href=\"".PHP_SELF2."\">0</a>] ";}
-			else{$dat.="[<a href=\"".($i/PAGE_DEF).PHP_EXT."\">".($i/PAGE_DEF)."</a>] ";}
-		}
+				$dat.="<form action=\"".PHP_SELF2."\" method=\"get\"><td>";
+			}else{
+				$dat.="<form action=\"".$prev/PAGE_DEF.PHP_EXT."\" method=\"get\"><td>";
 			}
+			$dat.="<input type=\"submit\" value=\"".S_PREV."\" />";
+			$dat.="</td></form>";
+		}
+	
+		$dat.="<td>";
+		for($i = 0; $i < $counttree ; $i+=PAGE_DEF){
+			if($i&&!($i%(PAGE_DEF*2))){$dat.=" ";}
+			if($st==$i){$dat.="[".($i/PAGE_DEF)."] ";}
+			else{
+				if($i==0){$dat.="[<a href=\"".PHP_SELF2."\">0</a>] ";}
+				else{$dat.="[<a href=\"".($i/PAGE_DEF).PHP_EXT."\">".($i/PAGE_DEF)."</a>] ";}
+			}
+		}
 			$dat.="</td>";
 	
 			if($p >= PAGE_DEF && $counttree > $next){
-				$dat.="<td><form action=\"".$next/PAGE_DEF.PHP_EXT."\" method=\"get\">";
+				$dat.="<form action=\"".$next/PAGE_DEF.PHP_EXT."\" method=\"get\"><td>";
 				$dat.="<input type=\"submit\" value=\"".S_NEXT."\" />";
 				$dat.="</form></td>";
-			}else{$dat.="<td>".S_LASTPG."</td>";}
+			}
 		$dat.="</tr></table><br class=\"allclear\" />\n";
 		} else { // in res display mode
 			$dat.="<table></table><br class=\"allclear\" />\n";
@@ -294,9 +294,7 @@ function updatelog($resno=0){
 function mysql_call($query){
 	$ret=mysql_query($query) or die(mysql_error());
 	if(!$ret){
-		#echo "error!!<br />";
 		echo $query."<br />";
-		#    echo mysql_errno().": ".mysql_error()."<br />";
 	}
 	return $ret;
 }
@@ -315,9 +313,8 @@ function head(&$dat){
 		$titlepart.= ''.TITLE.'';
 	}
 	$dat.='<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<html><head>
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
-<meta charset="utf-8" />
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
 <script type="text/javascript" src="js/style.js"></script>';
 	foreach($STYLES as $stylename => $stylefile){
