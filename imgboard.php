@@ -193,9 +193,6 @@ function updatelog($resno=0){
 				// URL and e-mail
 				if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 				$com = auto_link($com);
-				//$com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<font color=".RE_COL.">\\2</font>", $com);
-				//$com = eregi_replace("(^|>)&gt;&gt;([^<]*)", "\\1<a href='".PHP_SELF."#\\2' class=\"reflink\">&gt;&gt;\\2</a>", $com);
-				//$com = eregi_replace("(^|>)(&gt;[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 				$com = eregi_replace("&gt;", ">", $com);
 				$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a>", $com);
 				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
@@ -221,7 +218,6 @@ function updatelog($resno=0){
 						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
 					}else{
 						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <br />$imgsrc";
-						//$dat.="$imgsrc<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>";
 					}
 				}
 				$dat.="<blockquote>$com</blockquote>";
@@ -347,7 +343,7 @@ function form(&$dat,$resno,$admin=""){
 	$maxbyte = MAX_KB * 1024;
 	$no=$resno;
 	if($admin){
-		$msg = "<em>".S_NOTAGS."</em>"; /* Note to self:  Find out where this happened. */
+		$msg = "<em>".S_NOTAGS."</em>";
 	}
 	$dat.=$msg.'<div class="centered"><div class="postarea">
 		<form action="'.PHP_SELF.'" method="post" enctype="multipart/form-data" style="display: inline-block;">
@@ -386,7 +382,7 @@ Fikaba ".S_VERSION." ".VERSION."
 </body></html>";
 }
 
-function error($mes,$dest=''){ /* Hey guys, what's going on in this function?  Since I don't see it so often, I'll leave the tags alone for now.*/
+function error($mes,$dest=''){ /* Basically a fancy die() */
 	global $upfile_name,$path;
 	if(is_file($dest)) unlink($dest);
 	head($dat);
@@ -509,9 +505,9 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 		error(S_STRREF,$dest);};}
 	if($_SERVER["REQUEST_METHOD"] != "POST") error(S_UNJUST,$dest);
 	// Form content check
-	if(!$name||ereg("^[ |Å@|]*$",$name)) $name="";
-	if(!$com||ereg("^[ |Å@|\t]*$",$com)) $com="";
-	if(!$sub||ereg("^[ |Å@|]*$",$sub))   $sub="";
+	if(!$name||ereg("^[ |@|]*$",$name)) $name="";
+	if(!$com||ereg("^[ |@|\t]*$",$com)) $com="";
+	if(!$sub||ereg("^[ |@|]*$",$sub))   $sub="";
 
 	if(!$resto&&!is_file($dest)){
 		if(FORCEIMAGE||!$textonly) error(S_NOPIC,$dest);
@@ -595,7 +591,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	}
 	$com = str_replace("\n",  "", $com);	//\n is erased
 
-	//$name=ereg_replace(TRIPKEY,"",$name);  //erase tripkeys in name
 	$name=ereg_replace("[\r\n]","",$name);
 	$names=$name;
 	$name = trim($name);//blankspace removal
@@ -614,7 +609,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 		$cap=strtr($cap,"&amp;", "&");
 		$cap=strtr($cap,"&#44;", ",");
 		$name=ereg_replace("(#|!)(.*)","",$name);
-		//$name=ereg_replace(TRIPKEY,"",$name);  //erase tripkeys in name
 		$salt=substr($cap."H.",1,2);
 		$salt=ereg_replace("[^\.-z]",".",$salt);
 		$salt=strtr($salt,":;<=>?@[\\]^_`","ABCDEFGabcdef");
@@ -1281,7 +1275,6 @@ case 'admin':
 	}
 	if($admin=="rban") removeban($ip);
 	if($admin=="acc") adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$accacc);
-	//else adminpanel();
 	break;
 case 'banned':
 	checkban($ip);
