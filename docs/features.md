@@ -22,6 +22,7 @@
 * noko/nonoko (noko by default)
 * Catalogs
 * [JSON API](https://github.com/knarka/fikaba/blob/master/docs/api.md)
+* Far more advanced admin panel, with multiple accounts
 
 ## Planned features
 Roughly in order of importance:
@@ -30,5 +31,4 @@ Roughly in order of importance:
 2. WebM support
 3. CAPTCHA
 4. Oekaki
-5. Janitors
-6. Inline image expansion
+5. Inline image expansion
