@@ -347,7 +347,6 @@ function form(&$dat,$resno,$admin=""){
 	$maxbyte = MAX_KB * 1024;
 	$no=$resno;
 	if($admin){
-		//$hidden = "<input type=hidden name=admin value=\"".ADMIN_PASS."\">";
 		$msg = "<em>".S_NOTAGS."</em>"; /* Note to self:  Find out where this happened. */
 	}
 	$dat.=$msg.'<div class="centered"><div class="postarea">
@@ -361,9 +360,9 @@ function form(&$dat,$resno,$admin=""){
 		if(!$resno) { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_NEWTHREAD.'</td></tr>'; }
 		else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
 	}
-	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" size="35" /></td></tr>';
+	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value="'.$_SESSION['name'].'" size="35" /></td></tr>';
 	if($admin && $_SESSION['cancap']){
-		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" checked="checked" size="35" /></td></tr>
+		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" checked="checked" size="35" /> ('.$_SESSION['capcode'].')</td></tr>
 		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
 	}
 	$dat.='<tr><td class="postblock">'.S_EMAIL.'</td><td><input type="text" name="email" size="35" /></td></tr>
@@ -920,10 +919,11 @@ function valid($pass){
 	echo $dat;
 	echo "<div class='passvalid'>".S_MANAMODE." <a href='".PHP_SELF2."'>[".S_RETURNS."]</a> \n</div>";
 	if($pass){
-		$result = mysql_call("select password,capcode,candel,canban,cancap,canacc from ".MANATABLE);
+		$result = mysql_call("select name,password,capcode,candel,canban,cancap,canacc from ".MANATABLE);
 		while($row=mysql_fetch_row($result)){
-			list($password,$capcode,$candel,$canban,$cancap,$canacc)=$row;
+			list($adminname,$password,$capcode,$candel,$canban,$cancap,$canacc)=$row;
 			if($pass == $password){
+				$_SESSION["name"] = $adminname;
 				$_SESSION["capcode"] = $capcode;
 				$_SESSION["candel"] = $candel;
 				$_SESSION["canban"] = $canban;
