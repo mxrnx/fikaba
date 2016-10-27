@@ -792,11 +792,11 @@ function thumb($path,$tim,$ext){
 	if(function_exists("ImageCreateTrueColor")&&get_gd_ver()=="2"){
 		$im_out = ImageCreateTrueColor($out_w, $out_h);
 	}else{$im_out = ImageCreate($out_w, $out_h);}
-	// copy resized original
-	ImageCopyResized($im_out, $im_in, 0, 0, 0, 0, $out_w, $out_h, $size[0], $size[1]);
 	// change background color
 	$backing = imagecolorallocate($im_out,...$THUMBBACK);
 	imagefill($im_out, 0, 0, $backing);
+	// copy resized original
+	ImageCopyResized($im_out, $im_in, 0, 0, 0, 0, $out_w, $out_h, $size[0], $size[1]);
 	// thumbnail saved
 	ImageJPEG($im_out, $thumb_dir.$tim.'s.jpg',60);
 	chmod($thumb_dir.$tim.'s.jpg',0666);
