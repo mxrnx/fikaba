@@ -747,6 +747,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 
 //thumbnails
 function thumb($path,$tim,$ext){
+	global $THUMBBACK;
 	if(!function_exists("ImageCreate")||!function_exists("ImageCreateFromJPEG"))return;
 	$fname=$path.$tim.$ext;
 	$thumb_dir = THUMB_DIR;     //thumbnail directory
@@ -793,6 +794,9 @@ function thumb($path,$tim,$ext){
 	}else{$im_out = ImageCreate($out_w, $out_h);}
 	// copy resized original
 	ImageCopyResized($im_out, $im_in, 0, 0, 0, 0, $out_w, $out_h, $size[0], $size[1]);
+	// change background color
+	$backing = imagecolorallocate($im_out,...$THUMBBACK);
+	imagefill($im_out, 0, 0, $backing);
 	// thumbnail saved
 	ImageJPEG($im_out, $thumb_dir.$tim.'s.jpg',60);
 	chmod($thumb_dir.$tim.'s.jpg',0666);
