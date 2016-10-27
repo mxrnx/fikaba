@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000021
+# Fikaba 000022
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000021');
+define(VERSION, '000022');
 
 extract($_POST);
 extract($_GET);
@@ -377,7 +377,8 @@ function form(&$dat,$resno,$admin=""){
 function foot(&$dat){
 	$dat.="
 <div class=\"footer\">".S_FOOT."<br />
-Fikaba ".S_VERSION." ".VERSION."
+Fikaba ".S_VERSION." ".VERSION."<br />
+".FOOTTEXT."
 </div>
 </body></html>";
 }
