@@ -391,7 +391,7 @@ function error($mes,$dest=''){ /* Basically a fancy die() */
 	echo "<br /><br /><hr size=1><br /><br />
 		<center><font color=blue size=5>$mes<br /><br /><a href=".PHP_SELF2.">".S_RELOAD."</a></b></font></center>
 		<br /><br /><hr size=1>";
-	die("</body></html>");
+	die("</body></html>\n");
 }
 /* Auto Linker */
 function auto_link($proto){
