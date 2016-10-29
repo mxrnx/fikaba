@@ -218,6 +218,7 @@ td {
 	padding-top:6px;
 }
 .catthread{
+	display:inline-block;
 	float: none;
 	max-width:160px;
 	max-height:180px;

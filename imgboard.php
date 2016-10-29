@@ -1217,14 +1217,13 @@ function catalog(){
 	$dat = '';
 	head($dat);
 	$dat.="<div class=\"passvalid\">".S_CATALOG." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div><br />\n";
-	$dat.="<table class='cattable'><tbody><tr>";
+	$dat.="<div class='cattable'>";
 	$i=0;
 	$result = mysql_call("select * from ".POSTTABLE." order by root desc");
 	while($row=mysql_fetch_row($result)){
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
 		if((int)$resto==0){
-			if($i%10==0) $dat.='</tr><tr>';
-			$dat.="<td class='catthread'>";
+			$dat.="<div class='catthread'>";
 			if($ext){
 				$size = $fsize;//file size displayed in alt text
 				if($w && $h){//when there is size...
@@ -1239,12 +1238,12 @@ function catalog(){
 				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
 			}
 			if(strlen($com)>55) $com = substr($com,0,54)."...";
-			$dat.="<a href='".PHP_SELF."?res=$no' class='cattitle filetitle'>$sub</a><br /><span class='catcont'>$com</span></td>";
+			$dat.="<a href='".PHP_SELF."?res=$no'><span class='cattitle filetitle'>$sub</span><br /><span class='catcont'>$com</span></a></div>";
 			$i++;
 		}
 	}
 	mysql_free_result($result);
-	$dat.="</tr></tbody></table>";
+	$dat.="</div>";
 	foot($dat);
 	echo($dat);
 }
