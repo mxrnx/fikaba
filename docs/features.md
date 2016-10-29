@@ -23,6 +23,7 @@
 * Catalogs
 * [JSON API](https://github.com/knarka/fikaba/blob/master/docs/api.md)
 * Far more advanced admin panel, with multiple accounts
+* Forced anonymous
 
 ## Planned features
 Roughly in order of importance:
