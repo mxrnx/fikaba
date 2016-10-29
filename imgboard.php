@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000022
+# Fikaba 000023
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000022');
+define(VERSION, '000023');
 
 extract($_POST);
 extract($_GET);
@@ -356,7 +356,8 @@ function form(&$dat,$resno,$admin=""){
 		if(!$resno) { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_NEWTHREAD.'</td></tr>'; }
 		else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
 	}
-	$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value="'.$_SESSION['name'].'" size="35" /></td></tr>';
+	if(!FORCED_ANON||$admin)
+		$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value="'.$_SESSION['name'].'" size="35" /></td></tr>';
 	if($admin && $_SESSION['cancap']){
 		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" checked="checked" size="35" /> ('.$_SESSION['capcode'].')</td></tr>
 		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
@@ -602,9 +603,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	$name = str_replace("&amp;", "&", $name);//remove ampersands
 	$name = str_replace(",", "&#44;", $name);//remove commas
 
-
-
-
 	if(ereg("(#|!)(.*)",$names,$regs)){
 		$cap = $regs[2];
 		$cap=strtr($cap,"&amp;", "&");
@@ -616,7 +614,8 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 		$name.=TRIPKEY.substr(crypt($cap,$salt),-10)."";
 	}
 
-	if(!$name) $name=S_ANONAME;
+	session_start();
+	if(!$name||(FORCED_ANON&&!$_SESSION['name'])) $name=S_ANONAME; // manas can post with name when forced anon is on
 	if(!$com) $com=S_ANOTEXT;
 	if(!$sub) $sub=S_ANOTITLE;
 

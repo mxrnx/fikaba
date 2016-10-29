@@ -41,6 +41,7 @@ define(RENZOKU2, 10);				//Seconds between image posts (floodcheck)
 define(PROXY_CHECK, false);			//Enable proxy check
 define(DISP_ID, false);				//Display user IDs
 define(BR_CHECK, 15);				//Max lines per post (0 = no limit)
+define(FORCED_ANON, false);			//Force anonymous posting (except for managers)
 
 // Look and behavior
 define(COLLAPSENUM, 3);				//Number of replies to show in the index
