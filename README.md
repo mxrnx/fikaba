@@ -6,9 +6,9 @@ Fikaba is an imageboard engine forked from futallaby aiming to be more standards
 [See here for info on migrating from futallaby](https://github.com/knarka/fikaba/blob/master/docs/migrate.md)
 
 ## Instances
-I want to list some examples of sites running fikaba. If you are using fikaba, please make a pull request or otherwise contact me to add your site to the (for now empty) list below.
+Below are some examples of sites running Fikaba. If you are using fikaba and want to be added to the list, please make a pull request or otherwise contact me to add your site to the list below.
 
-* none yet
+* [Chanola](http://chanola.netau.net/board/)
 
 ## Features
 * Valid HTML5
