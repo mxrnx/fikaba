@@ -143,7 +143,7 @@ function updatelog($resno=0){
 			if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 			$com = auto_link($com);
 			$com = eregi_replace("&gt;", "\>", $com);
-			$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a>", $com);
+			$com = eregi_replace("(^|>)\>\>([^<]*)[\n ]", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a> ", $com);
 			$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 			// Picture file name
 			$img = $path.$tim.$ext;
@@ -194,7 +194,7 @@ function updatelog($resno=0){
 				if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 				$com = auto_link($com);
 				$com = eregi_replace("&gt;", ">", $com);
-				$com = eregi_replace("(^|>)\>\>([^<]*)", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a>", $com);
+				$com = eregi_replace("(^|>)\>\>([^<]*)[\n ]", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a> ", $com);
 				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 				if(DISP_ID){ $userid = "ID:$id"; }
 				else{ $userid = ""; }
