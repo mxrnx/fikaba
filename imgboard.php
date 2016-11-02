@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000023
+# Fikaba 000024
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000023');
+define(VERSION, '000024');
 
 extract($_POST);
 extract($_GET);
@@ -142,8 +142,8 @@ function updatelog($resno=0){
 			// URL and link
 			if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 			$com = auto_link($com);
-			$com = eregi_replace("&gt;", "\>", $com);
-			$com = eregi_replace("(^|>)\>\>([^<]*)[\n ]", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a> ", $com);
+			$com = eregi_replace("&gt;", ">", $com);
+			$com = eregi_replace("\>\>([0-9]+)", "<a href='".$_SERVER['REQUEST_URI']."#r\\1'>&gt;&gt;\\1</a>", $com);
 			$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 			// Picture file name
 			$img = $path.$tim.$ext;
@@ -194,7 +194,7 @@ function updatelog($resno=0){
 				if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 				$com = auto_link($com);
 				$com = eregi_replace("&gt;", ">", $com);
-				$com = eregi_replace("(^|>)\>\>([^<]*)[\n ]", "\\1<a href='".$_SERVER['REQUEST_URI']."#r\\2'>&gt;&gt;\\2</a> ", $com);
+				$com = eregi_replace("\>\>([0-9]+)", "<a href='".$_SERVER['REQUEST_URI']."#r\\1'>&gt;&gt;\\1</a>", $com);
 				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
 				if(DISP_ID){ $userid = "ID:$id"; }
 				else{ $userid = ""; }
