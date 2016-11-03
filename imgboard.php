@@ -751,8 +751,6 @@ function thumb($path,$tim,$ext){
 			$im_in = @ImageCreateFromGIF($fname);
 			if($im_in){break;}
 		}
-		if(!is_executable(realpath("./gif2png"))||!function_exists("ImageCreateFromPNG"))return;
-		@exec(realpath("./gif2png")." $fname",$a);
 		if(!file_exists($path.$tim.'.png'))return;
 		$im_in = @ImageCreateFromPNG($path.$tim.'.png');
 		unlink($path.$tim.'.png');
@@ -1006,7 +1004,7 @@ function adminban(){
 	echo "<input type=hidden name=admin value=ban />\n";
 	echo "\n<table><tbody>";
 	echo('<tr><td class="postblock">'.S_MANABANIP.'</td><td><input type="text" size="28" name="banip" />');
-	echo("<input type=submit value=\"".S_MANASUB."\" /></td></tr>");
+	echo(" <input type=submit value=\"".S_MANASUB."\" /></td></tr>");
 	echo('<tr><td class="postblock">'.S_MANABANEXP.'</td><td><input value="7" type="number" size="5" name="banexp" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANABANPUBMSG.'</td><td><textarea rows="3" cols="33" name="banpubmsg">user was banned for this post</textarea></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANABANPRIVMSG.'</td><td><textarea rows="3" cols="33" name="banprivmsg"></textarea></td></tr>');
