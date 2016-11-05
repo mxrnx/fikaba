@@ -597,9 +597,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	$com = str_replace( "\r",  "\n", $com);
 	// Continuous lines
 	$com = ereg_replace("\n((!@| )*\n){3,}","\n",$com);
-	if(!BR_CHECK || substr_count($com,"\n")<BR_CHECK){
-		$com = nl2br($com);		//br is substituted before newline char
-	}
+	$com = nl2br($com);		//br is substituted before newline char
 	$com = str_replace("\n",  "", $com);	//\n is erased
 
 	$name=ereg_replace("[\r\n]","",$name);
@@ -755,7 +753,7 @@ function thumb($path,$tim,$ext){
 	// width, height, and type are aquired
 	$size = GetImageSize($fname);
 	switch ($size[2]) {
-	case 1 :
+	case IMG_GIF:
 		if(function_exists("ImageCreateFromGIF")){
 			$im_in = @ImageCreateFromGIF($fname);
 			if($im_in){break;}
@@ -765,9 +763,9 @@ function thumb($path,$tim,$ext){
 		unlink($path.$tim.'.png');
 		if(!$im_in)return;
 		break;
-	case 2 : $im_in = @ImageCreateFromJPEG($fname);
+	case IMG_JPG: $im_in = @ImageCreateFromJPEG($fname);
 		if(!$im_in){return;} break;
-	case 3 :
+	case IMG_PNG:
 		if(!function_exists("ImageCreateFromPNG"))return;
 		$im_in = @ImageCreateFromPNG($fname);
 		if(!$im_in){return;}
