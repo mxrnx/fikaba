@@ -111,6 +111,7 @@ define(S_MANAUNBAN, 'Unban instead of ban');
 define(S_BANEXPERROR, 'Please give a number of days to ban this user for.');
 define(S_NOSUCHPOST, 'The post you\'re trying to ban for does not exist.');
 define(S_BANEXPIRED, 'Your ban has expired, and has been removed from the database.');
+define(S_BANNEDMSG, 'user was banned for this post');							//Default public message for bans
 define(S_CATALOG, "View mode: Catalog");
 define(S_CATALOGBUTTON, "Catalog");
 define(S_NOPERMISSION, 'You do not have the necessary permissions to do that.');			// text showed when illegally trying to access some part of the management panel
