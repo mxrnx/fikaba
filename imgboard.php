@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000024
+# Fikaba 000025
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000024');
+define(VERSION, '000025');
 
 extract($_POST);
 extract($_GET);
@@ -27,6 +27,15 @@ $badip = array("addr1\\.dummy\\.com","addr2\\.dummy\\.com"); //Refused hosts (IP
 if(!$con=mysql_connect(SQLHOST,SQLUSER,SQLPASS)){
 	echo S_SQLCONF;	//unable to connect to DB (wrong user/pass?)
 	exit;
+}
+
+if (!file_exists(IMG_DIR) && !is_dir(IMG_DIR)){
+	mkdir(IMG_DIR, 0777);
+	echo(IMG_DIR.': '.S_FCREATE);
+}
+if (!file_exists(THUMB_DIR) && !is_dir(THUMB_DIR)){
+	mkdir(THUMB_DIR, 0777);
+	echo(THUMB_DIR.': '.S_FCREATE);
 }
 
 $db_id=mysql_select_db(SQLDB,$con);

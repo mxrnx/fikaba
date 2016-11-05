@@ -94,6 +94,7 @@ define(S_NOTDIR, 'Error: Directory does not exist.<br>');						//Returns error w
 define(S_SQLCONF, 'MySQL connection failure');								//MySQL connection failure
 define(S_SQLDBSF, 'Database error, check SQL settings<br>');						//Database select failure
 define(S_TCREATE, "Creating table!<br>\n");								//Creating table
+define(S_FCREATE, "Creating folder!<br>\n");								//Creating table
 define(S_TCREATEF, 'Unable to create table!<br>');							//Table creation failed
 define(S_SQLFAIL, 'Critical SQL problem!<br>');								//SQL Failure
 define(S_BANRENZOKU, 'Error: you are banned. Post discarded. Check on the status of your ban <a href="?mode=banned">here</a>.');	//Error shown to banned user when they try to post

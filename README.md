@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000024
+Version 000025
 
 Fikaba is an imageboard engine forked from futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
@@ -23,10 +23,9 @@ Below are some examples of sites running Fikaba. If you are using fikaba and wan
 ## Installation
 1. Place the files from this repository in a folder on your webserver and set permissions of that folder to 777
 2. Edit/move config.example.php to config.php and edit it
-3. Make sure IMG\_DIR and THUMB\_DIR exist and chmod them to 777
-4. Navigate to imgboard.php in your browser
-5. Log in to the default admin account (password REPLACEME) and create a new account
-6. Pour yourself some puerh and admire your professional adminship
+3. Navigate to imgboard.php in your browser
+4. Log in to the default admin account (password REPLACEME) and create a new account
+5. Pour yourself some puerh and admire your professional adminship
 
 ## Updating
 [See here](https://github.com/knarka/fikaba/blob/master/docs/update.md)
