@@ -1015,7 +1015,7 @@ function adminban(){
 	echo('<tr><td class="postblock">'.S_MANABANIP.'</td><td><input type="text" size="28" name="banip" />');
 	echo(" <input type=submit value=\"".S_MANASUB."\" /></td></tr>");
 	echo('<tr><td class="postblock">'.S_MANABANEXP.'</td><td><input value="7" type="number" size="5" name="banexp" /></td></tr>');
-	echo('<tr><td class="postblock">'.S_MANABANPUBMSG.'</td><td><textarea rows="3" cols="33" name="banpubmsg">user was banned for this post</textarea></td></tr>');
+	echo('<tr><td class="postblock">'.S_MANABANPUBMSG.'</td><td><textarea rows="3" cols="33" name="banpubmsg">'.S_BANNEDMSG.'</textarea></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANABANPRIVMSG.'</td><td><textarea rows="3" cols="33" name="banprivmsg"></textarea></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANARMP.'</td><td><input value="7" type="checkbox" name="rmp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANARMALLP.'</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');

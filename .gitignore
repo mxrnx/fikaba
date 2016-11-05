@@ -1,3 +1,7 @@
 *.html
 config.php
 title.png
+
+# default directories, renamed ones will slip through
+src/
+thumb/
