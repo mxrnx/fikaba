@@ -390,7 +390,7 @@ function foot(&$dat){
 Fikaba ".S_VERSION." ".VERSION."<br />
 ".FOOTTEXT."
 </div>
-</body></html>";
+</body></html>\n";
 }
 
 function error($mes,$dest=''){ /* Basically a fancy die() */
@@ -741,7 +741,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	}else{
 		echo "<html><head><meta http-equiv=\"refresh\" content=\"1;URL=".PHP_SELF."?res=$resto\" /></head>";
 	}
-	echo "<body>$mes ".S_SCRCHANGE."</body></html>";
+	echo "<body>$mes ".S_SCRCHANGE."</body></html>\n";
 }
 
 //thumbnails
@@ -932,7 +932,7 @@ function valid($pass){
 				$_SESSION["canacc"] = $canacc;
 				echo("<div class='passvalid'>".S_MANALOGGEDIN."</div>");
 				echo("<meta http-equiv=\"refresh\" content=\"2;URL=".PHP_SELF."?mode=admin\" />");
-				die("</body></html>");
+				die("</body></html>\n");
 			}
 		}
 		die(S_WRONGPASS);
@@ -944,11 +944,11 @@ function valid($pass){
 
 	// Mana login form
 	if(!$pass){
-		echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
+		echo "<br /><div class='centered'><form action=\"".PHP_SELF."\" method=\"post\">\n";
 		echo "<input type=hidden name=mode value=admin />\n";
 		echo "<input type=password name=pass size=8>";
-		echo "<input type=submit value=\"".S_MANASUB."\"></div></form>\n";
-		die("</body></html>");
+		echo "<input type=submit value=\"".S_MANASUB."\"></form></div>\n";
+		die("</body></html>\n");
 	}
 }
 
@@ -970,7 +970,7 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 		echo('<tr><td class="postblock">'.S_ACCCAP.'</td><td><input type="checkbox" name="acccap" value=1 /></td></tr>');
 		echo('<tr><td class="postblock">'.S_ACCACC.'</td><td><input type="checkbox" name="accacc" value=1 /></td></tr>');
 		echo("</tbody></table></form></div>\n");
-		die('</body></html>');
+		die('</body></html>\n');
 	}
 	if(!$accdel) $accdel=0;
 	if(!$accban) $accban=0;
@@ -989,7 +989,7 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 	$query="delete from ".MANATABLE." where name='DUMMY' and password='REPLACEME'";
 	if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 	mysql_free_result($result);
-	die("<p>".S_ACCCREATED."</p></body></html>");
+	die("<p>".S_ACCCREATED."</p></body></html>\n");
 }
 
 function adminban(){
@@ -1021,7 +1021,7 @@ function adminban(){
 	echo('<tr><td class="postblock">'.S_MANARMALLP.'</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANAUNBAN.'</td><td><input value="7" type="checkbox" name="unban" value="on" /></td></tr>');
 	echo("</tbody></table></form></div>\n");
-	die('</body></html>');
+	die('</body></html>\n');
 }
 
 /* Admin deletion */
@@ -1113,7 +1113,7 @@ function admindel(){
 
 	$all = (int)($all / 1024);
 	echo "[ ".S_IMGSPACEUSAGE."<b>$all</b> KB ]";
-	die("</body></html>");
+	die("</body></html>\n");
 }
 
 function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
@@ -1133,7 +1133,6 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
 	}else{
 		$banip=$target;
 	}
-	//die("banip $banip");
 	mysql_free_result($result);
 
 	if($pubmsg && !$unban){
@@ -1180,7 +1179,6 @@ function isbanned($ip){ // check ban, returning true or false
 	while($row=mysql_fetch_row($result)){
 		list($bip,$time,$expires,$reason)=$row;
 		if($ip==$bip){
-			//echo($bip);
 			if((int)$expires<time()){ removeban($ip);}
 			else{return true;}
 		}
@@ -1273,7 +1271,7 @@ case 'admin':
 		echo "</form>";
 		form($post,$res,1);
 		echo $post;
-		die("</body></html>");
+		die("</body></html>\n");
 	}
 	if($admin=="logout"){
 		stopsession();
