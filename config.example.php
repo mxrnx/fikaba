@@ -33,6 +33,7 @@ define(PHP_SELF2, 'index.html');		//Name of main html file (point to PHP_SELF if
 define(PHP_EXT, '.html');			//Extension used for board pages after first
 define(USE_THUMB, true);			//Use thumbnails
 define(FORCEIMAGE, false);			//Whether or not threads must start with an image
+define(OEKAKI_ENABLED, false);			//Whether or not oekaki is enabled, duh
 $THUMBBACK = array(255,255,238);		//Thumbnail background for transp. images. Usually the background of your body element.
 
 // Spam/flood protection
