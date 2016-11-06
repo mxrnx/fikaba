@@ -233,6 +233,10 @@ td {
 	vertical-align:top;
 	margin:2px;
 }
+.cata {
+	text-decoration:none !important;
+	color:#800000 !important;
+}
 .catthumb{
 	max-width:160px;
 	max-height:160px;
