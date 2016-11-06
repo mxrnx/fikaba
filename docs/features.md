@@ -32,5 +32,4 @@ Roughly in order of importance:
 1. Secure tripcodes
 2. WebM support
 3. CAPTCHA
-4. Oekaki
-5. Inline image expansion
+4. Inline image expansion
