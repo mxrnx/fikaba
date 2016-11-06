@@ -204,6 +204,10 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	vertical-align:top;
 	margin:3px;
 }
+.cata{
+	font-size:13px;
+	text-transform:none !important;
+}
 .catthumb{
 	max-width:160px;
 	max-height:160px;

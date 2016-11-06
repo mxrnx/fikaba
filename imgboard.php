@@ -1241,7 +1241,7 @@ function catalog(){
 				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
 			}
 			if(strlen($com)>55) $com = substr($com,0,54)."...";
-			$dat.="<a href='".PHP_SELF."?res=$no'><span class='cattitle filetitle'>$sub</span><br /><span class='catcont'>$com</span></a></div>";
+			$dat.="<a class='cata' href='".PHP_SELF."?res=$no'><span class='cattitle filetitle'>$sub</span><br /><span class='catcont'>$com</span></a></div>";
 			$i++;
 		}
 	}
