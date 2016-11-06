@@ -1,5 +1,5 @@
 # Fikaba 
-Version 000025
+Version 000026
 
 Fikaba is an imageboard engine forked from futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
 
@@ -18,6 +18,7 @@ Below are some examples of sites running Fikaba. If you are using fikaba and wan
 * Highly configurable
 * Post references
 * Flood/proxy check
+* Oekaki
 * [...and more](https://github.com/knarka/fikaba/blob/master/docs/features.md)
 
 ## Installation

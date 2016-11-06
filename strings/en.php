@@ -13,6 +13,7 @@ define(S_EMAIL, 'E-mail');										//Describes e-mail field
 define(S_SUBJECT, 'Subject');										//Describes subject field
 define(S_SUBMIT, 'Submit');										//Describes submit button
 define(S_COMMENT, 'Comment');										//Describes comment field
+define(S_OEKAKI, 'Oekaki');
 define(S_UPLOADFILE, 'File');										//Describes file field
 define(S_NOFILE, 'No File');										//Describes file/no file checkbox
 define(S_DELPASS, 'Password');										//Describes password field

@@ -1,0 +1,3 @@
+[submodule "js/ritare"]
+	path = js/ritare
+	url = https://github.com/knarka/ritare

@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000025
+# Fikaba 000026
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000025');
+define(VERSION, '000026');
 
 extract($_POST);
 extract($_GET);
@@ -330,8 +330,9 @@ function head(&$dat){
 <script type="text/javascript"><!--
 function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(i=0;i<forms.length;i++){if(forms[i].pwd)with(forms[i]){if(!pwd.value)pwd.value=P;}if(forms[i].name)with(forms[i]){if(!name.value)name.value=N;}}}};function getCookie(key, tmp1, tmp2, xx1, xx2, xx3) {tmp1 = " " + document.cookie + ";";xx1 = xx2 = 0;len = tmp1.length;	while (xx1 < len) {xx2 = tmp1.indexOf(";", xx1);tmp2 = tmp1.substring(xx1 + 1, xx2);xx3 = tmp2.indexOf("=");if (tmp2.substring(0, xx3) == key) {return(unescape(tmp2.substring(xx3 + 1, xx2 - xx1 - 1)));}xx1 = xx2 + 1;}return("");}
 //--></script>
-<script type="text/javascript">function addref(postid) {document.getElementById("com").value += ">>" + postid + "\n";}</script>
-</head>
+<script type="text/javascript">function addref(postid) {document.getElementById("com").value += ">>" + postid + "\n";}</script>';
+	if(OEKAKI_ENABLED){$dat.='<script type="text/javascript" src="js/ritare/ritare.js"></script><link rel="stylesheet" type="text/css" href="js/ritare/ritare.css" />';}
+	$dat.='</head>
 	<body>
 	'.$titlebar.'
 	<div class="styles">';
@@ -355,7 +356,7 @@ function form(&$dat,$resno,$admin=""){
 		$msg = "<em>".S_NOTAGS."</em>";
 	}
 	$dat.=$msg.'<div class="centered"><div class="postarea">
-		<form action="'.PHP_SELF.'" method="post" enctype="multipart/form-data" style="display: inline-block;">
+		<form id="postform" action="'.PHP_SELF.'" method="post" enctype="multipart/form-data" style="display: inline-block;">
 		<input type="hidden" name="mode" value="regist" />
 		'.$hidden.'
 		<input type="hidden" name="MAX_FILE_SIZE" value="'.$maxbyte.'" />';
@@ -375,6 +376,7 @@ function form(&$dat,$resno,$admin=""){
 	<tr><td class="postblock">'.S_SUBJECT.'</td><td><input type="text" name="sub" size="35" />
 	<input type="submit" value="'.S_SUBMIT.'" /></td></tr>
 	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="50" rows="4"></textarea></td></tr>';
+	if(OEKAKI_ENABLED){$dat.='<tr><td class="postblock">'.S_OEKAKI.'</td><td id="oekakiparent"><script type="text/javascript">Ritare.start({parentel:"oekakiparent",onFinish:function(e){newfield=document.createElement("input");newfield.type="text"; newfield.name="oekaki";newfield.value=(Ritare.canvas.toDataURL(\'image/png\')); document.getElementById("postform").appendChild(newfield);},width:600,height:300});</script></td></tr>';}
 	$dat.='<tr><td class="postblock">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />';
 	if(!$resno && !FORCEIMAGE){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
@@ -414,19 +416,27 @@ function  proxy_connect($port) {
 	if(!$fp){return 0;}else{return 1;}
 }
 
-function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_name,$resto){
+function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$upfile_name,$resto){
 	global $path,$badstring,$badfile,$badip,$pwdc,$textonly,$admin;
 
 	if(isbanned($ip)) error(S_BANRENZOKU);
-
+	
 	// time
 	$time = time();
 	$tim = $time.substr(microtime(),2,3);
 
 	// upload processing
-	if($upfile&&file_exists($upfile)){
+	if($oekaki||$upfile&&file_exists($upfile)){
 		$dest = $path.$tim.'.tmp';
-		move_uploaded_file($upfile, $dest);
+		if($oekaki){
+			$oekaki = str_replace('data:image/png;base64,', '', $oekaki);
+			$oekaki = str_replace(' ', '+', $oekaki);
+			$imgdata = base64_decode($oekaki);
+			file_put_contents($dest, $imgdata);
+			$upfile_name = 'oekaki.png';
+		} else {
+			move_uploaded_file($upfile, $dest);
+		}
 		//if an error in up, it changes to down (what?)
 		//copy($upfile, $dest);
 		$upfile_name = CleanStr($upfile_name);
@@ -469,7 +479,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	if($_FILES["upfile"]["error"]==2){
 		error(S_TOOBIG,$dest);
 	}
-	if($upfile_name&&$_FILES["upfile"]["size"]==0){
+	if(!isset($oekaki)&&$upfile_name&&$_FILES["upfile"]["size"]==0){
 		error(S_TOOBIGORNONE."<br />$upfile_name",$dest);
 	}
 
@@ -520,7 +530,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$url,$pwd,$upfile,$upfile_na
 	if(!$com||ereg("^[ |@|\t]*$",$com)) $com="";
 	if(!$sub||ereg("^[ |@|]*$",$sub))   $sub="";
 
-	if(!$resto&&!is_file($dest)){
+	if(!isset($oekaki)&&!$resto&&!is_file($dest)){
 		if(FORCEIMAGE||!$textonly) error(S_NOPIC,$dest);
 		//else $textonly = "on";
 	}
@@ -1255,7 +1265,7 @@ function catalog(){
 $ip = $_SERVER['REMOTE_ADDR'];
 switch($mode){
 case 'regist':
-	regist($ip,$name,$capcode,$email,$sub,$com,'',$pwd,$upfile,$upfile_name,$resto);
+	regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,'',$pwd,$upfile,$upfile_name,$resto);
 	break;
 case 'admin':
 	valid($pass);
