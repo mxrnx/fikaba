@@ -376,8 +376,8 @@ function form(&$dat,$resno,$admin=""){
 	<tr><td class="postblock">'.S_SUBJECT.'</td><td><input type="text" name="sub" size="35" />
 	<input type="submit" value="'.S_SUBMIT.'" /></td></tr>
 	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="50" rows="4"></textarea></td></tr>';
-	if(OEKAKI_ENABLED){$dat.='<tr><td class="postblock">'.S_OEKAKI.'</td><td id="oekakiparent"><script type="text/javascript">Ritare.start({parentel:"oekakiparent",onFinish:function(e){newfield=document.createElement("input");newfield.type="text"; newfield.name="oekaki";newfield.value=(Ritare.canvas.toDataURL(\'image/png\')); document.getElementById("postform").appendChild(newfield);},width:600,height:300});</script></td></tr>';}
-	$dat.='<tr><td class="postblock">'.S_UPLOADFILE.'</td>
+	if(OEKAKI_ENABLED){$dat.='<tr><td class="postblock">'.S_OEKAKI.'</td><td id="oekakiparent"><script type="text/javascript">function startoekaki(){Ritare.start({parentel:"oekakiparent",onFinish:function(e){var oldel = document.getElementById(\'oekakifile\');oldel.parentNode.removeChild(oldel);newfield=document.createElement("input");newfield.type="hidden";newfield.name="oekaki";newfield.id="oekakifile";newfield.value=(Ritare.canvas.toDataURL(\'image/png\')); document.getElementById("postform").appendChild(newfield);},width:600,height:300});};</script><p id="oekakistarter" onclick="startoekaki();var el = document.getElementById(\'oekakistarter\');el.parentNode.removeChild(el);var el = document.getElementById(\'filerow\');el.parentNode.removeChild(el)">Click to open oekaki</p></td></tr>';}
+	$dat.='<tr id="filerow"><td class="postblock">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />';
 	if(!$resno && !FORCEIMAGE){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
 	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="18" maxlength="8" value="" /> '.S_DELEXPL.'</td></tr>
