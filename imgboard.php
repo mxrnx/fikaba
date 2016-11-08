@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000026
+# Fikaba 000027
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000026');
+define(VERSION, '000027');
 
 extract($_POST);
 extract($_GET);
@@ -335,11 +335,12 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	$dat.='</head>
 	<body>
 	'.$titlebar.'
-	<div class="styles">';
+	<div class="styles"><select>
+	<option disabled selected value></option>';
 	foreach($STYLES as $stylename => $stylefile){
-		$dat.='[<a href="#" onClick="changeStyle(\''.$stylename.'\')">'.$stylename.'</a>] ';
+		$dat.='<option href="#" onClick="changeStyle(\''.$stylename.'\')">'.$stylename.'</option>] ';
 	}
-	$dat.='</div>
+	$dat.='</select></div>
 	<div class="adminbar">
 	[<a href="'.HOME.'" target="_top">'.S_HOME.'</a>]
 	[<a href="'.PHP_SELF.'?mode=catalog" target="_top">'.S_CATALOGBUTTON.'</a>]
