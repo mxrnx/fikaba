@@ -69,7 +69,7 @@ table {
 input[type="text"]:focus, input[type="password"], input[type="number"], textarea:focus {
     border: 1px solid #888 !important;
 }
-input[type="file"], input[type="submit"], input[type="reset"] {
+select, input[type="file"], input[type="submit"], input[type="reset"] {
     background: #333 none repeat scroll 0% 0%;
     border: 1px solid #666;
     color: #CCC;
