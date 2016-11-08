@@ -93,7 +93,7 @@ if (!table_exist(MANATABLE)){
 
 function humantime($time){
 	$youbi = array(S_SUN, S_MON, S_TUE, S_WED, S_THU, S_FRI, S_SAT);
-	$yd = $youbi[gmdate("w", $time+9*60*60)] ;
+	$yd = $youbi[gmdate("w", $time+9*60*60)];
 	return gmdate("y/m/d",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
 }
 
@@ -383,6 +383,12 @@ function form(&$dat,$resno,$admin=""){
 	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="18" maxlength="8" value="" /> '.S_DELEXPL.'</td></tr>
 <tr><td colspan="2">
 <div class="rules lefted">'.S_RULES.'</div></td></tr></table></form></div></div><hr />';
+}
+
+function fakefoot(){
+	$dat = '';
+	foot($dat);
+	return $dat;
 }
 
 /* Footer */
@@ -940,6 +946,7 @@ function valid($pass){
 				$_SESSION["canacc"] = $canacc;
 				echo("<div class='passvalid'>".S_MANALOGGEDIN."</div>");
 				echo("<meta http-equiv=\"refresh\" content=\"2;URL=".PHP_SELF."?mode=admin\" />");
+				echo fakefoot();
 				die("</body></html>\n");
 			}
 		}
@@ -956,6 +963,7 @@ function valid($pass){
 		echo "<input type=hidden name=mode value=admin />\n";
 		echo "<input type=password name=pass size=8>";
 		echo "<input type=submit value=\"".S_MANASUB."\"></form></div>\n";
+		echo fakefoot();
 		die("</body></html>\n");
 	}
 }
@@ -978,7 +986,8 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 		echo('<tr><td class="postblock">'.S_ACCCAP.'</td><td><input type="checkbox" name="acccap" value=1 /></td></tr>');
 		echo('<tr><td class="postblock">'.S_ACCACC.'</td><td><input type="checkbox" name="accacc" value=1 /></td></tr>');
 		echo("</tbody></table></form></div>\n");
-		die('</body></html>\n');
+		echo fakefoot();
+		die("</body></html>\n");
 	}
 	if(!$accdel) $accdel=0;
 	if(!$accban) $accban=0;
@@ -1029,7 +1038,8 @@ function adminban(){
 	echo('<tr><td class="postblock">'.S_MANARMALLP.'</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANAUNBAN.'</td><td><input value="7" type="checkbox" name="unban" value="on" /></td></tr>');
 	echo("</tbody></table></form></div>\n");
-	die('</body></html>\n');
+	echo fakefoot();
+	die("</body></html>\n");
 }
 
 /* Admin deletion */
@@ -1121,6 +1131,7 @@ function admindel(){
 
 	$all = (int)($all / 1024);
 	echo "[ ".S_IMGSPACEUSAGE."<b>$all</b> KB ]";
+	echo fakefoot();
 	die("</body></html>\n");
 }
 
@@ -1279,6 +1290,7 @@ case 'admin':
 		echo "</form>";
 		form($post,$res,1);
 		echo $post;
+		echo fakefoot();
 		die("</body></html>\n");
 	}
 	if($admin=="logout"){
