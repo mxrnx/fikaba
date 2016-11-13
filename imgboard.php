@@ -893,19 +893,18 @@ function usrdel($no,$pwd){
 		else{
 			while($resrow=mysql_fetch_row($result)){
 				list($dno,$dext,$dtim,$dpass,$dhost)=$resrow;
-				if(substr(md5($pwd),2,8) == $dpass || substr(md5($pwdc),2,8) == $dpass ||
-					$dhost == $host || ADMIN_PASS==$pwd){
+				if(substr(md5($pwd),2,8) == $dpass || substr(md5($pwdc),2,8) == $dpass || $dhost == $host){
 					$flag = TRUE;
 					$delfile = $path.$dtim.$dext;	//path to delete
 					if(!$onlyimgdel){
 						if(!mysql_call("delete from ".POSTTABLE." where no=".$dno)){echo S_SQLFAIL;} //sql is broke
+					}
+					if(is_file($delfile)) unlink($delfile);//Deletion
+					if(is_file(THUMB_DIR.$dtim.'s.jpg')) unlink(THUMB_DIR.$dtim.'s.jpg');//Deletion
+				}
+			}
+			mysql_free_result($result);
 		}
-		if(is_file($delfile)) unlink($delfile);//Deletion
-		if(is_file(THUMB_DIR.$dtim.'s.jpg')) unlink(THUMB_DIR.$dtim.'s.jpg');//Deletion
-	}
-		}
-		mysql_free_result($result);
-	}
 	}
 	if(!$flag) error(S_BADDELPASS);
 }
