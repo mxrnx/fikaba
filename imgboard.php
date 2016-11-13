@@ -648,7 +648,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		session_start();
 		if(isset($_SESSION['capcode'])){
 			if($_SESSION['cancap'])
-				$name.=$_SESSION['capcode'];
+				$name.=' '.$_SESSION['capcode'];
 		}else{
 			stopsession();
 		}
