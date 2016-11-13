@@ -853,11 +853,12 @@ function md5_of_file($inFile) {
 /* text plastic surgery */
 function CleanStr($str){
 	global $admin;
+	session_start();
 	$str = trim($str);//blankspace removal
 	if (get_magic_quotes_gpc()) {//magic quotes is deleted (?)
 		$str = stripslashes($str);
 	}
-	if($admin!=ADMIN_PASS){//admins can use tags
+	if(!(isset($_SESSION['cancap']) && ((int)$_SESSION['cancap'])!=0)){
 		$str = htmlspecialchars($str);//remove html special chars
 		$str = str_replace("&amp;", "&", $str);//remove ampersands
 	}
