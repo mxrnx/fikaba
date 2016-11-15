@@ -26,6 +26,7 @@
 * Forced anonymous
 * Oekaki
 * Lockdown
+* Filters
 
 ## Planned features
 Roughly in order of importance:

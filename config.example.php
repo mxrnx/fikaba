@@ -57,3 +57,8 @@ $STYLES = array(				// Array containing NAME => FILE of stylesheets
 	"Burichan"	=>	'css/burichan.css',
 	"heavy_ice"	=>	'css/heavy_ice.css'
 );
+
+$FILTERS = array(				// Filters, in the format of IN => OUT
+	"test"			=>	'tosti',
+	"fikaba is awful"	=>	'I am awful'
+);
