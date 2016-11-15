@@ -25,6 +25,7 @@
 * Far more advanced admin panel, with multiple accounts
 * Forced anonymous
 * Oekaki
+* Lockdown
 
 ## Planned features
 Roughly in order of importance:
