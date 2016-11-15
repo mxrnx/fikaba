@@ -1,21 +1,31 @@
 <?php
-# Fikaba 000027
+# Fikaba 000028
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000027');
+include "config.php";
+include "strings/".LANGUAGE.".php";		//String resource file
+
+if(LOCKDOWN){
+	session_start();
+	unlink(PHP_SELF2);			//remove static index file
+
+	// if not trying to do something other than managing, die
+	if(!isset($_SESSION['capcode']) && !($_GET['mode'] == 'admin' || $_POST['mode'] == 'admin')){
+		die('Imageboard currently disabled.');
+	}
+}
+
+define(VERSION, '000028');
 
 extract($_POST, EXTR_SKIP);
 extract($_GET, EXTR_SKIP);
 extract($_COOKIE, EXTR_SKIP);
 $upfile_name=$_FILES["upfile"]["name"];
 $upfile=$_FILES["upfile"]["tmp_name"];
-
-include "config.php";
-include "strings/".LANGUAGE.".php";		//String resource file
 
 $path = realpath("./").'/'.IMG_DIR;
 ignore_user_abort(TRUE);

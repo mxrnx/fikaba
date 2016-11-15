@@ -1,5 +1,7 @@
 <?php
 
+define(LOCKDOWN, false);			//Set to true to disable page viewing for users (not for managers)
+
 // General settings
 define(TITLE, 'Fikaba-powered image board');	//Name of this image board
 define(SHOWTITLETXT, 1);			//Show TITLE at top (1: yes  0: no)
