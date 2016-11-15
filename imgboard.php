@@ -1,10 +1,12 @@
 <?php
-# Fikaba 000028
+# Fikaba 000029
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
+
+define(VERSION, '000029');
 
 include "config.php";
 include "strings/".LANGUAGE.".php";		//String resource file
@@ -18,8 +20,6 @@ if(LOCKDOWN){
 		die('Imageboard currently disabled.');
 	}
 }
-
-define(VERSION, '000028');
 
 extract($_POST, EXTR_SKIP);
 extract($_GET, EXTR_SKIP);
@@ -434,7 +434,7 @@ function  proxy_connect($port) {
 }
 
 function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$upfile_name,$resto){
-	global $path,$badstring,$badfile,$badip,$pwdc,$textonly,$admin;
+	global $path,$badstring,$badfile,$badip,$pwdc,$textonly,$admin,$FILTERS;
 
 	if(isbanned($ip)) error(S_BANRENZOKU);
 	
@@ -624,8 +624,12 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	$com = str_replace( "\r",  "\n", $com);
 	// Continuous lines
 	$com = ereg_replace("\n((!@| )*\n){3,}","\n",$com);
-	$com = nl2br($com);		//br is substituted before newline char
-	$com = str_replace("\n",  "", $com);	//\n is erased
+	$com = nl2br($com);		//newlines get substituted by br tags
+	$com = str_replace("\n",  "", $com);	//\n is erased (is this necessary?)
+
+	foreach ($FILTERS as $filterin => $filterout){
+		$com = str_replace($filterin, $filterout, $com);
+	}
 
 	$name=ereg_replace("[\r\n]","",$name);
 	$names=$name;
