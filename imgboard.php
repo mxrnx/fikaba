@@ -8,9 +8,9 @@
 
 define(VERSION, '000027');
 
-extract($_POST);
-extract($_GET);
-extract($_COOKIE);
+extract($_POST, EXTR_SKIP);
+extract($_GET, EXTR_SKIP);
+extract($_COOKIE, EXTR_SKIP);
 $upfile_name=$_FILES["upfile"]["name"];
 $upfile=$_FILES["upfile"]["tmp_name"];
 
@@ -270,13 +270,13 @@ function updatelog($resno=0){
 				else{$dat.="[<a href=\"".($i/PAGE_DEF).PHP_EXT."\">".($i/PAGE_DEF)."</a>] ";}
 			}
 		}
-			$dat.="</td>";
+		$dat.="</td>";
 	
-			if($p >= PAGE_DEF && $counttree > $next){
-				$dat.="<form action=\"".$next/PAGE_DEF.PHP_EXT."\" method=\"get\"><td>";
-				$dat.="<input type=\"submit\" value=\"".S_NEXT."\" />";
-				$dat.="</form></td>";
-			}
+		if($p >= PAGE_DEF && $counttree > $next){
+			$dat.="<form action=\"".$next/PAGE_DEF.PHP_EXT."\" method=\"get\"><td>";
+			$dat.="<input type=\"submit\" value=\"".S_NEXT."\" />";
+			$dat.="</form></td>";
+		}
 		$dat.="</tr></table><br class=\"allclear\" />\n";
 		} else { // in res display mode
 			$dat.="<table></table><br class=\"allclear\" />\n";
@@ -816,6 +816,7 @@ function thumb($path,$tim,$ext){
 	ImageDestroy($im_in);
 	ImageDestroy($im_out);
 }
+
 //check version of gd
 function get_gd_ver(){
 	if(function_exists("gd_info")){
@@ -836,6 +837,7 @@ function get_gd_ver(){
 	$phpinfo=substr($phpinfo,$length);
 	return $phpinfo;
 }
+
 //md5 calculation for earlier than php4.2.0
 function md5_of_file($inFile) {
 	if (file_exists($inFile)){
@@ -850,6 +852,7 @@ function md5_of_file($inFile) {
  }else{
 	 return false;
 }}
+
 /* text plastic surgery */
 function CleanStr($str){
 	global $admin;
