@@ -1,12 +1,17 @@
 <?php
-# Fikaba 000029
+# Fikaba 000030
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000029');
+define(VERSION, '000030');
+
+if(!file_exists('config.php')){
+	include "strings/en.php";
+	die(S_NOTCONFIGURED);
+}
 
 include "config.php";
 include "strings/".LANGUAGE.".php";		//String resource file
@@ -17,7 +22,7 @@ if(LOCKDOWN){
 
 	// if not trying to do something other than managing, die
 	if(!isset($_SESSION['capcode']) && !($_GET['mode'] == 'admin' || $_POST['mode'] == 'admin')){
-		die('Imageboard currently disabled.');
+		die(S_LOCKDOWN);
 	}
 }
 

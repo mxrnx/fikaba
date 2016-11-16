@@ -1,5 +1,7 @@
 <?php
 
+define(S_NOTCONFIGURED, 'Imageboard must be configured before usage');					//If config.php does not exist
+define(S_LOCKDOWN, 'Board is currently disabled. Please check back later');				//Lockdown
 define(S_HOME, 'Home');											//Forwards to home page
 define(S_ADMIN, 'Manage');										//Forwards to Management Panel
 define(S_RETURN, 'Return');										//Returns to image board
