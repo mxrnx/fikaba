@@ -15,12 +15,11 @@ Below are some examples of sites running Fikaba. If you are using fikaba and wan
 * Tripcodes, capcodes
 * Highly configurable
 * Post references
-* Flood/proxy check
 * Oekaki
 * [...and more](https://github.com/knarka/fikaba/blob/master/docs/features.md)
 
 ## Installation
-1. Place the files from this repository in a folder on your webserver and set permissions of that folder to 777
+1. Place the files from this repository in a folder on your webserver and set the permissions of that folder to 777
 2. Edit/move config.example.php to config.php and edit it
 3. Navigate to imgboard.php in your browser
 4. Log in to the default admin account (password REPLACEME) and create a new account
