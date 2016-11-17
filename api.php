@@ -7,7 +7,9 @@
  */
 
 include('config.php');
-if(!ENABLEAPI) die('API is currently disabled');
+include "strings/".LANGUAGE.".php";
+
+if(!ENABLEAPI) die(S_NOAPI);
 
 if(!isset($_GET['mode'])) die('Malformed request');
 else $mode = $_GET['mode'];
