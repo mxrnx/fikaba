@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000030
+# Fikaba 000031
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000030');
+define(VERSION, '000031');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -427,7 +427,7 @@ function error($mes,$dest=''){ /* Basically a fancy die() */
 		<br /><br /><hr size=1>";
 	die("</body></html>\n");
 }
-/* Auto Linker */
+
 function auto_link($proto){
 	$proto = ereg_replace("(https?|ftp|news)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)","<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",$proto);
 	return $proto;
@@ -969,8 +969,7 @@ function valid($pass){
 				$_SESSION["canacc"] = $canacc;
 				echo("<div class='passvalid'>".S_MANALOGGEDIN."</div>");
 				echo("<meta http-equiv=\"refresh\" content=\"2;URL=".PHP_SELF."?mode=admin\" />");
-				echo fakefoot();
-				die("</body></html>\n");
+				die(fakefoot());
 			}
 		}
 		die(S_WRONGPASS);
@@ -986,8 +985,7 @@ function valid($pass){
 		echo "<input type=hidden name=mode value=admin />\n";
 		echo "<input type=password name=pass size=8>";
 		echo "<input type=submit value=\"".S_MANASUB."\"></form></div>\n";
-		echo fakefoot();
-		die("</body></html>\n");
+		die(fakefoot());
 	}
 }
 
@@ -1009,8 +1007,7 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 		echo('<tr><td class="postblock">'.S_ACCCAP.'</td><td><input type="checkbox" name="acccap" value=1 /></td></tr>');
 		echo('<tr><td class="postblock">'.S_ACCACC.'</td><td><input type="checkbox" name="accacc" value=1 /></td></tr>');
 		echo("</tbody></table></form></div>\n");
-		echo fakefoot();
-		die("</body></html>\n");
+		die(fakefoot());
 	}
 	if(!$accdel) $accdel=0;
 	if(!$accban) $accban=0;
@@ -1061,8 +1058,7 @@ function adminban(){
 	echo('<tr><td class="postblock">'.S_MANARMALLP.'</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANAUNBAN.'</td><td><input value="7" type="checkbox" name="unban" value="on" /></td></tr>');
 	echo("</tbody></table></form></div>\n");
-	echo fakefoot();
-	die("</body></html>\n");
+	die(fakefoot());
 }
 
 /* Admin deletion */
@@ -1154,8 +1150,7 @@ function admindel(){
 
 	$all = (int)($all / 1024);
 	echo "[ ".S_IMGSPACEUSAGE."<b>$all</b> KB ]";
-	echo fakefoot();
-	die("</body></html>\n");
+	die(fakefoot());
 }
 
 function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
@@ -1310,11 +1305,9 @@ case 'admin':
 	if($admin=="ban") adminban();
 	if($admin=="post"){
 		if(!$_SESSION['cancap'])die(S_NOPERMISSION);
-		echo "</form>";
 		form($post,$res,1);
 		echo $post;
-		echo fakefoot();
-		die("</body></html>\n");
+		die(fakefoot());
 	}
 	if($admin=="logout"){
 		stopsession();
