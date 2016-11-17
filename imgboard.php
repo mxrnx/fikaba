@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000031
+# Fikaba 000032
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000031');
+define(VERSION, '000032');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -351,9 +351,9 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	<body>
 	'.$titlebar.'
 	<div class="styles"><select>
-	<option disabled selected value></option>';
+	<option disabled selected value>---</option>';
 	foreach($STYLES as $stylename => $stylefile){
-		$dat.='<option href="#" onClick="changeStyle(\''.$stylename.'\')">'.$stylename.'</option>] ';
+		$dat.='<option onClick="changeStyle(\''.$stylename.'\')">'.$stylename.'</option> ';
 	}
 	$dat.='</select></div>
 	<div class="adminbar">
