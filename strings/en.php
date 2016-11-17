@@ -1,5 +1,6 @@
 <?php
 
+define(S_NOAPI, 'API is currently disabled');
 define(S_NOTCONFIGURED, 'Imageboard must be configured before usage');					//If config.php does not exist
 define(S_LOCKDOWN, 'Board is currently disabled. Please check back later');				//Lockdown
 define(S_HOME, 'Home');											//Forwards to home page
