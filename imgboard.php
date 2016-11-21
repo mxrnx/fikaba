@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000032
+# Fikaba 000033
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000032');
+define(VERSION, '000033')
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -1042,7 +1042,8 @@ function adminban(){
 			$banmode = 0;
 		}
 		insertban($banip,$banexp,$banpubmsg,$banprivmsg,$banmode,$rmp,$rmallp,$unban); // 0 is IP mode, 1 is post no. mode
-		die("<p>User banned.</p>");
+		if ($unban) { die(S_UNBANSUCCESS); }
+		else { die(S_BANSUCCESS); }
 	}
 	echo('<div class="centered">'."\n");
 	echo "<p><form style='display: inline-block;' action=\"".PHP_SELF."\" method=\"post\">\n";
@@ -1183,7 +1184,6 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
 	}
 
 	if(!$unban){
-		echo('banning user');
 		$query="insert into ".BANTABLE." (ip,start,expires,reason) values (
 			'$banip',
 			'$time',
@@ -1192,7 +1192,6 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
 		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 		mysql_free_result($result);
 	}else{
-		echo('unbanning user');
 		$query="delete from ".BANTABLE." where `ip`='$banip'";
 		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 		mysql_free_result($result);
@@ -1236,22 +1235,19 @@ function checkban($ip) {
 			}else{ error(S_BANNEDMESSAGE."<br />\n".S_BANTIME.humantime($time)."<br />\n".S_BANEXPIRE.humantime($expires)); }
 		}
 	}
-	if(!$banned) error("You ($ip) are not banned....yet.");
+	if(!$banned) error(S_NOTBANNED . $ip);
 	mysql_free_result($result);
 }
 
 function removeban($ip) {
 	$result = mysql_call("select * from ".BANTABLE);
-	$banned=false;
 	while($row=mysql_fetch_row($result)){
 		list($bip,$time,$expires,$reason)=$row;
 		if($ip==$bip){
 			$result = mysql_call("delete from ".BANTABLE." where `ip` = '".$ip."'");
-			$banned=true;
 			break;
 		}
 	}
-	if(!$banned) error("No such ban '$ip'");
 	mysql_free_result($result);
 }
 
