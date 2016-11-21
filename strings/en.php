@@ -17,7 +17,7 @@ define(S_SUBJECT, 'Subject');										//Describes subject field
 define(S_SUBMIT, 'Submit');										//Describes submit button
 define(S_COMMENT, 'Comment');										//Describes comment field
 define(S_OEKAKI, 'Oekaki');
-define(S_OEKAKILOAD, 'Click to load oekaki');
+define(S_OEKAKILOAD, 'Click to load oekaki (don\'t forget to save!)');
 define(S_UPLOADFILE, 'File');										//Describes file field
 define(S_NOFILE, 'No File');										//Describes file/no file checkbox
 define(S_DELPASS, 'Password');										//Describes password field
@@ -104,8 +104,11 @@ define(S_TCREATEF, 'Unable to create table!<br>');							//Table creation failed
 define(S_SQLFAIL, 'Critical SQL problem!<br>');								//SQL Failure
 define(S_BANRENZOKU, 'Error: you are banned. Post discarded. Check on the status of your ban <a href="?mode=banned">here</a>.');	//Error shown to banned user when they try to post
 define(S_BANNEDMESSAGE, 'You are banned!');
+define(S_NOTBANNED, 'You are not banned. IP: ');
 define(S_BANTIME, 'You were banned on: ');
 define(S_BANEXPIRE, 'Your ban expires on: ');
+define(S_BANSUCCESS, 'User banned');
+define(S_UNBANSUCCESS, 'User unbanned');
 define(S_MANABANIP, 'IP or post no.: ');
 define(S_MANABANEXP, 'Expires in (days): ');
 define(S_MANABANPUBMSG, 'Public reason (only if no. ban): ');
