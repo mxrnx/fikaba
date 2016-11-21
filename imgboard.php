@@ -6,7 +6,7 @@
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000033')
+define(VERSION, '000033');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
