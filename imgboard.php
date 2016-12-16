@@ -1001,7 +1001,7 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 		echo('<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" size="28" name="accname" />');
 		echo(" <input type=submit value=\"".S_MANASUB."\" /></td></tr>");
 		echo('<tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" size="28" name="accpassword" /></td></tr>');
-		echo('<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="text" size="28" name="acccapcode" value=" ## Moderator" /></td></tr>');
+		echo('<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="text" size="28" name="acccapcode" value="## Moderator" /></td></tr>');
 		echo('<tr><td class="postblock">'.S_ACCDEL.'</td><td><input type="checkbox" name="accdel" value=1 /></td></tr>');
 		echo('<tr><td class="postblock">'.S_ACCBAN.'</td><td><input type="checkbox" name="accban" value=1 /></td></tr>');
 		echo('<tr><td class="postblock">'.S_ACCCAP.'</td><td><input type="checkbox" name="acccap" value=1 /></td></tr>');
