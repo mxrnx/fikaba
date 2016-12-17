@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000037
+# Fikaba 000038
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000037');
+define(VERSION, '000038');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -180,12 +180,12 @@ function updatelog($resno=0){
 				$size = $fsize;//file size displayed in alt text
 				if($w && $h){//when there is size...
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
-						$imgsrc = "    <span class=\"thumbnailmsg\">".S_THUMB."</span><br /><a href=\"".$src."\" target=\"_blank\"><img src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a><br />";
+						$imgsrc = "    <span class=\"thumbnailmsg\">".S_THUMB."</span><br /><a href=\"".$src."\" target=\"_blank\"><img src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a>";
 					}else{
-						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a><br />";
+						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a>";
 					}
 				}else{
-					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" alt=\"".$size." B\" /></a><br />";
+					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" alt=\"".$size." B\" /></a>";
 				}
 				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span>$imgsrc";
 			}
@@ -229,8 +229,8 @@ function updatelog($resno=0){
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
 				if ($ext && $ext == ".swf") {
-					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a><br /><br />";
-					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span> <br />$imgsrc";
+					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
+					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span>$imgsrc";
 				} else if($ext){
 					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
@@ -238,15 +238,15 @@ function updatelog($resno=0){
 						if(@is_file(THUMB_DIR.$tim.'s.jpg')){
 							$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a>";
 						}else{
-							$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a><br />";
+							$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /></a>";
 						}
 					}else{
-						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" alt=\"".$size." B\" /></a><br /><br />";
+						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" alt=\"".$size." B\" /></a>;br />";
 					}
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
-						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span>$imgsrc";
 					}else{
-						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span> <br />$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span>$imgsrc";
 					}
 				}
 				$dat.="<blockquote>$com</blockquote>";
