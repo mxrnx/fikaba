@@ -502,6 +502,9 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		error(S_TOOBIG,$dest);
 	}
 	if(!isset($oekaki)&&$upfile_name&&$_FILES["upfile"]["size"]==0){
+		if ($_FILES["upfile"]["error"] == 1) {
+			error(S_TOOBIG."<br />$upfile_name",$dest);
+		}
 		error(S_TOOBIGORNONE."<br />$upfile_name",$dest);
 	}
 
