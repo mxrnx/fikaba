@@ -9,5 +9,3 @@ alter table YOURPOSTTABLE add id text;
 ```
 
 Please note that posts made prior to the migration will not have an IP attached to them, which will result in errors when you try to ban by those post numbers.
-
-Last updated: 2016-10-18
