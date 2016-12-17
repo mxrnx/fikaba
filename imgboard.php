@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000035
+# Fikaba 000036
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000035');
+define(VERSION, '000036');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -175,8 +175,8 @@ function updatelog($resno=0){
 			// img tag creation
 			$imgsrc = "";
 			if ($ext && $ext == ".swf") {
-				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$size." B\" /></a><br /><br />";
-				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>$imgsrc";
+				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a><br /><br />";
+				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span>$imgsrc";
 			} else if($ext){
 				$size = $fsize;//file size displayed in alt text
 				if($w && $h){//when there is size...
@@ -188,7 +188,7 @@ function updatelog($resno=0){
 				}else{
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" alt=\"".$size." B\" /></a><br />";
 				}
-				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>$imgsrc";
+				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span>$imgsrc";
 			}
 			if(DISP_ID){ $userid = "ID:$id"; }
 			else{ $userid = ""; }
@@ -230,8 +230,8 @@ function updatelog($resno=0){
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
 				if ($ext && $ext == ".swf") {
-					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$size." B\" /></a><br /><br />";
-					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <br />$imgsrc";
+					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a><br /><br />";
+					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span> <br />$imgsrc";
 				} else if($ext){
 					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
@@ -245,9 +245,9 @@ function updatelog($resno=0){
 						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" alt=\"".$size." B\" /></a><br /><br />";
 					}
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
-						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
 					}else{
-						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <br />$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span> <br />$imgsrc";
 					}
 				}
 				$dat.="<blockquote>$com</blockquote>";
@@ -1275,7 +1275,7 @@ function catalog(){
 		if((int)$resto==0){
 			$dat.="<div class='catthread'>";
 			if ($ext && $ext == ".swf") {
-				$imgsrc = "<img class='catthumb' src=\"file.png\" width=\"200\" height=\"200\" alt=\"".$size." B\" /><br />";
+				$imgsrc = "<img class='catthumb' src=\"file.png\" width=\"200\" height=\"200\" alt=\"".$fsize." B\" /><br />";
 				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
 			} else if($ext){
 				$size = $fsize;//file size displayed in alt text
