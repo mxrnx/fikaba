@@ -215,7 +215,7 @@ form {
 	padding-left:2px;
 }
 .filesize {
-	margin-left:10px;
+	padding-right:10px;
 }
 .reply {
 	border-radius: 3px;
