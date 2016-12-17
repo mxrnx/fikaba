@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000034
+# Fikaba 000035
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000034');
+define(VERSION, '000035');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -174,7 +174,10 @@ function updatelog($resno=0){
 			$src = IMG_DIR.$tim.$ext;
 			// img tag creation
 			$imgsrc = "";
-			if($ext){
+			if ($ext && $ext == ".swf") {
+				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$size." B\" /></a><br /><br />";
+				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span>$imgsrc";
+			} else if($ext){
 				$size = $fsize;//file size displayed in alt text
 				if($w && $h){//when there is size...
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
@@ -226,7 +229,10 @@ function updatelog($resno=0){
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
-				if($ext){
+				if ($ext && $ext == ".swf") {
+					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$size." B\" /></a><br /><br />";
+					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a>-($size B)</span> <br />$imgsrc";
+				} else if($ext){
 					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
 					if($w && $h){//when there is size...
@@ -398,7 +404,9 @@ function form(&$dat,$resno,$admin=""){
 	if(!$resno && !FORCEIMAGE){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
 	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="18" maxlength="8" value="" /> '.S_DELEXPL.'</td></tr>
 <tr><td colspan="2">
-<div class="rules lefted">'.S_RULES.'</div></td></tr></table></form></div></div><hr />';
+<div class="rules lefted">';
+	if (SWF_ENABLED) $dat .= S_RULES_SWF.'</div></td></tr></table></form></div></div><hr />';
+	else $dat .= S_RULES.'</div></td></tr></table></form></div></div><hr />';
 }
 
 function fakefoot(){
@@ -480,12 +488,13 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 			case 1 : $ext=".gif";break;
 			case 2 : $ext=".jpg";break;
 			case 3 : $ext=".png";break;
-			case 4 : $ext=".swf";break;
-			case 5 : $ext=".psd";break;
-			case 6 : $ext=".bmp";break;
+			case 4 : $ext=".swf";break; // flash files are defintely images, thanks php
 			case 13 : $ext=".swf";break;
+			//case 5 : $ext=".psd";break;
+			//case 6 : $ext=".bmp";break;
 			default : error(S_NODETECT);break;
 		}
+		if ($ext==".swf" && !SWF_ENABLED) error(S_SWF_DISABLED);
 
 		// Picture reduction
 		if($W > MAX_W || $H > MAX_H){
@@ -1265,7 +1274,10 @@ function catalog(){
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
 		if((int)$resto==0){
 			$dat.="<div class='catthread'>";
-			if($ext){
+			if ($ext && $ext == ".swf") {
+				$imgsrc = "<img class='catthumb' src=\"file.png\" width=\"200\" height=\"200\" alt=\"".$size." B\" /><br />";
+				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
+			} else if($ext){
 				$size = $fsize;//file size displayed in alt text
 				if($w && $h){//when there is size...
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){

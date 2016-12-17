@@ -26,6 +26,7 @@ define(HOME,  '../');				//Site home directory (up one level by default
 define(MAX_KB, 2000);				//Maximum upload size in KB
 define(MAX_W,  250);				//Images exceeding this width will be thumbnailed
 define(MAX_H,  250);				//Images exceeding this height will be thumbnailed
+define(SWF_ENABLED, false);			//Whether or not upload of Flash files is allowed
 define(PAGE_DEF, 5);				//Threads per page
 define(THREADLIMIT,  40);			//Maxium number of entries
 define(BUMPLIMIT, 50);				//Maximum topic bumps

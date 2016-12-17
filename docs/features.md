@@ -2,7 +2,7 @@
 ## Features inherited from futallaby
 * MySQL database
 * Highly configurable
-* Image posting, automatic thumbnailing
+* Image posting, automatic thumbnailing (GIF, JPG, PNG)
 * Manager panel
 * Raw HTML posts for managers
 * Citations
@@ -27,6 +27,7 @@
 * Oekaki
 * Lockdown
 * Filters
+* Flash files
 
 ## Planned features
 Roughly in order of importance:
