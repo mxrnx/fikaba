@@ -91,7 +91,6 @@ define(S_MANAPOST, 'Manager Post');									//Defines Manager Post button--allow
 define(S_MANAACCS, 'Account Management');								//Defines button for adding/removing manager accoutns
 define(S_MANASUB, 'Submit');										//Defines name for submit button in Manager Mode
 define(S_ITDELETES, 'Delete');										//Defines for deletion button in Management Panel
-define(S_MDRESET, 'Reset');										//Defines name for field reset button in Management Panel
 define(S_MDONLYPIC, 'File Only');									//Sets whether or not to delete only file, or entire post/thread
 define(S_MDTABLE1, '<th>Delete?</th><th>Post No.</th><th>Time</th><th>Subject</th>');			//Explains field names for Management Panel (Delete?->Subject)
 define(S_MDTABLE2, '<th>Name</th><th>IP</th><th>Comment</th><th>Host</th><th>Size<br>(Bytes)</th><th>md5</th><th>Reply #</th><th>Timestamp (s)</th><th>Timestamp (ms)</th>');	//Explains names for Management Panel (Name->md5)
