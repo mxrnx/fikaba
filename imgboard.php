@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000036
+# Fikaba 000037
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000036');
+define(VERSION, '000037');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -18,7 +18,6 @@ include "strings/".LANGUAGE.".php";		//String resource file
 
 if(LOCKDOWN){
 	session_start();
-	unlink(PHP_SELF2);			//remove static index file
 
 	// if not trying to do something other than managing, die
 	if(!isset($_SESSION['capcode']) && !($_GET['mode'] == 'admin' || $_POST['mode'] == 'admin')){
@@ -1113,7 +1112,7 @@ function admindel(){
 	echo "<input type=hidden name=mode value=admin>\n";
 	echo "<input type=hidden name=admin value=del>\n";
 	echo "<div class=\"delbuttons\"><input type=submit value=\"".S_ITDELETES."\">";
-	echo "<input type=reset value=\"".S_MDRESET."\"> ";
+	echo "<input type=reset value=\"".S_RESET."\"> ";
 	echo "[<input type=checkbox name=onlyimgdel value=on><!--checked-->".S_MDONLYPIC." ]</div>";
 	echo "<table class=\"postlists\">\n";
 	echo "<tr class=\"managehead\">".S_MDTABLE1;
