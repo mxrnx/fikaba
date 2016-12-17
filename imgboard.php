@@ -175,7 +175,7 @@ function updatelog($resno=0){
 			$imgsrc = "";
 			if ($ext && $ext == ".swf") {
 				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a><br /><br />";
-				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span>$imgsrc";
+				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span><br />$imgsrc";
 			} else if($ext){
 				$size = $fsize;//file size displayed in alt text
 				if($w && $h){//when there is size...
@@ -187,7 +187,7 @@ function updatelog($resno=0){
 				}else{
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" alt=\"".$size." B\" /></a>";
 				}
-				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span>$imgsrc";
+				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span>$imgsrc<br />";
 			}
 			if(DISP_ID){ $userid = "ID:$id"; }
 			else{ $userid = ""; }
