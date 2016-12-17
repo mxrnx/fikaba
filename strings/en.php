@@ -45,6 +45,7 @@ define(S_NOREC, 'Error: Cannot find record.');								//Returns error when recor
 define(S_SAMEPIC, 'Error: Duplicate md5 checksum detected.');						//Returns error when a md5 checksum dupe is detected
 define(S_TOOBIG, 'This image is too large!  Upload something smaller!');
 define(S_TOOBIGORNONE, 'Either this image is too big or there is no image at all.  Yeah.');
+define(S_NODETECT, 'Could not detect image type (most likely because its type is not supported)');
 define(S_UPGOOD, ' '.$upfile_name.' uploaded!<br><br>');						//Defines message to be displayed when file is successfully uploaded
 define(S_STRREF, 'Error: String refused.');								//Returns error when a string is refused
 define(S_UNJUST, 'Error: Unjust POST.');								//Returns error on an unjust POST - prevents floodbots or ways not using POST method?

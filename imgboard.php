@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000033
+# Fikaba 000034
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000033');
+define(VERSION, '000034');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -484,7 +484,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 			case 5 : $ext=".psd";break;
 			case 6 : $ext=".bmp";break;
 			case 13 : $ext=".swf";break;
-			default : $ext=".xxx";break;
+			default : error(S_NODETECT);break;
 		}
 
 		// Picture reduction
