@@ -1282,7 +1282,7 @@ function catalog(){
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
 						$imgsrc = "<img class='catthumb' src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /><br />";
 					}else{
-						$imgsrc = "<img class='catthumb' src=\"$src\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /><br />";
+						$imgsrc = "<img class='catthumb' src=\"".IMG_DIR.$tim.$ext."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /><br />";
 					}
 				}else{
 					$imgsrc = "<img class='catthumb' src=\"$src\" alt=\"".$size." B\" /><br />";
