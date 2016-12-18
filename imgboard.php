@@ -174,7 +174,7 @@ function updatelog($resno=0){
 			// img tag creation
 			$imgsrc = "";
 			if ($ext && $ext == ".swf") {
-				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a><br /><br />";
+				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
 				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span><br />$imgsrc";
 			} else if($ext){
 				$size = $fsize;//file size displayed in alt text
