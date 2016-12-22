@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000038
+# Fikaba 000039
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000038');
+define(VERSION, '000039');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -369,7 +369,7 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	<div class="logo">'.$titlepart.'</div><hr /><br /><br />';
 }
 /* Contribution form */
-function form(&$dat,$resno,$admin=""){
+function form(&$dat,$resno,$admin="",$manapost=false){
 	session_start();
 	$maxbyte = MAX_KB * 1024;
 	$no=$resno;
@@ -388,7 +388,9 @@ function form(&$dat,$resno,$admin=""){
 		else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
 	}
 	if(!FORCED_ANON||$admin)
-		$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value="'.$_SESSION['name'].'" size="35" /></td></tr>';
+		$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value="';
+		if ($manapost) $dat .= $_SESSION['name'];
+		$dat .= '" size="35" /></td></tr>';
 	if($admin && $_SESSION['cancap']){
 		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" checked="checked" size="35" /> ('.$_SESSION['capcode'].')</td></tr>
 		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
@@ -1315,7 +1317,7 @@ case 'admin':
 	if($admin=="ban") adminban();
 	if($admin=="post"){
 		if(!$_SESSION['cancap'])die(S_NOPERMISSION);
-		form($post,$res,1);
+		form($post,$res,1,true);
 		echo $post;
 		die(fakefoot());
 	}
