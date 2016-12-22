@@ -74,13 +74,13 @@ a:hover, a:visited:hover {
 .adminbar { float:right; }
 .styles{ float: left; }
 
-input[type="text"] {
+input[type="text"],input[type="password"] {
 	margin-top:1px;
 	margin-bottom:1px;
 	width:240px;
 }
 
-input[type="text"], textarea {
+input[type="text"], input[type="password"], textarea {
 	background-color:white;
 	border: 1px solid #808080;
 	border-radius:2px;
