@@ -66,7 +66,7 @@ td {
 table {
 	margin-left: 1.8em;
 }
-input[type="text"]:focus, input[type="password"], input[type="number"], textarea:focus {
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"], textarea:focus {
     border: 1px solid #888 !important;
 }
 select, input[type="file"], input[type="submit"], input[type="reset"] {
