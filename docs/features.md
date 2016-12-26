@@ -1,8 +1,9 @@
 # Features
-## Features inherited from futallaby
 * MySQL database
 * Highly configurable
 * Image posting, automatic thumbnailing (GIF, JPG, PNG)
+* Flash support
+* WebM support
 * Manager panel
 * Raw HTML posts for managers
 * Citations
@@ -10,8 +11,7 @@
 * Flood detection
 * Proxy detection
 * User IDs
-
-## Features that fikaba does, but futallaby does not have
+* Support for multiple languages (English and (incomplete) Japanese included)
 * Valid html5 instead of xhtml
 * Style picker
 * Capcodes
@@ -27,11 +27,9 @@
 * Oekaki
 * Lockdown
 * Filters
-* Flash files
 
 ## Planned features
 Roughly in order of importance:
 
 1. Secure tripcodes
-2. WebM support
-3. CAPTCHA
+2. CAPTCHA
