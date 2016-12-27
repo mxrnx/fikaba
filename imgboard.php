@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000040
+# Fikaba 000041
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000040');
+define(VERSION, '000041');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -331,11 +331,11 @@ function head(&$dat){
 		$titlepart.= '<img src="'.TITLEIMG.'" alt="'.TITLE.'" />';
 		if (SHOWTITLETXT == 1) {$titlepart.= '<br />';}
 	} else if (SHOWTITLEIMG == 2) {
-		$titlepart.= '<img src="'.(include(TITLEIMG)).'" onclick="this.src=this.src;" alt="'.TITLE.'" />';
+		$titlepart.= '<img src="'.BANNERS[mt_rand(0, count(BANNERS) - 1)].'" onclick="this.src=this.src;" alt="'.TITLE.'" />';
 		if (SHOWTITLETXT == 1) {$titlepart.= '<br />';}
 	}
 	if (SHOWTITLETXT == 1) {
-		$titlepart.= ''.TITLE.'';
+		$titlepart.= TITLE;
 	}
 	$dat.='<!doctype html>
 <html><head>

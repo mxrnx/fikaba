@@ -96,6 +96,11 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
         width:100%;
 	text-transform: uppercase;
 }
+.logo img {
+	margin: 0 auto;
+	clear:both;
+	float:none;
+}
 .reply {
 	border: 1px solid #D2E7E8;
 	box-shadow: 2px 2px #D2E7E8;

@@ -55,6 +55,11 @@ td {
         color:#800000;
         width:100%;
 }
+.logo img {
+	margin: 0 auto;
+	clear:both;
+	float:none;
+}
 .theader {
         background:#0010E0;
         color:#FFFFFF;
