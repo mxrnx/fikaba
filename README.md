@@ -19,6 +19,8 @@ Below are some examples of sites running Fikaba. If you are using fikaba and wan
 * [...and more](https://github.com/knarka/fikaba/blob/master/docs/features.md)
 
 ## Installation
+This guide assumes you have a webserver with PHP (5.6 at least) already installed. Fikaba has only been tested on Apache, but should work on any server.
+
 1. Place the files from this repository in a folder on your webserver and set the permissions of that folder to 777
 2. Edit/move config.example.php to config.php and edit it
 3. Navigate to imgboard.php in your browser
