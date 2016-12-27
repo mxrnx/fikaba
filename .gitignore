@@ -1,6 +1,10 @@
 *.html
 config.php
+
+# default banner names
 title.png
+title1.png
+title2.png
 
 # default directories, renamed ones will slip through
 src/
