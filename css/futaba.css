@@ -30,7 +30,7 @@ a:hover,.admddel,.admbban,.admppost,.admaacc {
 	text-decoration:none;
 }
 img {
-        margin: 10px;
+        margin: 4px 10px 10px 10px;
 	border: 0;
 	float: left;
 	clear: none;
@@ -134,6 +134,7 @@ td {
 	font-family:serif;
 	text-decoration:none;
 	padding-right:10px;
+	margin-left:10px;
 }
 .filetitle {
 	background:inherit;
@@ -167,6 +168,7 @@ td {
 	background:#F0E0D6;
 	color:#800000;
 	font-family:serif;
+	min-width: 500px;
 }
 .doubledash {
  	vertical-align:top;
@@ -179,6 +181,8 @@ td {
         font-family:serif;
         color:#CC1105;
         font-weight:800;
+}
+.commentfile {
 }
 .commentpostername {
         background:inherit;
@@ -259,4 +263,6 @@ td {
 	width:96%;
 	margin-left:auto;
 	margin-right:auto;
+}
+form table {
 }

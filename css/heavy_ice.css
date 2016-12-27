@@ -41,6 +41,7 @@ a:hover,.admddel,.admbban,.admppost,.admaacc {
 }
 .filesize {
 	padding-right:10px;
+	margin-left:10px;
 }
 .postername, .commentpostername {
 	color: #D2E7E8;
@@ -50,7 +51,7 @@ a:hover,.admddel,.admbban,.admppost,.admaacc {
 	font-size: 10px;
 }
 img {
-	margin: 10px;
+        margin: 4px 10px 10px 10px;
 	border: 0;
 	float: left;
 	clear: none;
@@ -101,6 +102,7 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	padding: 4px;
 	border-radius: 0px;
 	margin-bottom: 5px;
+	min-width:500px;
 }
 .passvalid {
 	width: 45%;

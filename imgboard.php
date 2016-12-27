@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000039
+# Fikaba 000040
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000039');
+define(VERSION, '000040');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -187,7 +187,7 @@ function updatelog($resno=0){
 				}else{
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" alt=\"".$size." B\" /></a>";
 				}
-				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span>$imgsrc<br />";
+				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span><br />$imgsrc";
 			}
 			if(DISP_ID){ $userid = "ID:$id"; }
 			else{ $userid = ""; }
@@ -230,7 +230,7 @@ function updatelog($resno=0){
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
 				if ($ext && $ext == ".swf") {
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
-					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span>$imgsrc";
+					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span><br />$imgsrc";
 				} else if($ext){
 					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
@@ -244,9 +244,9 @@ function updatelog($resno=0){
 						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" alt=\"".$size." B\" /></a>;br />";
 					}
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
-						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span>$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
 					}else{
-						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span>$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span><br />$imgsrc";
 					}
 				}
 				$dat.="<blockquote>$com</blockquote>";

@@ -30,7 +30,7 @@ a:hover,.admddel,.admbban,.admppost,.admaacc {
 	text-decoration:none;
 }
 img {
-	margin: 10px;
+        margin: 4px 10px 10px 10px;
 	border: 0;
 	float: left;
 	clear: none;
@@ -117,6 +117,7 @@ td {
 	font-family:sans-serif;
 	text-decoration:underline;
 	padding-right:10px;
+	margin-left:10px;
 }
 .filetitle {
 	background:inherit;
@@ -151,6 +152,7 @@ td {
 	background:#D6DAF0;
 	color:#000000;
 	font-family:serif;
+	min-width: 500px;
 }
 .doubledash {
  	vertical-align:top;
