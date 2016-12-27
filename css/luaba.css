@@ -151,7 +151,7 @@ form {
 	font-weight:bold;
 }
 
-.postername {
+.postername, .commentpostername {
 	font-weight:bold;
 	color:#000080;
 }
