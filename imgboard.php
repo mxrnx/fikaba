@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000043
+# Fikaba 000044
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000043');
+const VERSION = '000044';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -504,7 +504,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 			$W = ceil($W * $key);
 			$H = ceil($H * $key);
 		}
-		$mes = S_UPGOOD;
+		$mes = ' ' . $upfile_name . S_UPGOOD;
 	}
 
 	if($_FILES["upfile"]["error"]==2){
