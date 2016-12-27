@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000042
+# Fikaba 000043
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000042');
+define(VERSION, '000043');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -354,7 +354,6 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	if(OEKAKI_ENABLED){$dat.='<script type="text/javascript" src="js/ritare/ritare.js"></script><link rel="stylesheet" type="text/css" href="js/ritare/ritare.css" />';}
 	$dat.='</head>
 	<body>
-	'.$titlebar.'
 	<div class="styles"><select>
 	<option disabled selected value>---</option>';
 	foreach($STYLES as $stylename => $stylefile){
@@ -1080,7 +1079,7 @@ function admindel(){
 	global $path,$onlyimgdel;
 	session_start();
 	if(!$_SESSION['candel']) die(S_NOPERMISSION);
-	$delno = array(dummy);
+	$delno = array();
 	$delflag = FALSE;
 	reset($_POST);
 	while ($item = each($_POST)){
@@ -1091,20 +1090,20 @@ function admindel(){
 	$find = FALSE;
 	while($row=mysql_fetch_row($result)){
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
-		if($onlyimgdel==on){
+		if($onlyimgdel=='on'){
 			if(array_search($no,$delno)){//only a picture is deleted
 				$delfile = $path.$tim.$ext;	//only a picture is deleted
 				if(is_file($delfile)) unlink($delfile);//delete
 				if(is_file(THUMB_DIR.$tim.'s.jpg')) unlink(THUMB_DIR.$tim.'s.jpg');//delete
-	}
+			}
 		}else{
 			if(array_search($no,$delno)){//It is empty when deleting
 				$find = TRUE;
 				if(!mysql_call("delete from ".POSTTABLE." where no=".$no)){echo S_SQLFAIL;}
 				$delfile = $path.$tim.$ext;	//Delete file
-		if(is_file($delfile)) unlink($delfile);//Delete
-		if(is_file(THUMB_DIR.$tim.'s.jpg')) unlink(THUMB_DIR.$tim.'s.jpg');//Delete
-	}
+				if(is_file($delfile)) unlink($delfile);//Delete
+				if(is_file(THUMB_DIR.$tim.'s.jpg')) unlink(THUMB_DIR.$tim.'s.jpg');//Delete
+			}
 		}
 	}
 	mysql_free_result($result);
@@ -1123,6 +1122,7 @@ function admindel(){
 
 	if(!$result=mysql_call("select * from ".POSTTABLE." order by no desc")){echo S_SQLFAIL;}
 	$j=0;
+	$all = 0;
 	while($row=mysql_fetch_row($result)){
 		$j++;
 		$img_flag = FALSE;
