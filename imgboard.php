@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000041
+# Fikaba 000042
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000041');
+define(VERSION, '000042');
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -192,10 +192,10 @@ function updatelog($resno=0){
 			if(DISP_ID){ $userid = "ID:$id"; }
 			else{ $userid = ""; }
 			//  Main creation
-			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span>   \n";
-			$dat.="<span class=\"postername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp; \n";
+			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span>";
+			$dat.="<span class=\"postername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;";
 			if(!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
-			$dat.="\n<blockquote>$com</blockquote>";
+			$dat.="<blockquote>$com</blockquote>";
 	
 			if(!$resline=mysql_call("select * from ".POSTTABLE." where resto=".$no." order by no")) echo S_SQLFAIL;
 			$countres=mysql_num_rows($resline);
@@ -204,7 +204,7 @@ function updatelog($resno=0){
 				$s=$countres - COLLAPSENUM;
 				if($s<0){$s=0;}
 				elseif($s>0){
-					$dat.="<span class=\"omittedposts\">".$s.S_ABBR."</span><br />\n";
+					$dat.="<span class=\"omittedposts\">".$s.S_ABBR."</span><br />";
 				}
 			}else{$s=0;}
 	
@@ -225,9 +225,9 @@ function updatelog($resno=0){
 				if(DISP_ID){ $userid = "ID:$id"; }
 				else{ $userid = ""; }
 				// Main creation
-				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">\n";
-				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle \n";
-				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span> \n";
+				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">";
+				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle";
+				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span>";
 				if ($ext && $ext == ".swf") {
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
 					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span><br />$imgsrc";
@@ -250,9 +250,9 @@ function updatelog($resno=0){
 					}
 				}
 				$dat.="<blockquote>$com</blockquote>";
-				$dat.="</td></tr></table>\n";
+				$dat.="</td></tr></table>";
 			}
-		$dat.="<br class=\"leftclear\" /><hr />\n";
+		$dat.="<br class=\"leftclear\" /><hr />";
 		clearstatcache();//clear stat cache of a file
 		mysql_free_result($resline);
 		$p++;
@@ -297,9 +297,9 @@ function updatelog($resno=0){
 			$dat.="<input type=\"submit\" value=\"".S_NEXT."\" />";
 			$dat.="</form></td>";
 		}
-		$dat.="</tr></table><br class=\"allclear\" />\n";
+		$dat.="</tr></table><br class=\"allclear\" />";
 		} else { // in res display mode
-			$dat.="<table></table><br class=\"allclear\" />\n";
+			$dat.="<table></table><br class=\"allclear\" />";
 		}
 		foot($dat);
 		if(ECHOALL){echo $dat;break;}
@@ -953,7 +953,7 @@ function adminhead(){
 	global $admin;
 	head($dat);
 	echo $dat;
-	echo("<div class='passvalid'>".S_MANAMODE." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div>\n");
+	echo("<div class='passvalid'>".S_MANAMODE." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div>");
 	echo("<div class='manabuttons'>[<a href='".PHP_SELF."'>".S_LOGUPD."</a>] ");
 	echo("[<a class='admd$admin' href='".PHP_SELF."?mode=admin&admin=del'>".S_MANAREPDEL."</a>] ");
 	echo("[<a class='admb$admin' href='".PHP_SELF."?mode=admin&admin=ban'>".S_MANABAN."</a>] ");
@@ -968,7 +968,7 @@ function valid($pass){
 	if(isset($_SESSION['capcode'])) return;
 	head($dat);
 	echo $dat;
-	echo "<div class='passvalid'>".S_MANAMODE." <a href='".PHP_SELF2."'>[".S_RETURNS."]</a> \n</div>";
+	echo "<div class='passvalid'>".S_MANAMODE." <a href='".PHP_SELF2."'>[".S_RETURNS."]</a> </div>";
 	if($pass){
 		$result = mysql_call("select name,password,capcode,candel,canban,cancap,canacc from ".MANATABLE);
 		while($row=mysql_fetch_row($result)){
@@ -994,10 +994,10 @@ function valid($pass){
 
 	// Mana login form
 	if(!$pass){
-		echo "<br /><div class='centered'><form action=\"".PHP_SELF."\" method=\"post\">\n";
-		echo "<input type=hidden name=mode value=admin />\n";
+		echo "<br /><div class='centered'><form action=\"".PHP_SELF."\" method=\"post\">";
+		echo "<input type=hidden name=mode value=admin />";
 		echo "<input type=password name=pass size=8>";
-		echo "<input type=submit value=\"".S_MANASUB."\"></form></div>\n";
+		echo "<input type=submit value=\"".S_MANASUB."\"></form></div>";
 		die(fakefoot());
 	}
 }
@@ -1006,11 +1006,11 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 	session_start();
 	if(!$_SESSION['canacc']) die(S_NOPERMISSION);
 	if(!$accname){
-		echo('<div class="centered">'."\n");
-		echo "<p><form style='display: inline-block;' action=\"".PHP_SELF."\" method=\"post\">\n";
-		echo "<input type=hidden name=mode value=admin />\n";
-		echo "<input type=hidden name=admin value=acc />\n";
-		echo "\n<table><tbody>";
+		echo('<div class="centered">');
+		echo "<p><form style='display: inline-block;' action=\"".PHP_SELF."\" method=\"post\">";
+		echo "<input type=hidden name=mode value=admin />";
+		echo "<input type=hidden name=admin value=acc />";
+		echo "<table><tbody>";
 		echo('<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" size="28" name="accname" />');
 		echo(" <input type=submit value=\"".S_MANASUB."\" /></td></tr>");
 		echo('<tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" size="28" name="accpassword" /></td></tr>');
@@ -1019,7 +1019,7 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 		echo('<tr><td class="postblock">'.S_ACCBAN.'</td><td><input type="checkbox" name="accban" value=1 /></td></tr>');
 		echo('<tr><td class="postblock">'.S_ACCCAP.'</td><td><input type="checkbox" name="acccap" value=1 /></td></tr>');
 		echo('<tr><td class="postblock">'.S_ACCACC.'</td><td><input type="checkbox" name="accacc" value=1 /></td></tr>');
-		echo("</tbody></table></form></div>\n");
+		echo("</tbody></table></form></div>");
 		die(fakefoot());
 	}
 	if(!$accdel) $accdel=0;
@@ -1039,7 +1039,7 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 	$query="delete from ".MANATABLE." where name='DUMMY' and password='REPLACEME'";
 	if(!$result=mysql_call($query)){echo S_SQLFAIL;}
 	mysql_free_result($result);
-	die("<p>".S_ACCCREATED."</p></body></html>\n");
+	die("<p>".S_ACCCREATED."</p></body></html>");
 }
 
 function adminban(){
@@ -1058,11 +1058,11 @@ function adminban(){
 		if ($unban) { die(S_UNBANSUCCESS); }
 		else { die(S_BANSUCCESS); }
 	}
-	echo('<div class="centered">'."\n");
-	echo "<p><form style='display: inline-block;' action=\"".PHP_SELF."\" method=\"post\">\n";
-	echo "<input type=hidden name=mode value=admin />\n";
-	echo "<input type=hidden name=admin value=ban />\n";
-	echo "\n<table><tbody>";
+	echo('<div class="centered">'."");
+	echo "<p><form style='display: inline-block;' action=\"".PHP_SELF."\" method=\"post\">";
+	echo "<input type=hidden name=mode value=admin />";
+	echo "<input type=hidden name=admin value=ban />";
+	echo "<table><tbody>";
 	echo('<tr><td class="postblock">'.S_MANABANIP.'</td><td><input type="text" size="28" name="banip" />');
 	echo(" <input type=submit value=\"".S_MANASUB."\" /></td></tr>");
 	echo('<tr><td class="postblock">'.S_MANABANEXP.'</td><td><input value="7" type="number" size="5" name="banexp" /></td></tr>');
@@ -1071,7 +1071,7 @@ function adminban(){
 	echo('<tr><td class="postblock">'.S_MANARMP.'</td><td><input value="7" type="checkbox" name="rmp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANARMALLP.'</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');
 	echo('<tr><td class="postblock">'.S_MANAUNBAN.'</td><td><input value="7" type="checkbox" name="unban" value="on" /></td></tr>');
-	echo("</tbody></table></form></div>\n");
+	echo("</tbody></table></form></div>");
 	die(fakefoot());
 }
 
@@ -1110,16 +1110,16 @@ function admindel(){
 	mysql_free_result($result);
 	}
 	// Deletion screen display
-	echo "<p><form action=\"".PHP_SELF."\" method=\"post\">\n";
-	echo "<input type=hidden name=mode value=admin>\n";
-	echo "<input type=hidden name=admin value=del>\n";
+	echo "<p><form action=\"".PHP_SELF."\" method=\"post\">";
+	echo "<input type=hidden name=mode value=admin>";
+	echo "<input type=hidden name=admin value=del>";
 	echo "<div class=\"delbuttons\"><input type=submit value=\"".S_ITDELETES."\">";
 	echo "<input type=reset value=\"".S_RESET."\"> ";
 	echo "[<input type=checkbox name=onlyimgdel value=on><!--checked-->".S_MDONLYPIC." ]</div>";
-	echo "<table class=\"postlists\">\n";
+	echo "<table class=\"postlists\">";
 	echo "<tr class=\"managehead\">".S_MDTABLE1;
 	echo S_MDTABLE2;
-	echo "</tr>\n";
+	echo "</tr>";
 
 	if(!$result=mysql_call("select * from ".POSTTABLE." order by no desc")){echo S_SQLFAIL;}
 	$j=0;
@@ -1154,8 +1154,8 @@ function admindel(){
 	echo "<tr class=$class><td><input type=checkbox name=\"$no\" value=delete></td>";
 	echo "<td>$no</td><td>$now</td><td>$sub</td>";
 	echo "<td>$name</td><td>$ip</td><td>$com</td>";
-	echo "<td>$host</td><td>$clip($size)</td><td>$md5</td><td>$resto</td><td>$tim</td><td>$time</td>\n";
-	echo "</tr>\n";
+	echo "<td>$host</td><td>$clip($size)</td><td>$md5</td><td>$resto</td><td>$tim</td><td>$time</td>";
+	echo "</tr>";
 	}
 	mysql_free_result($result);
 
@@ -1245,7 +1245,7 @@ function checkban($ip) {
 			if((int)$expires<time()){
 				removeban($ip);
 				error(S_BANEXPIRED);
-			}else{ error(S_BANNEDMESSAGE."<br />\n".S_BANTIME.humantime($time)."<br />\n".S_BANEXPIRE.humantime($expires)); }
+			}else{ error(S_BANNEDMESSAGE."<br />".S_BANTIME.humantime($time)."<br />".S_BANEXPIRE.humantime($expires)); }
 		}
 	}
 	if(!$banned) error(S_NOTBANNED . $ip);
@@ -1267,7 +1267,7 @@ function removeban($ip) {
 function catalog(){
 	$dat = '';
 	head($dat);
-	$dat.="<div class=\"passvalid\">".S_CATALOG." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div><br />\n";
+	$dat.="<div class=\"passvalid\">".S_CATALOG." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div><br />";
 	$dat.="<div class='cattable'>";
 	$i=0;
 	$result = mysql_call("select * from ".POSTTABLE." order by root desc");
