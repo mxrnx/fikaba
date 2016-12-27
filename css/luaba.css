@@ -8,8 +8,7 @@ body {
 }
 
 img {
-        margin: 7px;
-	margin-left:10px;
+        margin: 4px 10px 10px 10px;
 	border: 0;
 	float: left;
 	clear: none;
@@ -216,11 +215,13 @@ form {
 }
 .filesize {
 	padding-right:10px;
+	margin-left:10px;
 }
 .reply {
 	border-radius: 3px;
 	background-color:#c2c2ff;
 	padding: 5px;
+	min-width:500px;
 }
 table{
 	margin-top:10px;
