@@ -33,3 +33,5 @@ Roughly in order of importance:
 
 1. Secure tripcodes
 2. CAPTCHA
+3. Sticky threads
+4. Locked threads
