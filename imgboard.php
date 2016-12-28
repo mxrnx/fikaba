@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000043
+# Fikaba 000045
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-define(VERSION, '000043');
+const VERSION = '000045';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -153,9 +153,8 @@ function updatelog($resno=0){
 		$dat='';
 		head($dat);
 		form($dat,$resno);
-		if(!$resno){
-			$st = $page;
-		}
+		if(!$resno) $st = $page;
+		else $st = 0;
 		$dat.='<form action="'.PHP_SELF.'" method="post">';
 	
 		for($i = $st; $i < $st+PAGE_DEF; $i++){
@@ -372,9 +371,9 @@ function form(&$dat,$resno,$admin="",$manapost=false){
 	session_start();
 	$maxbyte = MAX_KB * 1024;
 	$no=$resno;
-	if($admin){
-		$msg = "<em>".S_NOTAGS."</em>";
-	}
+	if($admin) $msg = "<em>".S_NOTAGS."</em>";
+	else $msg = '';
+
 	$dat.=$msg.'<div class="centered"><div class="postarea">
 		<form id="postform" action="'.PHP_SELF.'" method="post" enctype="multipart/form-data" style="display: inline-block;">
 		<input type="hidden" name="mode" value="regist" />
@@ -504,7 +503,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 			$W = ceil($W * $key);
 			$H = ceil($H * $key);
 		}
-		$mes = S_UPGOOD;
+		$mes = ' ' . $upfile_name . S_UPGOOD;
 	}
 
 	if($_FILES["upfile"]["error"]==2){
@@ -1311,7 +1310,7 @@ case 'regist':
 case 'admin':
 	valid($pass);
 	session_start();
-	if(!$admin) $admin='del';
+	if(!isset($admin)) $admin='del';
 	adminhead();
 	if($admin=="del") admindel();
 	if($admin=="ban") adminban();
@@ -1337,7 +1336,7 @@ case 'catalog':
 case 'usrdel':
 	usrdel($no,$pwd);
 default:
-	if($res){
+	if(isset($res)){
 		updatelog($res);
 	}else{
 		updatelog();
