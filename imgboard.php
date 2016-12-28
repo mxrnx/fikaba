@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000045
+# Fikaba 000046
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '000045';
+const VERSION = '000046';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -191,7 +191,7 @@ function updatelog($resno=0){
 			if(DISP_ID){ $userid = "ID:$id"; }
 			else{ $userid = ""; }
 			//  Main creation
-			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span>";
+			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span> ";
 			$dat.="<span class=\"postername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;";
 			if(!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
 			$dat.="<blockquote>$com</blockquote>";
