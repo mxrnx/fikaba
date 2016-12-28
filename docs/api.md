@@ -1,5 +1,5 @@
 # JSON API
-Fikaba's json api tries to follow the 4chan api wherever possible, and the [vichan api](https://github.com/vichan-devel/vichan-API/) after that. Do not assume they can be used interchangably though, because they still differ quite a lot.
+Fikaba's json api tries to follow the [4chan api](https://github.com/4chan/4chan-API) wherever possible, and the [vichan api](https://github.com/vichan-devel/vichan-API/) after that. Do not assume they can be used interchangably though, because they still differ quite a lot.
 
 ## Endpoints
 ### Catalog
