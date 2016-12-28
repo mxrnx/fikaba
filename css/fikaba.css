@@ -25,6 +25,8 @@ a:hover,.admddel,.admbban,.admppost,.admaacc {
 .reflink, .reflink:visited {
 	color:#800000;
 	text-decoration:none;
+}
+.reply .reflink {
 	display:none;
 }
 .intro:hover .reflink, .reflink:hover {
