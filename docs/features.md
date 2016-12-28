@@ -1,32 +1,29 @@
 # Features
 * MySQL database
-* Highly configurable
-* Image posting, automatic thumbnailing (GIF, JPG, PNG)
+* Configurable
+* Image posting (including replying), automatic thumbnailing (GIF, JPG, PNG)
 * Flash support
-* WebM support
-* Manager panel
-* Raw HTML posts for managers
-* Citations
+* Fairly advanced manager panel
+* Raw HTML posting for managers
+* Quoting
 * User post deletion
 * Flood detection
 * Proxy detection
 * User IDs
 * Support for multiple languages (English and (incomplete) Japanese included)
-* Valid html5 instead of xhtml
+* Valid html5 (instead of xhtml)
 * Style picker
 * Capcodes
 * Image replies
-* The possibility to reply to any thread as a manager
 * Post references (>>###)
 * IP bans
 * noko/nonoko (noko by default)
 * Catalogs
 * [JSON API](https://github.com/knarka/fikaba/blob/master/docs/api.md)
-* Far more advanced admin panel, with multiple accounts
 * Forced anonymous
 * Oekaki
 * Lockdown
-* Filters
+* Word filters
 
 ## Planned features
 Roughly in order of importance:
@@ -35,3 +32,4 @@ Roughly in order of importance:
 2. CAPTCHA
 3. Sticky threads
 4. Locked threads
+5. WebM support
