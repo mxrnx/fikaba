@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000046
+# Fikaba 000047
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '000046';
+const VERSION = '000047';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -885,7 +885,6 @@ function md5_of_file($inFile) {
 
 /* text plastic surgery */
 function CleanStr($str){
-	global $admin;
 	session_start();
 	$str = trim($str);//blankspace removal
 	if (get_magic_quotes_gpc()) {//magic quotes is deleted (?)
