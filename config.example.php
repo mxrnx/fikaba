@@ -55,6 +55,7 @@ const TRIPKEY = '#';				//this character is displayed before tripcodes
 // CSS
 const CSSDEFAULT = 'Futaba';			// The name of the stylesheet to be used by default
 $STYLES = array(				// Array containing NAME => FILE of stylesheets
+	"Fikaba"	=>	'css/fikaba.css',
 	"Futaba"	=>	'css/futaba.css',
 	"Burichan"	=>	'css/burichan.css',
 	"heavy_ice"	=>	'css/heavy_ice.css'
