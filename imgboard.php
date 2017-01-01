@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000047
+# Fikaba 000048
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '000047';
+const VERSION = '000048';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -436,7 +436,7 @@ function error($mes,$dest=''){ /* Basically a fancy die() */
 }
 
 function auto_link($proto){
-	$proto = ereg_replace("(https?|ftp|news)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)","<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",$proto);
+	$proto = ereg_replace("(https?|ftp|news|irc|gopher)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)","<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",$proto);
 	return $proto;
 }
 
