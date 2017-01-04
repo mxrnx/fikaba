@@ -768,12 +768,12 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 				$j = mb_convert_encoding($j, "UTF-16", "SJIS");
 				$c_name.="%u".bin2hex($j);
 				$i++;
+			}
+			header("Set-Cookie: namec=$c_name; expires=".gmdate("D, d-M-Y H:i:s",time()+7*24*3600)." GMT",false);
+		}else{
+			$c_name=$names;
+			setcookie ("namec", $c_name,time()+7*24*3600);  /* 1 week cookie expiration */
 		}
-		header("Set-Cookie: namec=$c_name; expires=".gmdate("D, d-M-Y H:i:s",time()+7*24*3600)." GMT",false);
-	}else{
-		$c_name=$names;
-		setcookie ("namec", $c_name,time()+7*24*3600);  /* 1 week cookie expiration */
-	}
 	}
 
 	if($dest&&file_exists($dest)){
