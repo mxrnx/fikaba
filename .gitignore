@@ -9,3 +9,7 @@ title2.png
 # default directories, renamed ones will slip through
 src/
 thumb/
+
+# editor files
+*.swp
+*~
