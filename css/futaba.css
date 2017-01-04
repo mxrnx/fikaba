@@ -271,3 +271,8 @@ td {
 }
 form table {
 }
+#errormsg {
+	color:red;
+	text-align:center;
+	font-size:20pt;
+}

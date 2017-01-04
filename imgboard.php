@@ -1,12 +1,12 @@
 <?php
-# Fikaba 000048
+# Fikaba 160401
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '000048';
+const VERSION = '160401';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -430,7 +430,7 @@ function error($mes,$dest=''){ /* Basically a fancy die() */
 	head($dat);
 	echo $dat;
 	echo "<br /><br /><hr size=1><br /><br />
-		<center><font color=blue size=5>$mes<br /><br /><a href=".PHP_SELF2.">".S_RELOAD."</a></b></font></center>
+		<p id='errormsg'>$mes<br /><br /><a href=".PHP_SELF2.">".S_RELOAD."</a></b></p>
 		<br /><br /><hr size=1>";
 	die("</body></html>\n");
 }
