@@ -250,3 +250,8 @@ table{
 	text-align: right;
 	float:right;
 }
+#errormsg {
+	color:red;
+	text-align:center;
+	font-size:20px;
+}
