@@ -669,8 +669,11 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 
 	session_start();
 	if(!$name||(FORCED_ANON&&!$_SESSION['name'])) $name=S_ANONAME; // manas can post with name when forced anon is on
-	if(!$com) $com=S_ANOTEXT;
-	if(!$sub) $sub=S_ANOTITLE;
+	// TODO: add a setting for this
+	//if(!$com) $com=S_ANOTEXT;
+	//if(!$sub) $sub=S_ANOTITLE;
+	if(!$com) $com='';
+	if(!$sub) $sub='';
 
 	// Add capcode
 	if($capcode){
