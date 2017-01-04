@@ -34,7 +34,7 @@ const USE_THUMB = true;				//Use thumbnails
 const PHP_SELF = 'imgboard.php';		//Name of main script file (if ECHOALL, you probably want 'index.php')
 const PHP_SELF2 = 'index.html';			//Name of main html file (point to PHP_SELF if ECHOALL)
 const PHP_EXT = '.html';			//Extension used for board pages after first
-$THUMBBACK = array(255,255,238);		//Thumbnail background for transp. images. Usually the background of your body element.
+const THUMBBACK = array(255,255,238);		//Thumbnail background for transp. images. Usually the background of your body element.
 
 // Look and behavior
 const ECHOALL = false;				//Do not write index to file, but echo directly (4chan-style)
@@ -54,14 +54,14 @@ const FORCED_ANON = false;			//Force anonymous posting (except for managers)
 
 // CSS
 const CSSDEFAULT = 'Futaba';			// The name of the stylesheet to be used by default
-$STYLES = array(				// Array containing NAME => FILE of stylesheets
+const STYLES = array(				// Array containing NAME => FILE of stylesheets
 	"Fikaba"	=>	'css/fikaba.css',
 	"Futaba"	=>	'css/futaba.css',
 	"Burichan"	=>	'css/burichan.css',
 	"heavy_ice"	=>	'css/heavy_ice.css'
 );
 
-$FILTERS = array(				// Filters, in the format of IN => OUT
+const FILTERS = array(				// Filters, in the format of IN => OUT
 	"test"			=>	'tosti',
 	"fikaba is awful"	=>	'I am awful'
 );

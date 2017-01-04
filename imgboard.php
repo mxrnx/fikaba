@@ -324,7 +324,6 @@ function mysql_call($query){
 }
 
 function head(&$dat){
-	global $STYLES;
 	$titlepart = '';
 	if (SHOWTITLEIMG == 1) {
 		$titlepart.= '<img src="'.TITLEIMG.'" alt="'.TITLE.'" />';
@@ -341,7 +340,7 @@ function head(&$dat){
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
 <script type="text/javascript" src="js/style.js"></script>';
-	foreach($STYLES as $stylename => $stylefile){
+	foreach(STYLES as $stylename => $stylefile){
 		$dat.='<link rel="alternate stylesheet" type="text/css" href="'.$stylefile.'" title="'.$stylename.'" />';
 	}
 	$dat.='<script type="text/javascript">getUserFav("'.CSSDEFAULT.'");</script>
@@ -355,7 +354,7 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	<body>
 	<div class="styles"><select>
 	<option disabled selected value>---</option>';
-	foreach($STYLES as $stylename => $stylefile){
+	foreach(STYLES as $stylename => $stylefile){
 		$dat.='<option onClick="changeStyle(\''.$stylename.'\')">'.$stylename.'</option> ';
 	}
 	$dat.='</select></div>
@@ -446,7 +445,7 @@ function  proxy_connect($port) {
 }
 
 function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$upfile_name,$resto){
-	global $path,$badstring,$badfile,$badip,$pwdc,$textonly,$admin,$FILTERS;
+	global $path,$badstring,$badfile,$badip,$pwdc,$textonly,$admin;
 
 	if(isbanned($ip)) error(S_BANRENZOKU);
 	
@@ -643,7 +642,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	$com = nl2br($com);		//newlines get substituted by br tags
 	$com = str_replace("\n",  "", $com);	//\n is erased (is this necessary?)
 
-	foreach ($FILTERS as $filterin => $filterout){
+	foreach (FILTERS as $filterin => $filterout){
 		$com = str_replace($filterin, $filterout, $com);
 	}
 
@@ -791,7 +790,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 
 //thumbnails
 function thumb($path,$tim,$ext){
-	global $THUMBBACK;
 	if(!function_exists("ImageCreate")||!function_exists("ImageCreateFromJPEG"))return;
 	$fname=$path.$tim.$ext;
 	$thumb_dir = THUMB_DIR;     //thumbnail directory
@@ -835,7 +833,7 @@ function thumb($path,$tim,$ext){
 		$im_out = ImageCreateTrueColor($out_w, $out_h);
 	}else{$im_out = ImageCreate($out_w, $out_h);}
 	// change background color
-	$backing = imagecolorallocate($im_out,...$THUMBBACK);
+	$backing = imagecolorallocate($im_out,...THUMBBACK);
 	imagefill($im_out, 0, 0, $backing);
 	// copy resized original
 	ImageCopyResized($im_out, $im_in, 0, 0, 0, 0, $out_w, $out_h, $size[0], $size[1]);
