@@ -1,12 +1,12 @@
 <?php
-# Fikaba 160401
+# Fikaba 170117
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '160401';
+const VERSION = '170117';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -32,7 +32,7 @@ $upfile_name=$_FILES["upfile"]["name"];
 $upfile=$_FILES["upfile"]["tmp_name"];
 
 $path = realpath("./").'/'.IMG_DIR;
-ignore_user_abort(TRUE);
+ignore_user_abort(true);
 
 $badstring = array("dummy_string","dummy_string2"); // Refused text
 $badfile = array("dummy","dummy2"); //Refused files (md5 hashes)
@@ -912,22 +912,22 @@ function usrdel($no,$pwd){
 	global $path,$pwdc,$onlyimgdel;
 	$host = gethostbyaddr($_SERVER["REMOTE_ADDR"]);
 	$delno = array();
-	$delflag = FALSE;
+	$delflag = false;
 	reset($_POST);
 	while ($item = each($_POST)){
-		if($item[1]=='delete'){array_push($delno,$item[0]);$delflag=TRUE;}
+		if($item[1]=='delete'){array_push($delno,$item[0]);$delflag=true;}
 	}
 	if($pwd==""&&$pwdc!="") $pwd=$pwdc;
 	$countdel=count($delno);
 
-	$flag = FALSE;
+	$flag = false;
 	for($i = 0; $i<$countdel; $i++){
 		if(!$result=mysql_call("select no,ext,tim,pwd,host from ".POSTTABLE." where no=".$delno[$i])){echo S_SQLFAIL;}
 		else{
 			while($resrow=mysql_fetch_row($result)){
 				list($dno,$dext,$dtim,$dpass,$dhost)=$resrow;
 				if(substr(md5($pwd),2,8) == $dpass || substr(md5($pwdc),2,8) == $dpass || $dhost == $host){
-					$flag = TRUE;
+					$flag = true;
 					$delfile = $path.$dtim.$dext;	//path to delete
 					if(!$onlyimgdel){
 						if(!mysql_call("delete from ".POSTTABLE." where no=".$dno)){echo S_SQLFAIL;} //sql is broke
@@ -1079,14 +1079,14 @@ function admindel(){
 	session_start();
 	if(!$_SESSION['candel']) die(S_NOPERMISSION);
 	$delno = array();
-	$delflag = FALSE;
+	$delflag = false;
 	reset($_POST);
 	while ($item = each($_POST)){
-		if($item[1]=='delete'){array_push($delno,$item[0]);$delflag=TRUE;}
+		if($item[1]=='delete'){array_push($delno,$item[0]);$delflag=true;}
 	}
 	if($delflag){
 		if(!$result=mysql_call("select * from ".POSTTABLE."")){echo S_SQLFAIL;}
-	$find = FALSE;
+	$find = false;
 	while($row=mysql_fetch_row($result)){
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
 		if($onlyimgdel=='on'){
@@ -1097,7 +1097,7 @@ function admindel(){
 			}
 		}else{
 			if(array_search($no,$delno)){//It is empty when deleting
-				$find = TRUE;
+				$find = true;
 				if(!mysql_call("delete from ".POSTTABLE." where no=".$no)){echo S_SQLFAIL;}
 				$delfile = $path.$tim.$ext;	//Delete file
 				if(is_file($delfile)) unlink($delfile);//Delete
@@ -1124,7 +1124,7 @@ function admindel(){
 	$all = 0;
 	while($row=mysql_fetch_row($result)){
 		$j++;
-		$img_flag = FALSE;
+		$img_flag = false;
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$row;
 		// Format
 		$now=ereg_replace('.{2}/(.*)$','\1',$now);
@@ -1138,7 +1138,7 @@ function admindel(){
 		if(strlen($com) > 20) $com = substr($com,0,18) . "...";
 		// Link to the picture
 		if($ext && is_file($path.$tim.$ext)){
-			$img_flag = TRUE;
+			$img_flag = true;
 			$clip = "<a href=\"".IMG_DIR.$tim.$ext."\" target=\"_blank\">".$tim.$ext."</a><br />";
 			$size = $fsize;
 			$all += $size;
