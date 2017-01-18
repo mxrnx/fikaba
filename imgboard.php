@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170117
+# Fikaba 170118
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170117';
+const VERSION = '170118';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -439,9 +439,10 @@ function auto_link($proto){
 	return $proto;
 }
 
-function  proxy_connect($port) {
+function proxy_connect($port) {
 	$fp = @fsockopen ($_SERVER["REMOTE_ADDR"], $port,$a,$b,2);
-	if(!$fp){return 0;}else{return 1;}
+	if(!$fp){return false;}
+	else{return true;}
 }
 
 function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$upfile_name,$resto){
@@ -585,14 +586,14 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		if(eregi("$value$",$host)){
 			error(S_BADHOST,$dest);
 	}}
-		if(eregi("^mail",$host)
-			|| eregi("^ns",$host)
-			|| eregi("^dns",$host)
-			|| eregi("^ftp",$host)
-			|| eregi("^prox",$host)
-			|| eregi("^pc",$host)
-			|| eregi("^[^\.]\.[^\.]$",$host)){
-			$pxck = "on";
+	if(eregi("^mail",$host)
+	|| eregi("^ns",$host)
+	|| eregi("^dns",$host)
+	|| eregi("^ftp",$host)
+	|| eregi("^prox",$host)
+	|| eregi("^pc",$host)
+	|| eregi("^[^\.]\.[^\.]$",$host)){
+		$pxck = true;
 	}
 	if(eregi("ne\\.jp$",$host)||
 		eregi("ad\\.jp$",$host)||
@@ -601,13 +602,13 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		eregi("uu\\.net$",$host)||
 		eregi("asahi-net\\.or\\.jp$",$host)||
 		eregi("rim\\.or\\.jp$",$host)
-	){$pxck = "off";}
-	else{$pxck = "on";}
+	){$pxck = false;}
+	else{$pxck = true;}
 
-	if($pxck=="on" && PROXY_CHECK){
-		if(proxy_connect('80') == 1){
+	if($pxck && PROXY_CHECK){
+		if(proxy_connect('80') == true){
 			error(S_PROXY80,$dest);
-		} elseif(proxy_connect('8080') == 1){
+		} elseif(proxy_connect('8080') == true){
 			error(S_PROXY8080,$dest);
 		}
 	}
