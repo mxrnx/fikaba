@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170118
+# Fikaba 170119
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170118';
+const VERSION = '170119';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -43,11 +43,11 @@ if(!$con=mysql_connect(SQLHOST,SQLUSER,SQLPASS)){
 	exit;
 }
 
-if (!file_exists(IMG_DIR) && !is_dir(IMG_DIR)){
+if(!file_exists(IMG_DIR) && !is_dir(IMG_DIR)){
 	mkdir(IMG_DIR, 0777);
 	echo(IMG_DIR.': '.S_FCREATE);
 }
-if (!file_exists(THUMB_DIR) && !is_dir(THUMB_DIR)){
+if(!file_exists(THUMB_DIR) && !is_dir(THUMB_DIR)){
 	mkdir(THUMB_DIR, 0777);
 	echo(THUMB_DIR.': '.S_FCREATE);
 }
@@ -55,7 +55,7 @@ if (!file_exists(THUMB_DIR) && !is_dir(THUMB_DIR)){
 $db_id=mysql_select_db(SQLDB,$con);
 if(!$db_id){echo S_SQLDBSF;}
 
-if (!table_exist(POSTTABLE)) {
+if(!table_exist(POSTTABLE)){
 	echo (POSTTABLE.': '.S_TCREATE);
 	$result = mysql_call("create table ".POSTTABLE." (primary key(no),
 		no    int not null auto_increment,
@@ -81,7 +81,7 @@ if (!table_exist(POSTTABLE)) {
 	updatelog(); // in case of a database wipe or something
 }
 
-if (!table_exist(BANTABLE)){
+if(!table_exist(BANTABLE)){
 	echo (BANTABLE.': '.S_TCREATE);
 	$result = mysql_call("create table ".BANTABLE." (ip text not null,
 		start int,
@@ -90,7 +90,7 @@ if (!table_exist(BANTABLE)){
 	if(!$result){echo S_TCREATEF;}
 }
 
-if (!table_exist(MANATABLE)){
+if(!table_exist(MANATABLE)){
 	echo (MANATABLE.': '.S_TCREATE);
 	$result = mysql_call("create table ".MANATABLE." (name text not null,
 		password text not null,
@@ -439,7 +439,7 @@ function auto_link($proto){
 	return $proto;
 }
 
-function proxy_connect($port) {
+function proxy_connect($port){
 	$fp = @fsockopen ($_SERVER["REMOTE_ADDR"], $port,$a,$b,2);
 	if(!$fp){return false;}
 	else{return true;}
@@ -822,13 +822,13 @@ function thumb($path,$tim,$ext){
 	default : return;
 	}
 	// Resizing
-	if ($size[0] > $width || $size[1] >$height) {
+	if($size[0] > $width || $size[1] >$height){
 		$key_w = $width / $size[0];
 		$key_h = $height / $size[1];
 		($key_w < $key_h) ? $keys = $key_w : $keys = $key_h;
 		$out_w = ceil($size[0] * $keys) +1;
 		$out_h = ceil($size[1] * $keys) +1;
-	} else {
+	}else{
 		$out_w = $size[0];
 		$out_h = $size[1];
 	}
@@ -872,24 +872,25 @@ function get_gd_ver(){
 
 //md5 calculation for earlier than php4.2.0
 function md5_of_file($inFile) {
-	if (file_exists($inFile)){
+	if(file_exists($inFile)){
 		if(function_exists('md5_file')){
 			return md5_file($inFile);
-	}else{
-		$fd = fopen($inFile, 'r');
-		$fileContents = fread($fd, filesize($inFile));
-		fclose ($fd);
-		return md5($fileContents);
+		}else{
+			$fd = fopen($inFile, 'r');
+			$fileContents = fread($fd, filesize($inFile));
+			fclose ($fd);
+			return md5($fileContents);
+		}
+ 	}else{
+		return false;
 	}
- }else{
-	 return false;
-}}
+}
 
 /* text plastic surgery */
 function CleanStr($str){
 	session_start();
 	$str = trim($str);//blankspace removal
-	if (get_magic_quotes_gpc()) {//magic quotes is deleted (?)
+	if(get_magic_quotes_gpc()) {//magic quotes is deleted (?)
 		$str = stripslashes($str);
 	}
 	if(!(isset($_SESSION['cancap']) && ((int)$_SESSION['cancap'])!=0)){
@@ -915,7 +916,7 @@ function usrdel($no,$pwd){
 	$delno = array();
 	$delflag = false;
 	reset($_POST);
-	while ($item = each($_POST)){
+	while($item = each($_POST)){
 		if($item[1]=='delete'){array_push($delno,$item[0]);$delflag=true;}
 	}
 	if($pwd==""&&$pwdc!="") $pwd=$pwdc;
@@ -1275,10 +1276,10 @@ function catalog(){
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
 		if((int)$resto==0){
 			$dat.="<div class='catthread'>";
-			if ($ext && $ext == ".swf") {
+			if($ext && $ext == ".swf"){
 				$imgsrc = "<img class='catthumb' src=\"file.png\" width=\"200\" height=\"200\" alt=\"".$fsize." B\" /><br />";
 				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
-			} else if($ext){
+			}else if($ext){
 				$size = $fsize;//file size displayed in alt text
 				if($w && $h){//when there is size...
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
