@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170119
+# Fikaba 170204
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170119';
+const VERSION = '170204';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -1173,9 +1173,9 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
 	$daylength = 60*60*24;
 	$expires = $time + ($daylength * $days);
 	if($bantype==0){
-		$result = mysql_call("select * from ".POSTTABLE);
+		$result = mysql_call("select no, ip from ".POSTTABLE);
 		while($row=mysql_fetch_row($result)){
-			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
+			list($no, $ip)=$row;
 			if($target==(int)$no){
 				$banip=$ip;
 				break;
@@ -1224,10 +1224,10 @@ function insertban($target,$days,$pubmsg,$privmsg,$bantype,$rmp,$rmallp,$unban){
 }
 
 function isbanned($ip){ // check ban, returning true or false
-	$result = mysql_call("select * from ".BANTABLE);
+	$result = mysql_call("select ip, expires from ".BANTABLE);
 	$banned=false;
 	while($row=mysql_fetch_row($result)){
-		list($bip,$time,$expires,$reason)=$row;
+		list($bip,$expires)=$row;
 		if($ip==$bip){
 			if((int)$expires<time()){ removeban($ip);}
 			else{return true;}
@@ -1254,9 +1254,9 @@ function checkban($ip) {
 }
 
 function removeban($ip) {
-	$result = mysql_call("select * from ".BANTABLE);
+	$result = mysql_call("select ip from ".BANTABLE);
 	while($row=mysql_fetch_row($result)){
-		list($bip,$time,$expires,$reason)=$row;
+		list($bip)=$row;
 		if($ip==$bip){
 			$result = mysql_call("delete from ".BANTABLE." where `ip` = '".$ip."'");
 			break;
