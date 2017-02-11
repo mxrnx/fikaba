@@ -1,26 +1,26 @@
 body {
-         font-size:12pt;
-         background:#b8b08d;
-         color:#262322;
-	 font-family:sans-serif;
+	font-size:12pt;
+	background:#DEDAB0;
+	color:#262322;
+	font-family:sans-serif;
 }
 a       {
-        background:inherit;
-        color:#842929!important;
-        text-decoration:underline;
-        font-family:serif;
+	background:inherit;
+	color:#842929!important;
+	text-decoration:underline;
+	font-family:serif;
 }
 a:visited {
-        background:inherit;
-        color:#842929!important;
-        text-decoration:underline;
-        font-family:serif;
+	background:inherit;
+	color:#842929!important;
+	text-decoration:underline;
+	font-family:serif;
 }
 a:hover,.admddel,.admbban,.admppost,.admaacc {
-        color:#842929!important;
-        background:inherit;
-        text-decoration:underline;
-        font-family:serif;
+	color:#842929!important;
+	background:inherit;
+	text-decoration:underline;
+	font-family:serif;
 }
 .reflink, .reflink:visited {
 	color:#800000;
@@ -30,12 +30,12 @@ a:hover,.admddel,.admbban,.admppost,.admaacc {
 	display:none;
 }
 .intro:hover .reflink, .reflink:hover {
-        color:#CC1105;
+	color:#CC1105;
 	text-decoration:none;
 	display:inline;
 }
 img {
-        margin: 4px 10px 10px 10px;
+	margin: 4px 10px 10px 10px;
 	float: left;
 	clear: none;
 	border: 1px solid #262322;
@@ -45,22 +45,20 @@ td {
 	text-align: left;
 }
 .adminbar {
-        text-align:right;
-        background:inherit;
-        /*clear:both;*/
-        float:right;
+	text-align:right;
+	background:inherit;
+	float:right;
 }
 .styles {
 	float: left;
 }
 .logo {
-        clear:both;
-        text-align:center;
-        background:inherit;
-        font-size:24pt;
-        /*color:#842929;*/
+	clear:both;
+	text-align:center;
+	background:inherit;
+	font-size:24pt;
 	color:#842929;
-        width:100%;
+	width:100%;
 }
 .logo img {
 	margin: 0 auto;
@@ -68,43 +66,43 @@ td {
 	float:none;
 }
 .theader {
-        background:#0010E0;
-        color:#FFFFFF;
-        width:100%;
+	background:#0010E0;
+	color:#FFFFFF;
+	width:100%;
 }
 .postarea {
 	background:inherit;
 }
 .rules {
-        font-size:10px;
-        font-family:sans-serif;
+	font-size:10px;
+	font-family:sans-serif;
 }
 .postblocktitle {
-        background:#503b31;
+	background:#604b41;
 	text-align: center;
-        color:#DEDACB;
-        font-weight:800;
+	color:#DEDAB0;
+	font-weight:800;
 }
 .postblock {
-        background:#503b31;
-        color:#DEDACB;
-        font-weight:800;
+	background:#604b41;
+	color:#DEDAB0;
+	font-weight:800;
 }
 .footer {
-        text-align:center;
-        font-size:12px;
-        font-family:serif;
+	text-align:center;
+	font-size:12px;
+	font-family:serif;
 	margin-top: 45px;
 }
 .passvalid {
-        background:#503b31;
+	background:#503b31;
 	text-align:center;
 	width:100%;
-	color:#DEDACB;
+	color:#DEDAB0;
 }
 .passvalid a, .postblocktitle a {
 	font-weight:bold;
-	color:#DEDACB !important;
+	color:#DEDAB0 !important;
 	margin-left:10px;
 }
 .dellist {
@@ -137,13 +135,13 @@ td {
 	color:#800000;
 }
 .row2 {
-        background:#FFFFFF;
-        font-family:sans-serif;
-        font-size:12px;
-        color:#800000;
+	background:#FFFFFF;
+	font-family:sans-serif;
+	font-size:12px;
+	color:#800000;
 }
 .unkfunc {
-	background:inert;
+	background:inherit;
 	color:#789922;
 }
 .filesize {
@@ -164,25 +162,26 @@ td {
 	background:inherit;
 	font-size:16px;
 	font-family:serif;
-        color:#503b31;
-	font-weight:800;}
+	color:#503b31;
+	font-weight:800;
+}
 .oldpost {
-        background:inherit;
-        font-size:18px;
-        font-family:serif;
-        color:#CC1105;
-        font-weight:800;
+	background:inherit;
+	font-size:18px;
+	font-family:serif;
+	color:#CC1105;
+	font-weight:800;
 }
 .omittedposts {
-        background:inherit;
-        font-size:18px;
-        font-family:serif;
-        color:#070707;
-        font-weight:800;
+	background:inherit;
+	font-size:18px;
+	font-family:serif;
+	color:#070707;
+	font-weight:800;
 	margin-left:30px;
 }
 .reply {
-	background:#DEDACB;
+	background:#BAB08D;
 	color:#262322;
 	font-family:serif;
 	border: 1px solid #262322;
@@ -190,24 +189,24 @@ td {
 	min-width: 500px;
 }
 .doubledash {
- 	vertical-align:top;
+	vertical-align:top;
 	clear:both;
 	float:left;
 }
 .replytitle {
-        background:inherit;
-        font-size:18px;
-        font-family:serif;
-        color:#CC1105;
-        font-weight:800;
+	background:inherit;
+	font-size:18px;
+	font-family:serif;
+	color:#CC1105;
+	font-weight:800;
 }
 .commentfile {
 }
 .commentpostername {
-        background:inherit;
-        font-size:16px;
-        font-family:serif;
-        color:#503b31;
+	background:inherit;
+	font-size:16px;
+	font-family:serif;
+	color:#503b31;
 	font-weight:800;
 }
 .thumbnailmsg {
@@ -252,7 +251,7 @@ td {
 	padding-top:10px;
 	vertical-align:top;
 	margin:2px;
-	background:#DEDACB;
+	background:#DEDAB0;
 	color:#262322;
 	border: 1px solid #262322;
 	border-radius: 2px;
