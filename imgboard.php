@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170204
+# Fikaba 170222
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170204';
+const VERSION = '170222';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -227,11 +227,11 @@ function updatelog($resno=0){
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">";
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle";
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span>";
+				$src = IMG_DIR.$tim.$ext;
 				if ($ext && $ext == ".swf") {
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
 					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span><br />$imgsrc";
 				} else if($ext){
-					$src = IMG_DIR.$tim.$ext;
 					$size = $fsize;//file size displayed in alt text
 					if($w && $h){//when there is size...
 						if(@is_file(THUMB_DIR.$tim.'s.jpg')){
