@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170222
+# Fikaba 170223
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170222';
+const VERSION = '170223';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -72,6 +72,7 @@ if(!table_exist(POSTTABLE)){
 		tim   text,
 		time  int,
 		md5   text,
+		fname text,
 		fsize int,
 		root  timestamp,
 		resto int,
@@ -158,8 +159,9 @@ function updatelog($resno=0){
 		$dat.='<form action="'.PHP_SELF.'" method="post">';
 	
 		for($i = $st; $i < $st+PAGE_DEF; $i++){
-			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=mysql_fetch_row($treeline);
+			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip,$id)=mysql_fetch_row($treeline);
 			if(!$no) break;
+			if(!$fname) $fname = S_ANOFILE;
 	
 			// URL and link
 			if($email) $name = "<a href=\"mailto:$email\">$name</a>";
@@ -174,7 +176,7 @@ function updatelog($resno=0){
 			$imgsrc = "";
 			if ($ext && $ext == ".swf") {
 				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
-				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span><br />$imgsrc";
+				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B, $fname)</span><br />$imgsrc";
 			} else if($ext){
 				$size = $fsize;//file size displayed in alt text
 				if($w && $h){//when there is size...
@@ -186,7 +188,7 @@ function updatelog($resno=0){
 				}else{
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" alt=\"".$size." B\" /></a>";
 				}
-				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span><br />$imgsrc";
+				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B, $fname)</span><br />$imgsrc";
 			}
 			if(DISP_ID){ $userid = "ID:$id"; }
 			else{ $userid = ""; }
@@ -209,8 +211,10 @@ function updatelog($resno=0){
 	
 			while($resrow=mysql_fetch_row($resline)){
 				if($s>0){$s--;continue;}
-				list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$resrow;
+				list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip,$id)=$resrow;
+
 				if(!$no){break;}
+				if(!$fname) $fname = S_ANOFILE;
 	
 				if($sub)
 					$replytitle = "<span class=\"replytitle\">$sub</span>";
@@ -230,7 +234,7 @@ function updatelog($resno=0){
 				$src = IMG_DIR.$tim.$ext;
 				if ($ext && $ext == ".swf") {
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
-					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B)</span><br />$imgsrc";
+					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B, $fname)</span><br />$imgsrc";
 				} else if($ext){
 					$size = $fsize;//file size displayed in alt text
 					if($w && $h){//when there is size...
@@ -243,9 +247,9 @@ function updatelog($resno=0){
 						$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"".$src."\" alt=\"".$size." B\" /></a>;br />";
 					}
 					if(@is_file(THUMB_DIR.$tim.'s.jpg')){
-						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B, $fname)</span> <span class=\"thumbnailmsg\">".S_THUMB."</span><br />$imgsrc";
 					}else{
-						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B)</span><br />$imgsrc";
+						$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B, $fname)</span><br />$imgsrc";
 					}
 				}
 				$dat.="<blockquote>$com</blockquote>";
@@ -737,7 +741,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	}
 	}else{$rootqu="now()";} //now it is root
 
-	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fsize,root,resto,ip,id) values (".
+	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fname,fsize,root,resto,ip,id) values (".
 		"'".$now."',".
 		"'".mysql_escape_string($name)."',".
 		"'".mysql_escape_string($email)."',".
@@ -751,6 +755,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		"'".$tim."',".
 		(int)$time.",".
 		"'".$md5."',".
+		"'".$upfile_name."',".
 		(int)$fsize.",".
 		$rootqu.",".
 		(int)$resto.",
