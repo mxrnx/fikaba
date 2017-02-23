@@ -72,6 +72,7 @@ const S_SAT = 'Sat';											//Defines abbreviation used for "Saturday"
 const S_ANONAME = 'Anonymous';										//Defines what to print if there is no text entered in the name field
 const S_ANOTEXT = 'No text';										//Defines what to print if there is no text entered in the comment field
 const S_ANOTITLE = 'No subject';									//Defines what to print if there is no text entered into subject field
+const S_ANOFILE = 'unknown filename';
 const S_RENZOKU = 'Error: Flood detected, post discarded.';						//Returns error for $sec/post spam filter
 const S_RENZOKU2 = 'Error: Flood detected, file discarded.';						//Returns error for $sec/upload spam filter
 const S_RENZOKU3 = 'Error: Flood detected.';								//Returns error for flood? (don't know the specifics)
