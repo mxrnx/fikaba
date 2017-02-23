@@ -9,6 +9,7 @@ If you're coming from a really old version, your tables might miss some columns.
 use YOURDATABASE;
 alter table YOURPOSTTABLE add ip text;
 alter table YOURPOSTTABLE add id text;
+alter table YOURPOSTTABLE add fname text;
 ```
 
 ## Updating
