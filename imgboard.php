@@ -1090,7 +1090,7 @@ function admindel(){
 		if(!$result=mysql_call("select * from ".POSTTABLE."")){echo S_SQLFAIL;}
 	$find = false;
 	while($row=mysql_fetch_row($result)){
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip)=$row;
 		if($onlyimgdel=='on'){
 			if(array_search($no,$delno)){//only a picture is deleted
 				$delfile = $path.$tim.$ext;	//only a picture is deleted
@@ -1127,7 +1127,7 @@ function admindel(){
 	while($row=mysql_fetch_row($result)){
 		$j++;
 		$img_flag = false;
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip,$id)=$row;
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip,$id)=$row;
 		// Format
 		$now=ereg_replace('.{2}/(.*)$','\1',$now);
 		$now=ereg_replace('\(.*\)',' ',$now);
