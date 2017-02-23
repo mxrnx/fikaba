@@ -1273,7 +1273,7 @@ function catalog(){
 	$i=0;
 	$result = mysql_call("select * from ".POSTTABLE." order by root desc");
 	while($row=mysql_fetch_row($result)){
-		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fsize,$root,$resto,$ip)=$row;
+		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip)=$row;
 		if((int)$resto==0){
 			$dat.="<div class='catthread'>";
 			if($ext && $ext == ".swf"){
