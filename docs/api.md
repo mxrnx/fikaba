@@ -30,6 +30,7 @@ Number should here be replaced by the post no. of the OP.
 | `tim`           | `string`       | Renamed filename               | UNIX timestamp + microseconds              | `1344402680740`             |
 | `time`          | `integer`      | UNIX timestamp                 | UNIX timestamp                             | `1344570123`                |
 | `md5`           | `string`       | File MD5                       | text (24 character, packed base64 MD5 hash)| `NOetrLVnES3jUn1x5ZPVAg==`  |
+| `fname`         | `string`       | Original filename              | text                                       | `lemonparty.png`            |
 | `fsize`         | `integer`      | File size                      | 1-max filesize                             | `2500`                      |
 | `root`          | `integer`      | Time when last modified        | UNIX timestamp                             | `1344571233`                |
 | `resto`         | `integer`      | Reply to                       | 0 (is a thread OP), 1-9999999999999        | `0`                         |
