@@ -219,8 +219,8 @@ function updatelog($resno=0){
 				if(!$no){break;}
 				if(!$fname) $fname = S_ANOFILE;
 	
-				if($sub)
-					$replytitle = "<span class=\"replytitle\">$sub</span>";
+				if($sub) $replytitle = "<span class=\"replytitle\">$sub</span>";
+				else $replytitle = "";
 	
 				// URL and e-mail
 				if($email) $name = "<a href=\"mailto:$email\">$name</a>";
@@ -382,7 +382,6 @@ function form(&$dat,$resno,$admin="",$manapost=false){
 	$dat.=$msg.'<div class="centered"><div class="postarea">
 		<form id="postform" action="'.PHP_SELF.'" method="post" enctype="multipart/form-data" style="display: inline-block;">
 		<input type="hidden" name="mode" value="regist" />
-		'.$hidden.'
 		<input type="hidden" name="MAX_FILE_SIZE" value="'.$maxbyte.'" />';
 	if($no){$dat.='<input type="hidden" name="resto" value="'.$no.'" />';}
 	$dat.='<table>';
@@ -1160,7 +1159,7 @@ function admindel(){
 	}
 	mysql_free_result($result);
 
-	echo "</table><input type=submit value=\"".S_ITDELETES."$msg\">";
+	echo "</table><input type=submit value=\"".S_ITDELETES."\">";
 	echo "<input type=reset value=\"".S_RESET."\"></form>";
 
 	$all = (int)($all / 1024);
@@ -1305,11 +1304,13 @@ function catalog(){
 
 /*-----------Main-------------*/
 $ip = $_SERVER['REMOTE_ADDR'];
+if (!isset($mode)) $mode = '';
 switch($mode){
 case 'regist':
 	regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,'',$pwd,$upfile,$upfile_name,$resto);
 	break;
 case 'admin':
+	if (!isset($pass)) $pass = '';
 	valid($pass);
 	if(!isset($admin)) $admin='del';
 	adminhead();
