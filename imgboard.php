@@ -17,7 +17,6 @@ include "config.php";
 include "strings/".LANGUAGE.".php";		//String resource file
 
 if(LOCKDOWN){
-	session_start();
 
 	// if not trying to do something other than managing, die
 	if(!isset($_SESSION['capcode']) && !($_GET['mode'] == 'admin' || $_POST['mode'] == 'admin')){
@@ -32,6 +31,8 @@ if (isset($_FILES["upfile"])) {
 	$upfile_name=$_FILES["upfile"]["name"];
 	$upfile=$_FILES["upfile"]["tmp_name"];
 }
+
+session_start();
 
 $path = realpath("./").'/'.IMG_DIR;
 ignore_user_abort(true);
@@ -373,7 +374,6 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 }
 /* Contribution form */
 function form(&$dat,$resno,$admin="",$manapost=false){
-	session_start();
 	$maxbyte = MAX_KB * 1024;
 	$no=$resno;
 	if($admin) $msg = "<em>".S_NOTAGS."</em>";
@@ -674,7 +674,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		$name.=TRIPKEY.substr(crypt($cap,$salt),-10)."";
 	}
 
-	session_start();
 	if(!$name||(FORCED_ANON&&!$_SESSION['name'])) $name=S_ANONAME; // manas can post with name when forced anon is on
 	// TODO: add a setting for this
 	//if(!$com) $com=S_ANOTEXT;
@@ -684,7 +683,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 
 	// Add capcode
 	if($capcode){
-		session_start();
 		if(isset($_SESSION['capcode'])){
 			if($_SESSION['cancap'])
 				$name.=' '.$_SESSION['capcode'];
@@ -895,7 +893,6 @@ function md5_of_file($inFile) {
 
 /* text plastic surgery */
 function CleanStr($str){
-	session_start();
 	$str = trim($str);//blankspace removal
 	if(get_magic_quotes_gpc()) {//magic quotes is deleted (?)
 		$str = stripslashes($str);
@@ -971,7 +968,6 @@ function adminhead(){
 
 /*password validation */
 function valid($pass){
-	session_start();
 	if(isset($_SESSION['capcode'])) return;
 	head($dat);
 	echo $dat;
@@ -1010,7 +1006,6 @@ function valid($pass){
 }
 
 function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$accacc){
-	session_start();
 	if(!$_SESSION['canacc']) die(S_NOPERMISSION);
 	if(!$accname){
 		echo('<div class="centered">');
@@ -1051,7 +1046,6 @@ function adminacc($accname,$accpassword,$acccapcode,$accdel,$accban,$acccap,$acc
 
 function adminban(){
 	global $banip,$banexp,$banpubmsg,$banprivmsg,$rmp,$rmallp,$unban;
-	session_start();
 	if(!$_SESSION['canban']) die(S_NOPERMISSION);
 	if($banip!=''){
 		if($banexp=='') error(S_BANEXPERROR);
@@ -1085,7 +1079,6 @@ function adminban(){
 /* Admin deletion */
 function admindel(){
 	global $path,$onlyimgdel;
-	session_start();
 	if(!$_SESSION['candel']) die(S_NOPERMISSION);
 	$delno = array();
 	$delflag = false;
@@ -1318,7 +1311,6 @@ case 'regist':
 	break;
 case 'admin':
 	valid($pass);
-	session_start();
 	if(!isset($admin)) $admin='del';
 	adminhead();
 	if($admin=="del") admindel();
