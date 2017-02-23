@@ -28,8 +28,10 @@ if(LOCKDOWN){
 extract($_POST, EXTR_SKIP);
 extract($_GET, EXTR_SKIP);
 extract($_COOKIE, EXTR_SKIP);
-$upfile_name=$_FILES["upfile"]["name"];
-$upfile=$_FILES["upfile"]["tmp_name"];
+if (isset($_FILES["upfile"])) {
+	$upfile_name=$_FILES["upfile"]["name"];
+	$upfile=$_FILES["upfile"]["tmp_name"];
+}
 
 $path = realpath("./").'/'.IMG_DIR;
 ignore_user_abort(true);
