@@ -433,7 +433,7 @@ function error($mes,$dest=''){ /* Basically a fancy die() */
 	head($dat);
 	echo $dat;
 	echo "<br /><br /><hr size=1><br /><br />
-		<p id='errormsg'>$mes<br /><br /><a href=".PHP_SELF2.">".S_RELOAD."</a></b></p>
+		<p id='errormsg'>$mes<br /><br /><a href=".PHP_SELF2.">".S_RETURN."</a></b></p>
 		<br /><br /><hr size=1>";
 	die("</body></html>\n");
 }
