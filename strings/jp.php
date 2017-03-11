@@ -28,11 +28,8 @@ const S_DELPICONLY = '画像だけ消す';
 const S_DELKEY = '削除キー';
 const S_DELETE = '削除';
 const S_PREV = '前のページ';
-const S_FIRSTPG = '最初のページ';
 const S_NEXT = '次のページ';
-const S_LASTPG = '最後のページ';
 const S_FOOT = '- <a href="http://php.s3.to" target="_blank">GazouBBS</a> + <a href="http://www.2chan.net/" target="_blank">futaba</a> + <a href="http://www.1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="https://github.com/knarka/fikaba" target="_blank">fikaba</a> -'; //Prints footer (leave these credits)
-const S_RELOAD = 'リロード';
 const S_UPFAIL = 'アップロードに失敗しました<br />サーバがサポートしていない可能性があります';
 const S_NOREC = 'アップロードに失敗しました<br />画像ファイル以外は受け付けません';
 const S_SAMEPIC = 'アップロードに失敗しました<br />同じ画像がありました';
@@ -82,10 +79,6 @@ const S_MDTABLE1 = '<th>削除</th><th>記事No</th><th>投稿日</th><th>題名
 const S_MDTABLE2 = '<th>投稿者</th><th>コメント</th><th>ホスト名</th><th>添付<br />(Bytes)</th><th>md5</th>';
 const S_RESET = 'リセット';
 const S_IMGSPACEUSAGE = '【 画像データ合計 : <b>$all</b> KB 】';
-const S_CANNOTWRITE = 'カレントディレクトリに書けません<br />';
-const S_NOTWRITE = 'を書けません<br />';
-const S_NOTREAD = 'を読めません<br />';
-const S_NOTDIR = 'がありません<br />';
 /* begin MySQL specific section */
 const S_SQLCONF = '接続失敗';		//MySQL connection failure
 const S_SQLDBSF = 'mysql_select_db失敗<br />';	//database select failure
