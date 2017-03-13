@@ -370,7 +370,7 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	[<a href="'.PHP_SELF.'?mode=catalog" target="_top">'.S_CATALOGBUTTON.'</a>]
 	[<a href="'.PHP_SELF.'?mode=admin">'.S_ADMIN.'</a>]
 	</div>
-	<div class="logo">'.$titlepart.'</div><hr /><br /><br />';
+	<div class="logo">'.$titlepart.'</div><hr class="logohr" /><br /><br />';
 }
 /* Contribution form */
 function form(&$dat,$resno,$admin="",$manapost=false){
