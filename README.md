@@ -16,7 +16,7 @@ Below are some examples of sites running Fikaba. If you are using fikaba and wan
 * Highly configurable
 * Post references
 * Oekaki
-* [...and more](https://github.com/knarka/fikaba/blob/master/docs/features.md)
+[Full list](https://github.com/knarka/fikaba/blob/master/docs/features.md)
 
 ## Installation
 This guide assumes you have a webserver with PHP (5.6 at least) already installed. Fikaba has only been tested on Apache, but should work on any server.
