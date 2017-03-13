@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170223
+# Fikaba 170313
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170223';
+const VERSION = '170313';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -196,7 +196,7 @@ function updatelog($resno=0){
 			if(DISP_ID){ $userid = "ID:$id"; }
 			else{ $userid = ""; }
 			//  Main creation
-			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span> ";
+			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /> <span class=\"filetitle\">$sub</span> ";
 			$dat.="<span class=\"postername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;";
 			if(!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
 			$dat.="<blockquote>$com</blockquote>";
@@ -232,7 +232,7 @@ function updatelog($resno=0){
 				else{ $userid = ""; }
 				// Main creation
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">";
-				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle";
+				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" /> $replytitle";
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span>";
 				$src = IMG_DIR.$tim.$ext;
 				if ($ext && $ext == ".swf") {
