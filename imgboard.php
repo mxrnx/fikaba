@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170313
+# Fikaba 170326
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170313';
+const VERSION = '170326';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -685,8 +685,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		if(isset($_SESSION['capcode'])){
 			if($_SESSION['cancap'])
 				$name.=' '.$_SESSION['capcode'];
-		}else{
-			stopsession();
 		}
 	}
 
@@ -733,11 +731,11 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		$rootqu="0";
 		if(!$resline=mysql_call("select * from ".POSTTABLE." where resto=".$resto)){echo S_SQLFAIL;}
 		$countres=mysql_num_rows($resline);
-	mysql_free_result($resline);
-	if(!stristr($email,'sage') && $countres < BUMPLIMIT){
-		$query="update ".POSTTABLE." set root=now() where no=$resto"; //age
-		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
-	}
+		mysql_free_result($resline);
+		if(!stristr($email,'sage') && $countres < BUMPLIMIT){
+			$query="update ".POSTTABLE." set root=now() where no=$resto"; //age
+			if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+		}
 	}else{$rootqu="now()";} //now it is root
 
 	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fname,fsize,root,resto,ip,id) values (".
@@ -990,9 +988,6 @@ function valid($pass){
 		die(S_WRONGPASS);
 		mysql_free_result($result);
 	}
-
-	// Get rid of unnecessary session
-	stopsession();
 
 	// Mana login form
 	if(!$pass){
