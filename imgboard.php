@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170223
+# Fikaba 170326
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170223';
+const VERSION = '170326';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -196,7 +196,7 @@ function updatelog($resno=0){
 			if(DISP_ID){ $userid = "ID:$id"; }
 			else{ $userid = ""; }
 			//  Main creation
-			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /><span class=\"filetitle\">$sub</span> ";
+			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /> <span class=\"filetitle\">$sub</span> ";
 			$dat.="<span class=\"postername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;";
 			if(!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
 			$dat.="<blockquote>$com</blockquote>";
@@ -232,7 +232,7 @@ function updatelog($resno=0){
 				else{ $userid = ""; }
 				// Main creation
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">";
-				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" />$replytitle";
+				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" /> $replytitle";
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span>";
 				$src = IMG_DIR.$tim.$ext;
 				if ($ext && $ext == ".swf") {
@@ -370,7 +370,7 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	[<a href="'.PHP_SELF.'?mode=catalog" target="_top">'.S_CATALOGBUTTON.'</a>]
 	[<a href="'.PHP_SELF.'?mode=admin">'.S_ADMIN.'</a>]
 	</div>
-	<div class="logo">'.$titlepart.'</div><hr /><br /><br />';
+	<div class="logo">'.$titlepart.'</div><hr class="logohr" /><br /><br />';
 }
 /* Contribution form */
 function form(&$dat,$resno,$admin="",$manapost=false){
@@ -685,8 +685,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		if(isset($_SESSION['capcode'])){
 			if($_SESSION['cancap'])
 				$name.=' '.$_SESSION['capcode'];
-		}else{
-			stopsession();
 		}
 	}
 
@@ -733,11 +731,11 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		$rootqu="0";
 		if(!$resline=mysql_call("select * from ".POSTTABLE." where resto=".$resto)){echo S_SQLFAIL;}
 		$countres=mysql_num_rows($resline);
-	mysql_free_result($resline);
-	if(!stristr($email,'sage') && $countres < BUMPLIMIT){
-		$query="update ".POSTTABLE." set root=now() where no=$resto"; //age
-		if(!$result=mysql_call($query)){echo S_SQLFAIL;}
-	}
+		mysql_free_result($resline);
+		if(!stristr($email,'sage') && $countres < BUMPLIMIT){
+			$query="update ".POSTTABLE." set root=now() where no=$resto"; //age
+			if(!$result=mysql_call($query)){echo S_SQLFAIL;}
+		}
 	}else{$rootqu="now()";} //now it is root
 
 	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fname,fsize,root,resto,ip,id) values (".
@@ -990,9 +988,6 @@ function valid($pass){
 		die(S_WRONGPASS);
 		mysql_free_result($result);
 	}
-
-	// Get rid of unnecessary session
-	stopsession();
 
 	// Mana login form
 	if(!$pass){

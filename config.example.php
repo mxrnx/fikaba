@@ -37,7 +37,7 @@ const PHP_EXT = '.html';			//Extension used for board pages after first
 const THUMBBACK = array(255,255,238);		//Thumbnail background for transp. images. Usually the background of your body element.
 
 // Look and behavior
-const ECHOALL = false;				//Do not write index to file, but echo directly (4chan-style)
+const ECHOALL = false;				//Do not write index to file, but echo directly (not very stable, not recommended)
 const PAGE_DEF = 5;				//Threads per page
 const THREADLIMIT =  40;			//Maxium number of entries
 const BUMPLIMIT = 50;				//Maximum topic bumps
@@ -55,9 +55,10 @@ const FORCED_ANON = false;			//Force anonymous posting (except for managers)
 // CSS
 const CSSDEFAULT = 'Futaba';			// The name of the stylesheet to be used by default
 const STYLES = array(				// Array containing NAME => FILE of stylesheets
-	"Fikaba"	=>	'css/fikaba.css',
 	"Futaba"	=>	'css/futaba.css',
 	"Burichan"	=>	'css/burichan.css',
+	"Yotsuba"	=>	'css/yotsuba.css',
+	"Fikaba"	=>	'css/fikaba.css',
 	"heavy_ice"	=>	'css/heavy_ice.css'
 );
 
