@@ -610,7 +610,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	){$pxck = false;}
 	else{$pxck = true;}
 
-	if($pxck && PROXY_CHECK){
+	if($pxck && PROXY_CHECK && !isset($_SESSION['name'])){
 		if(proxy_connect('80') == true){
 			error(S_PROXY80,$dest);
 		} elseif(proxy_connect('8080') == true){
@@ -681,12 +681,8 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	if(!$sub) $sub='';
 
 	// Add capcode
-	if($capcode){
-		if(isset($_SESSION['capcode'])){
-			if($_SESSION['cancap'])
+	if($capcode && isset($_SESSION['capcode']) && $_SESSION['cancap'])
 				$name.=' '.$_SESSION['capcode'];
-		}
-	}
 
 	// Read the log
 	$query="select time from ".POSTTABLE." where com='".mysql_escape_string($com)."' ".
