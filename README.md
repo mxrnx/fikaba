@@ -24,14 +24,11 @@ This guide assumes you have a webserver with PHP (5.6 at least) already installe
 1. Place the files from this repository in a folder on your webserver and set the permissions of that folder to 777
 2. Edit/move config.example.php to config.php and edit it
 3. Navigate to imgboard.php in your browser
-4. Log in to the default admin account (password REPLACEME) and create a new account
+4. Log in to the default admin account (password REPLACEME) and create a new account. The default one will be automatically removed
 5. Pour yourself some puerh and admire your professional adminship
 
 ## Updating
 [See here](https://github.com/knarka/fikaba/blob/master/docs/update.md)
-
-## Contributing
-I'll accept useful shit, I guess. The only thing I'm really looking for is someone that understands moonspeak, to keep jp.php updated as more strings get added.
 
 ## License
 See the file LICENSE.
