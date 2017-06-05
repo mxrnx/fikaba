@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170326
+# Fikaba 170605
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170326';
+const VERSION = '170605';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -367,7 +367,7 @@ function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(
 	$dat.='</select></div>
 	<div class="adminbar">
 	[<a href="'.HOME.'" target="_top">'.S_HOME.'</a>]
-	[<a href="'.PHP_SELF.'?mode=catalog" target="_top">'.S_CATALOGBUTTON.'</a>]
+	[<a href="'.PHP_SELF.'?mode=catalog">'.S_CATALOGBUTTON.'</a>]
 	[<a href="'.PHP_SELF.'?mode=admin">'.S_ADMIN.'</a>]
 	</div>
 	<div class="logo">'.$titlepart.'</div><hr class="logohr" /><br /><br />';
