@@ -28,7 +28,14 @@ const S_RULES = '<ul><li>Supported file types are: GIF, JPG, PNG</li>
 const S_RULES_SWF = '<ul><li>Supported file types are: GIF, JPG, PNG, SWF</li>
 <li>Maximum file size allowed is '.MAX_KB.' KB.</li>
 <li>Images greater than '.MAX_W.'x'.MAX_H.' pixels will be thumbnailed.</li></ul>';				//Prints rules under posting section
+const S_RULES_WEBM = '<ul><li>Supported file types are: GIF, JPG, PNG, WEBM</li>
+<li>Maximum file size allowed is '.MAX_KB.' KB.</li>
+<li>Images greater than '.MAX_W.'x'.MAX_H.' pixels will be thumbnailed.</li></ul>';				//Prints rules under posting section
+const S_RULES_BOTH = '<ul><li>Supported file types are: GIF, JPG, PNG, SWF, WEBM</li>
+<li>Maximum file size allowed is '.MAX_KB.' KB.</li>
+<li>Images greater than '.MAX_W.'x'.MAX_H.' pixels will be thumbnailed.</li></ul>';				//Prints rules under posting section
 const S_SWF_DISABLED = "Error: The upload of SWF files is currently disabled.";
+const S_WEBM_DISABLED = "Error: The upload of WebM files is currently disabled.";
 const S_REPORTERR = 'Error: Cannot find reply.';							//Returns error when a reply (res) cannot be found
 const S_THUMB = 'Thumbnail displayed, click image for full size.';					//Prints instructions for viewing real source
 const S_PICNAME = 'File: ';										//Prints text before upload name/link

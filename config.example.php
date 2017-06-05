@@ -28,6 +28,7 @@ const MAX_KB = 2000;				//Maximum upload size in KB
 const MAX_W =  250;				//Images exceeding this width will be thumbnailed
 const MAX_H =  250;				//Images exceeding this height will be thumbnailed
 const SWF_ENABLED = false;			//Whether or not upload of Flash files is allowed
+const WEBM_ENABLED = true;			//Whether or not upload of WebM files is allowed
 const OEKAKI_ENABLED = false;			//Whether or not oekaki is enabled, duh
 const FORCEIMAGE = false;			//Whether or not threads must start with an image
 const USE_THUMB = true;				//Use thumbnails

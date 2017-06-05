@@ -3,6 +3,7 @@
 * Configurable
 * Image posting (including replying), automatic thumbnailing (GIF, JPG, PNG)
 * Flash support
+* WebM support
 * Fairly advanced manager panel
 * Raw HTML posting for managers
 * Quoting
@@ -32,4 +33,4 @@ Roughly in order of importance:
 2. CAPTCHA
 3. Sticky threads
 4. Locked threads
-5. WebM support
+5. WebM thumbnails

@@ -235,7 +235,7 @@ function updatelog($resno=0){
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" /> $replytitle";
 				$dat.="<span class=\"commentpostername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a><a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;<br /></span>";
 				$src = IMG_DIR.$tim.$ext;
-				if ($ext && $ext == ".swf") {
+				if ($ext && ($ext == ".swf" || $ext == ".webm")) {
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
 					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B, $fname)</span><br />$imgsrc";
 				} else if($ext){
@@ -408,8 +408,11 @@ function form(&$dat,$resno,$admin="",$manapost=false){
 	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="18" maxlength="8" value="" /> '.S_DELEXPL.'</td></tr>
 <tr><td colspan="2">
 <div class="rules lefted">';
-	if (SWF_ENABLED) $dat .= S_RULES_SWF.'</div></td></tr></table></form></div></div><hr />';
-	else $dat .= S_RULES.'</div></td></tr></table></form></div></div><hr />';
+	if (SWF_ENABLED && WEBM_ENABLED) $dat .= S_RULES_BOTH;
+	elseif (SWF_ENABLED) $dat .= S_RULES_SWF;
+	elseif (WEBM_ENABLED) $dat .= S_RULES_WEBM;
+	else $dat .= S_RULES;
+	$dat.='</div></td></tr></table></form></div></div><hr />';
 }
 
 function fakefoot(){
@@ -475,8 +478,25 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		//copy($upfile, $dest);
 		$upfile_name = CleanStr($upfile_name);
 		if(!is_file($dest)) error(S_UPFAIL,$dest);
-		$size = getimagesize($dest);
-		if(!is_array($size)) error(S_NOREC,$dest);
+		if(exec("file -b " . escapeshellarg($dest)) == "WebM") {
+			$ext = ".webm";
+			//pass
+		} else {
+			$size = getimagesize($dest);
+			if(!is_array($size)) error(S_NOREC,$dest);
+			$W = $size[0];
+			$H = $size[1];
+			switch ($size[2]) {
+				case 1 : $ext=".gif";break;
+				case 2 : $ext=".jpg";break;
+				case 3 : $ext=".png";break;
+				case 4 : $ext=".swf";break; // flash files are definitely images, thanks php
+				case 13 : $ext=".swf";break;
+				//case 5 : $ext=".psd";break;
+				//case 6 : $ext=".bmp";break;
+				default : error(S_NODETECT);break;
+			}
+		}
 		$md5 = md5_of_file($dest);
 		foreach($badfile as $value){
 			if(ereg("^$value",$md5)){
@@ -484,24 +504,13 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 			}
 		}
 		chmod($dest,0666);
-		$W = $size[0];
-		$H = $size[1];
 		$fsize = filesize($dest);
 		if($fsize>MAX_KB * 1024) error(S_TOOBIG,$dest);
-		switch ($size[2]) {
-			case 1 : $ext=".gif";break;
-			case 2 : $ext=".jpg";break;
-			case 3 : $ext=".png";break;
-			case 4 : $ext=".swf";break; // flash files are defintely images, thanks php
-			case 13 : $ext=".swf";break;
-			//case 5 : $ext=".psd";break;
-			//case 6 : $ext=".bmp";break;
-			default : error(S_NODETECT);break;
-		}
 		if ($ext==".swf" && !SWF_ENABLED) error(S_SWF_DISABLED);
+		if ($ext==".webm" && !WEBM_ENABLED) error(S_WEBM_DISABLED);
 
 		// Picture reduction
-		if($W > MAX_W || $H > MAX_H){
+		if($ext != ".webm" && ($W > MAX_W || $H > MAX_H)){
 			$W2 = MAX_W / $W;
 			$H2 = MAX_H / $H;
 			($W2 < $H2) ? $key = $W2 : $key = $H2;
@@ -514,7 +523,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	if($_FILES["upfile"]["error"]==2){
 		error(S_TOOBIG,$dest);
 	}
-	if(!isset($oekaki)&&$upfile_name&&$_FILES["upfile"]["size"]==0){
+	if($ext != ".webm" && !isset($oekaki)&&$upfile_name&&$_FILES["upfile"]["size"]==0){
 		if ($_FILES["upfile"]["error"] == 1) {
 			error(S_TOOBIG."<br />$upfile_name",$dest);
 		}
