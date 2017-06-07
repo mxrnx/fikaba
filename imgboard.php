@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170605
+# Fikaba 170607
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170605';
+const VERSION = '170607';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -425,7 +425,7 @@ function fakefoot(){
 function foot(&$dat){
 	$dat.="
 <div class=\"footer\">".S_FOOT."<br />
-Fikaba ".S_VERSION." ".VERSION."<br />
+Fikaba".S_VERSION." ".VERSION."<br />
 ".FOOTTEXT."
 </div>
 </body></html>\n";
