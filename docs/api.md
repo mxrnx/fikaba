@@ -33,5 +33,5 @@ Number should here be replaced by the post no. of the OP.
 | `fname`         | `string`       | Original filename              | text                                       | `lemonparty.png`            |
 | `fsize`         | `integer`      | File size                      | 1-max filesize                             | `2500`                      |
 | `root`          | `integer`      | Time when last modified        | UNIX timestamp                             | `1344571233`                |
-| `resto`         | `integer`      | Reply to                       | 0 (is a thread OP), 1-9999999999999        | `0`                         |
+| `resto`         | `integer`      | Response to                    | 0 (is a thread OP), 1-9999999999999        | `0`                         |
 | `id`            | `text`         | User ID (empty if not enabled) | text                                       | `ng6ncCd.`
