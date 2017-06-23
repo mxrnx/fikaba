@@ -9,4 +9,6 @@ alter table YOURPOSTTABLE add id text;
 alter table YOURPOSTTABLE add fname text;
 ```
 
-Please note that posts made prior to the migration will not have an IP attached to them, which will result in errors when you try to ban by those post numbers.
+Note that posts made prior to the migration will not have an IP attached to them, which will result in errors when you try to ban by those post numbers.
+
+Also, don't forget to log in with the default manager account and create a new account.
