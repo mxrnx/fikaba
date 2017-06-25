@@ -20,11 +20,11 @@ Number should here be replaced by the post no. of the OP.
 |:----------------|:---------------|:-------------------------------|:-------------------------------------------|:----------------------------|
 | `no`            | `integer`      | Post number                    | 1-9999999999999                            | `9001`                      |
 | `now`           | `text`         | Human-readable time            | text                                       | `16/10/24(Mon)00:04`        | 
-| `name`          | `string`       | Name + trip/capcode            | text                                       | `moot`                      |
+| `name`          | `string`       | Name + trip/capcode            | text (may include html)                    | `someguy ## Admin`          |
 | `email`         | `string`       | Email (or `sage`, `nonoko`)    | text                                       | `anon@example.com`, `nonoko`|
 | `sub`           | `string`       | Subject                        | text                                       | `This is a subject`         |
 | `com`           | `string`       | Comment                        | text (includes escaped HTML)               | `This is a comment`         |
-| `ext`           | `string`       | File extension                 | .jpg, .png, .gif                           | `.jpg`                      |
+| `ext`           | `string`       | File extension                 | .jpg, .png, .gif, .swf, .webm              | `.jpg`                      |
 | `w`             | `integer`      | Image width                    | 0-10000                                    | `500`                       |
 | `h`             | `integer`      | Image height                   | 0-10000                                    | `500`                       |
 | `tim`           | `string`       | Renamed filename               | UNIX timestamp + microseconds              | `1344402680740`             |
