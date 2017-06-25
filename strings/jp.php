@@ -9,6 +9,7 @@ const S_EMAIL = 'E-mail';
 const S_SUBJECT = '題　　名';
 const S_SUBMIT = '送信する';
 const S_COMMENT = 'コメント';
+const S_OEKAKI = 'お絵描き';
 const S_UPLOADFILE = '添付File';
 const S_NOFILE = '画像なし';
 const S_DELPASS = '削除キー';
