@@ -133,4 +133,4 @@ const S_ACCDEL = 'Can delete posts? ';
 const S_ACCBAN = 'Can ban users? ';
 const S_ACCCAP = 'Can post with capcode? ';
 const S_ACCACC = 'Can create new accounts? ';
-const S_VERSION = ' version';
+const S_VERSION = ' version ';

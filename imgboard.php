@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170625
+# Fikaba 170626
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170625';
+const VERSION = '170626';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -343,7 +343,7 @@ function head(&$dat){
 		$titlepart.= TITLE;
 	}
 	$dat.='<!doctype html>
-<html><head>
+<html lang="'.LANGUAGE.'"><head>
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
 <script type="text/javascript" src="js/style.js"></script>';
@@ -424,7 +424,7 @@ function fakefoot(){
 function foot(&$dat){
 	$dat.="
 <div class=\"footer\">".S_FOOT."<br />
-Fikaba".S_VERSION." ".VERSION."<br />
+Fikaba".S_VERSION.VERSION."<br />
 ".FOOTTEXT."
 </div>
 </body></html>\n";
@@ -442,7 +442,7 @@ function error($mes,$dest=''){ /* Basically a fancy die() */
 }
 
 function auto_link($proto){
-	$proto = ereg_replace("(https?|ftp|news|irc|gopher)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)","<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",$proto);
+	$proto = ereg_replace("(https?|ftp|news|irc|gopher|telnet|ssh)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)","<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",$proto);
 	return $proto;
 }
 
