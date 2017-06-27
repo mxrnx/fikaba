@@ -21,9 +21,9 @@ Below are some examples of sites running Fikaba. If you are using fikaba and wan
 ## Installation
 This guide assumes you have a webserver with PHP (5.6 at least) already installed. Fikaba has only been tested on Apache, but should work on any server.
 
-1. Place the files from this repository in a folder on your webserver and set the permissions of that folder to 777
+1. Clone the files from this repository into a folder on your webserver and set the permissions of that folder to 777
 2. Edit/move config.example.php to config.php and edit it
-3. If you want to use oekaki, execute `git submodule init; git submodule update`, first in the root folder, and then in js/ritare. This will pull in the oekaki applet and its dependencies, respectively.
+3. If you want to use oekaki, execute `git submodule update --init --recursive`.
 4. Navigate to imgboard.php in your browser
 5. Log in to the default admin account (password REPLACEME) and create a new account. The default one will be automatically removed
 6. Pour yourself some puerh and admire your professional adminship
