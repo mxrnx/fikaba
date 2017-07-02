@@ -1,36 +1,36 @@
 body {
-         font-size:12pt;
-         background:#FFFFEE;
-         color:#800000;
+	font-size:12pt;
+	background:#FFFFEE;
+	color:#800000;
 }
 a       {
-        background:inherit;
-        color:#0000EE;
-        text-decoration:underline;
-        font-family:serif;
+	background:inherit;
+	color:#0000EE;
+	text-decoration:underline;
+	font-family:serif;
 }
 a:visited {
-        background:inherit;
-        color:#0000EE;
-        text-decoration:underline;
-        font-family:serif;
+	background:inherit;
+	color:#0000EE;
+	text-decoration:underline;
+	font-family:serif;
 }
 a:hover,.admddel,.admbban,.admppost,.admaacc {
-        color:#DD0000!important;
-        background:inherit;
-        text-decoration:underline;
-        font-family:serif;
+	color:#DD0000!important;
+	background:inherit;
+	text-decoration:underline;
+	font-family:serif;
 }
 .reflink, .reflink:visited {
 	color:#800000;
 	text-decoration:none;
 }
 .reflink:hover {
-        color:#CC1105;
+	color:#CC1105;
 	text-decoration:none;
 }
 img {
-        margin: 4px 10px 10px 10px;
+	margin: 4px 10px 10px 10px;
 	border: 0;
 	float: left;
 	clear: none;
@@ -39,21 +39,21 @@ td {
 	text-align: left;
 }
 .adminbar {
-        text-align:right;
-        background:inherit;
-        /*clear:both;*/
-        float:right;
+	text-align:right;
+	background:inherit;
+	/*clear:both;*/
+	float:right;
 }
 .styles {
 	float: left;
 }
 .logo {
-        clear:both;
-        text-align:center;
-        background:inherit;
-        font-size:24pt;
-        color:#800000;
-        width:100%;
+	clear:both;
+	text-align:center;
+	background:inherit;
+	font-size:24pt;
+	color:#800000;
+	width:100%;
 }
 .logo img {
 	margin: 0 auto;
@@ -61,32 +61,32 @@ td {
 	float:none;
 }
 .theader {
-        background:#0010E0;
-        color:#FFFFFF;
-        width:100%;
+	background:#0010E0;
+	color:#FFFFFF;
+	width:100%;
 }
 .postarea {
-        background:inherit;
+	background:inherit;
 }
 .rules {
-        font-size:10px;
-        font-family:sans-serif;
+	font-size:10px;
+	font-family:sans-serif;
 }
 .postblocktitle {
-        background:#EEAA88;
+	background:#EEAA88;
 	text-align: center;
-        color:#800000;
-        font-weight:800;
+	color:#800000;
+	font-weight:800;
 }
 .postblock {
-        background:#EEAA88;
-        color:#800000;
-        font-weight:800;
+	background:#EEAA88;
+	color:#800000;
+	font-weight:800;
 }
 .footer {
-        text-align:center;
-        font-size:12px;
-        font-family:serif;
+	text-align:center;
+	font-size:12px;
+	font-family:serif;
 	margin-top: 45px;
 }
 .passvalid {
@@ -125,10 +125,10 @@ td {
 	color:#800000;
 }
 .row2 {
-        background:#FFFFFF;
-        font-family:sans-serif;
-        font-size:12px;
-        color:#800000;
+	background:#FFFFFF;
+	font-family:sans-serif;
+	font-size:12px;
+	color:#800000;
 }
 .unkfunc {
 	background:inert;
@@ -153,20 +153,20 @@ td {
 	font-size:16px;
 	font-family:serif;
 	color:#117743;
-	font-weight:800;}
+font-weight:800;}
 .oldpost {
-        background:inherit;
-        font-size:18px;
-        font-family:serif;
-        color:#CC1105;
-        font-weight:800;
+	background:inherit;
+	font-size:18px;
+	font-family:serif;
+	color:#CC1105;
+	font-weight:800;
 }
 .omittedposts {
-        background:inherit;
-        font-size:18px;
-        font-family:serif;
-        color:#070707;
-        font-weight:800;
+	background:inherit;
+	font-size:18px;
+	font-family:serif;
+	color:#070707;
+	font-weight:800;
 	margin-left:30px;
 }
 .reply {
@@ -176,24 +176,24 @@ td {
 	min-width: 500px;
 }
 .doubledash {
- 	vertical-align:top;
+	vertical-align:top;
 	clear:both;
 	float:left;
 }
 .replytitle {
-        background:inherit;
-        font-size:18px;
-        font-family:serif;
-        color:#CC1105;
-        font-weight:800;
+	background:inherit;
+	font-size:18px;
+	font-family:serif;
+	color:#CC1105;
+	font-weight:800;
 }
 .commentfile {
 }
 .commentpostername {
-        background:inherit;
-        font-size:16px;
-        font-family:serif;
-        color:#117743;
+	background:inherit;
+	font-size:16px;
+	font-family:serif;
+	color:#117743;
 	font-weight:800;
 }
 .thumbnailmsg {

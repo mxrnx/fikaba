@@ -51,7 +51,7 @@ a:hover,.admddel,.admbban,.admppost,.admaacc {
 	font-size: 10px;
 }
 img {
-        margin: 4px 10px 10px 10px;
+	margin: 4px 10px 10px 10px;
 	border: 0;
 	float: left;
 	clear: none;
@@ -68,32 +68,32 @@ table {
 	margin-left: 1.8em;
 }
 input[type="text"]:focus, input[type="password"]:focus, input[type="number"], textarea:focus {
-    border: 1px solid #888 !important;
+	border: 1px solid #888 !important;
 }
 select, input[type="file"], input[type="submit"], input[type="reset"] {
-    background: #333 none repeat scroll 0% 0%;
-    border: 1px solid #666;
-    color: #CCC;
+	background: #333 none repeat scroll 0% 0%;
+	border: 1px solid #666;
+	color: #CCC;
 }
 input[type="text"], input[type="password"], input[type="number"], textarea {
-    background: #0D1010 none repeat scroll 0% 0%;
-    border: 1px solid #D2E7E8;
-    color: #CCC;
+	background: #0D1010 none repeat scroll 0% 0%;
+	border: 1px solid #D2E7E8;
+	color: #CCC;
 }
 .adminbar {
-        text-align:right;
-        background:inherit;
-        float:right;
+	text-align:right;
+	background:inherit;
+	float:right;
 }
 .styles {
 	float: left;
 }
 .logo {
-        clear:both;
-        text-align:center;
-        background:inherit;
-        font-size:24pt;
-        width:100%;
+	clear:both;
+	text-align:center;
+	background:inherit;
+	font-size:24pt;
+	width:100%;
 	text-transform: uppercase;
 }
 .logo img {
@@ -155,8 +155,8 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	float:right;
 }
 .footer {
-        text-align:center;
-        font-size:12px;
+	text-align:center;
+	font-size:12px;
 	margin-top: 45px;
 }
 .delbuttons {
@@ -175,9 +175,9 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	color:#EEE;
 }
 .row2 {
-        background:#0D1010;
-        font-family:sans-serif;
-        font-size:12px;
+	background:#0D1010;
+	font-family:sans-serif;
+	font-size:12px;
 	color:#EEE;
 }
 .postlists {

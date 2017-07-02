@@ -8,7 +8,7 @@ body {
 }
 
 img {
-        margin: 4px 10px 10px 10px;
+	margin: 4px 10px 10px 10px;
 	border: 0;
 	float: left;
 	clear: none;
@@ -17,7 +17,7 @@ img {
 }
 
 .doubledash {
- 	vertical-align:top;
+	vertical-align:top;
 	clear:both;
 	float:left;
 	color:#000080;
@@ -47,9 +47,9 @@ a:hover, a:visited:hover {
 }
 
 .adminbar {
-        text-align:right;
-        background:inherit;
-        float:right;
+	text-align:right;
+	background:inherit;
+	float:right;
 }
 
 .manabuttons{
@@ -206,8 +206,8 @@ form {
 	margin-right:auto;
 }
 .footer {
-        text-align:center;
-        font-size:12px;
+	text-align:center;
+	font-size:12px;
 	margin-top: 45px;
 }
 .filetitle {
