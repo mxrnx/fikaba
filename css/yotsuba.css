@@ -180,10 +180,11 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"], te
 	color:#800000;
 	min-width: 500px;
 }
+body>form>table { /* compensate for lack of .doubledash */
+	padding-left: 12px;
+}
 .doubledash {
-	vertical-align:top;
-	clear:both;
-	float:left;
+	display:none;
 }
 .replytitle {
 	background:inherit;
