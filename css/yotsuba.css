@@ -1,7 +1,12 @@
+html {
+	height: auto;
+	min-height: 100%;
+}
 body {
 	font-family: arial,helvetica,sans-serif;
 	font-size:10pt;
 	color:#800000;
+	background-color: #FFFEEE;
 	background: linear-gradient(#FED6AF, #FFFFEE 150px) top center repeat-x;
 }
 a       {
