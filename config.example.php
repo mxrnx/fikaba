@@ -52,6 +52,8 @@ const BR_CHECK = 15;				//Max lines per post (0 = no limit)
 const PROXY_CHECK = false;			//Enable proxy check
 const DISP_ID = false;				//Display user IDs
 const FORCED_ANON = false;			//Force anonymous posting (except for managers)
+const BADSTRING = array();			//Posts containing any of these strings will be discarded (can be a nuisance, use with care)
+const BADFILE = array();			//Files to be discarded (md5 hashes)
 
 // CSS
 const CSSDEFAULT = 'Futaba';			// The name of the stylesheet to be used by default

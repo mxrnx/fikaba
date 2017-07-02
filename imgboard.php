@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170626
+# Fikaba 170702
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170626';
+const VERSION = '170702';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -36,10 +36,6 @@ session_start();
 
 $path = realpath("./").'/'.IMG_DIR;
 ignore_user_abort(true);
-
-$badstring = array("dummy_string","dummy_string2"); // Refused text
-$badfile = array("dummy","dummy2"); //Refused files (md5 hashes)
-$badip = array("addr1\\.dummy\\.com","addr2\\.dummy\\.com"); //Refused hosts (IP bans)
 
 if(!$con=mysql_connect(SQLHOST,SQLUSER,SQLPASS)){
 	echo S_SQLCONF;	//unable to connect to DB (wrong user/pass?)
@@ -453,7 +449,7 @@ function proxy_connect($port){
 }
 
 function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$upfile_name,$resto){
-	global $path,$badstring,$badfile,$badip,$pwdc,$textonly,$admin;
+	global $path,$pwdc,$textonly,$admin;
 
 	if(isbanned($ip)) error(S_BANRENZOKU);
 	
@@ -497,7 +493,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 			}
 		}
 		$md5 = md5_of_file($dest);
-		foreach($badfile as $value){
+		foreach(BADFILE as $value){
 			if(ereg("^$value",$md5)){
 				error(S_SAMEPIC,$dest); //Refuse this image
 			}
@@ -568,7 +564,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	if(!$find) error(S_NOTHREADERR,$dest);
 	}
 
-	foreach($badstring as $value){if(ereg($value,$com)||ereg($value,$sub)||ereg($value,$name)||ereg($value,$email)){
+	foreach(BADSTRING as $value){if(ereg($value,$com)||ereg($value,$sub)||ereg($value,$name)||ereg($value,$email)){
 		error(S_STRREF,$dest);};}
 	if($_SERVER["REQUEST_METHOD"] != "POST") error(S_UNJUST,$dest);
 	// Form content check
@@ -595,10 +591,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	//host check
 	$host = gethostbyaddr($_SERVER["REMOTE_ADDR"]);
 
-	foreach($badip as $value){ //Refusal hosts
-		if(eregi("$value$",$host)){
-			error(S_BADHOST,$dest);
-	}}
 	if(eregi("^mail",$host)
 	|| eregi("^ns",$host)
 	|| eregi("^dns",$host)
