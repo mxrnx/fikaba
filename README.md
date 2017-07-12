@@ -1,10 +1,10 @@
 # Fikaba 
-Fikaba is an imageboard engine forked from futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of futallaby, since futallaby has become abandonware.
+Fikaba is an imageboard engine forked from Futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of Futallaby, since Futallaby has become abandonware.
 
-[See here for info on migrating from futallaby](https://github.com/knarka/fikaba/blob/master/docs/migrate.md)
+[See here for info on migrating from Futallaby](https://github.com/knarka/fikaba/blob/master/docs/migrate.md)
 
 ## Instances
-Below are some examples of sites running Fikaba. If you are using fikaba and want to be added to the list, please make a pull request or otherwise contact me to add your site to the list below.
+Below are some examples of sites running Fikaba. If you are using Fikaba and want to be added to the list, please make a pull request or otherwise contact me to add your site to the list below.
 
 * ~~[Chanola](http://chanola.netau.net/board/)~~ RIP
 
