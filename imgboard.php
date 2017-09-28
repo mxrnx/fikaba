@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170702
+# Fikaba 170928
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170702';
+const VERSION = '170928';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
@@ -167,7 +167,7 @@ function updatelog($resno=0){
 			$com = auto_link($com);
 			$com = eregi_replace("&gt;", ">", $com);
 			$com = eregi_replace("\>\>([0-9]+)", "<a href='".$_SERVER['REQUEST_URI']."#r\\1'>&gt;&gt;\\1</a>", $com);
-			$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
+			$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<span class=\"unkfunc\">\\2</span>", $com);
 			// Picture file name
 			$img = $path.$tim.$ext;
 			$src = IMG_DIR.$tim.$ext;
@@ -223,7 +223,7 @@ function updatelog($resno=0){
 				$com = auto_link($com);
 				$com = eregi_replace("&gt;", ">", $com);
 				$com = eregi_replace("\>\>([0-9]+)", "<a href='".$_SERVER['REQUEST_URI']."#r\\1'>&gt;&gt;\\1</a>", $com);
-				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<div class=\"unkfunc\">\\2</div>", $com);
+				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<span class=\"unkfunc\">\\2</span>", $com);
 				if(DISP_ID){ $userid = "ID:$id"; }
 				else{ $userid = ""; }
 				// Main creation
