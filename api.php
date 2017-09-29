@@ -68,7 +68,7 @@ switch($mode){
 		$jsonout = jsoncatalog();
 		break;
 	case 'res':
-		$jsonout = jsonres($_GET['res']);
+		$jsonout = jsonres(mysqli_real_escape_string($_GET['res']));
 		break;
 	default:
 		break;
