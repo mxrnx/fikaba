@@ -17,7 +17,6 @@ include "config.php";
 include "strings/".LANGUAGE.".php";		//String resource file
 
 if(LOCKDOWN){
-
 	// if not trying to do something other than managing, die
 	if(!isset($_SESSION['capcode']) && !($_GET['mode'] == 'admin' || $_POST['mode'] == 'admin')){
 		die(S_LOCKDOWN);
@@ -419,7 +418,7 @@ function fakefoot(){
 /* Footer */
 function foot(&$dat){
 	$dat.="
-<div class=\"footer\">".S_FOOT."<br />
+<div class=\"footer\">- <a href=\"http://php.s3.to\" target=\"_blank\">GazouBBS</a> + <a href=\"http://www.2chan.net/\" target=\"_blank\">futaba</a> + <a href=\"http://www.1chan.net/futallaby/\" target=\"_blank\">futallaby</a> + <a href=\"https://github.com/knarka/fikaba\" target=\"_blank\">fikaba</a> -<br />
 Fikaba".S_VERSION.VERSION."<br />
 ".FOOTTEXT."
 </div>
