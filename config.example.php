@@ -1,19 +1,19 @@
 <?php
 
-const LOCKDOWN = false;			//Set to true to disable page viewing for users (not for managers)
+const LOCKDOWN = false;				//Set to true to disable page viewing for users (not for managers)
 
 // General settings
-const TITLE = 'Fikaba-powered image board';	//Name of this image board
+const TITLE = 'Fikaba-powered image board';	//Name of this imageboard
 const SHOWTITLETXT = 1;				//Show TITLE at top (1: yes  0: no)
 const SHOWTITLEIMG = 0;				//Show image at top (0: no, 1: single, 2: rotating)
 const BANNERS = array('title1.png', 'title2.png');	// Banners for SHOWTITLEIMG=2
-const TITLEIMG = 'title.png';			//Title image
+const TITLEIMG = 'title.png';			//Title image for SHOWTITLEIMG=1
 const LANGUAGE = 'en';				//Language. Fikaba provides en and ja by default
 const FOOTTEXT = '';				//Extra footer text, for disclaimers and such. Can be left empty
 
 // Database settings
-const POSTTABLE = 'CHANGEME';			//Post table (NOT DATABASE) used by image board
-const BANTABLE = 'CHANGEME';			//Bans table (NOT DATABASE) used by fikaba
+const POSTTABLE = 'CHANGEME';			//Post table (NOT DATABASE)
+const BANTABLE = 'CHANGEME';			//Bans table (NOT DATABASE)
 const MANATABLE = 'CHANGEME';			//Manager (admin, mod, janitor) table
 const SQLHOST = 'localhost';			//MySQL server address, usually localhost
 const SQLUSER = 'CHANGEME';			//MySQL user (must be changed)
@@ -29,7 +29,7 @@ const MAX_W =  250;				//Images exceeding this width will be thumbnailed
 const MAX_H =  250;				//Images exceeding this height will be thumbnailed
 const SWF_ENABLED = false;			//Whether or not upload of Flash files is allowed
 const WEBM_ENABLED = true;			//Whether or not upload of WebM files is allowed
-const OEKAKI_ENABLED = false;			//Whether or not oekaki is enabled, duh
+const OEKAKI_ENABLED = false;			//Whether or not oekaki is enabled
 const FORCEIMAGE = false;			//Whether or not threads must start with an image
 const USE_THUMB = true;				//Use thumbnails
 const PHP_SELF = 'imgboard.php';		//Name of main script file (if ECHOALL, you probably want 'index.php')
@@ -65,6 +65,5 @@ const STYLES = array(				// Array containing NAME => FILE of stylesheets
 );
 
 const FILTERS = array(				// Filters, in the format of IN => OUT
-	"test"			=>	'tosti',
-	"fikaba is awful"	=>	'I am awful'
+	"darn"		=>	'd*rn'
 );
