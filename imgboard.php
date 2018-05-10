@@ -164,9 +164,9 @@ function updatelog($resno=0){
 			// URL and link
 			if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 			$com = auto_link($com);
-			$com = eregi_replace("&gt;", ">", $com);
-			$com = eregi_replace("\>\>([0-9]+)", "<a href='".PHP_SELF."?res=$resto#r\\1'>&gt;&gt;\\1</a>", $com);
-			$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<span class=\"unkfunc\">\\2</span>", $com);
+			$com = preg_replace("/&gt;/i", ">", $com);
+			$com = preg_replace("/\>\>([0-9]+)/i", "<a href='".PHP_SELF."?res=$resto#r\\1'>&gt;&gt;\\1</a>", $com);
+			$com = preg_replace("/(^|>)(\>[^<]*)/i", "\\1<span class=\"unkfunc\">\\2</span>", $com);
 			// Picture file name
 			$img = $path.$tim.$ext;
 			$src = IMG_DIR.$tim.$ext;
@@ -220,9 +220,9 @@ function updatelog($resno=0){
 				// URL and e-mail
 				if($email) $name = "<a href=\"mailto:$email\">$name</a>";
 				$com = auto_link($com);
-				$com = eregi_replace("&gt;", ">", $com);
-				$com = eregi_replace("\>\>([0-9]+)", "<a href='".PHP_SELF."?res=$resto#r\\1'>&gt;&gt;\\1</a>", $com);
-				$com = eregi_replace("(^|>)(\>[^<]*)", "\\1<span class=\"unkfunc\">\\2</span>", $com);
+				$com = preg_replace("/&gt;/i", ">", $com);
+				$com = preg_replace("/\>\>([0-9]+)/i", "<a href='".PHP_SELF."?res=$resto#r\\1'>&gt;&gt;\\1</a>", $com);
+				$com = preg_replace("/(^|>)(\>[^<]*)/i", "\\1<span class=\"unkfunc\">\\2</span>", $com);
 				if(DISP_ID){ $userid = "ID:$id"; }
 				else{ $userid = ""; }
 				// Main creation
@@ -438,7 +438,7 @@ function error($mes,$dest=''){ /* Basically a fancy die() */
 }
 
 function auto_link($proto){
-	$proto = ereg_replace("(https?|ftp|news|irc|gopher|telnet|ssh)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)","<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",$proto);
+	$proto = preg_replace("#(https?|ftp|news|irc|gopher|telnet|ssh)(://[[:alnum:]\+\$\;\?\.%,!\#~*/:@&=_-]+)#","<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",$proto);
 	return $proto;
 }
 
@@ -494,7 +494,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		}
 		$md5 = md5_of_file($dest);
 		foreach(BADFILE as $value){
-			if(ereg("^$value",$md5)){
+			if(preg_match("/^$value/",$md5)){
 				error(S_SAMEPIC,$dest); //Refuse this image
 			}
 		}
@@ -564,22 +564,19 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	if(!$find) error(S_NOTHREADERR,$dest);
 	}
 
-	foreach(BADSTRING as $value){if(ereg($value,$com)||ereg($value,$sub)||ereg($value,$name)||ereg($value,$email)){
+	foreach(BADSTRING as $value){if(preg_match('/'.$value.'/',$com)||preg_match('/'.$value.'/',$sub)||preg_match('/'.$value.'/',$name)||preg_match('/'.$value.'/',$email)){
 		error(S_STRREF,$dest);};}
 	if($_SERVER["REQUEST_METHOD"] != "POST") error(S_UNJUST,$dest);
 	// Form content check
-	if(!$name||ereg("^[ |@|]*$",$name)) $name="";
-	if(!$com||ereg("^[ |@|\t]*$",$com)) $com="";
-	if(!$sub||ereg("^[ |@|]*$",$sub))   $sub="";
+	if(!$name||preg_match("/^[ |@|]*$/",$name)) $name="";
+	if(!$com||preg_match("/^[ |@|\t]*$/",$com)) $com="";
+	if(!$sub||preg_match("/^[ |@|]*$/",$sub))   $sub="";
 
 	if(!isset($oekaki)&&!$resto&&!is_file($dest)){
 		if(FORCEIMAGE||!$textonly) error(S_NOPIC,$dest);
 		//else $textonly = "on";
 	}
 	if(!$com&&!is_file($dest)) error(S_NOTEXT,$dest);
-
-	$name=ereg_replace(S_MANAGEMENT,"\"".S_MANAGEMENT."\"",$name);
-	$name=ereg_replace(S_DELETION,"\"".S_DELETION."\"",$name);
 
 	if(strlen($com) > 1000) error(S_TOOLONG,$dest);
 	if(strlen($name) > 100) error(S_TOOLONG,$dest);
@@ -591,24 +588,15 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	//host check
 	$host = gethostbyaddr($_SERVER["REMOTE_ADDR"]);
 
-	if(eregi("^mail",$host)
-	|| eregi("^ns",$host)
-	|| eregi("^dns",$host)
-	|| eregi("^ftp",$host)
-	|| eregi("^prox",$host)
-	|| eregi("^pc",$host)
-	|| eregi("^[^\.]\.[^\.]$",$host)){
+	if(preg_match("/^mail/",$host)
+	|| preg_match("/^ns/",$host)
+	|| preg_match("/^dns/",$host)
+	|| preg_match("/^ftp/",$host)
+	|| preg_match("/^prox/",$host)
+	|| preg_match("/^pc/",$host)
+	|| preg_match("/^[^\.]\.[^\.]$/",$host)){
 		$pxck = true;
 	}
-	if(eregi("ne\\.jp$",$host)||
-		eregi("ad\\.jp$",$host)||
-		eregi("bbtec\\.net$",$host)||
-		eregi("aol\\.com$",$host)||
-		eregi("uu\\.net$",$host)||
-		eregi("asahi-net\\.or\\.jp$",$host)||
-		eregi("rim\\.or\\.jp$",$host)
-	){$pxck = false;}
-	else{$pxck = true;}
 
 	if($pxck && PROXY_CHECK && !isset($_SESSION['name'])){
 		if(proxy_connect('80') == true){
@@ -635,16 +623,16 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	$now = gmdate("y/m/d",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
 	$posterid = substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+9*60*60)),'id'),-8);
 	//Text plastic surgery (rorororor)
-	$email= CleanStr($email);  $email=ereg_replace("[\r\n]","",$email);
-	$sub  = CleanStr($sub);    $sub  =ereg_replace("[\r\n]","",$sub);
-	$url  = CleanStr($url);    $url  =ereg_replace("[\r\n]","",$url);
-	$resto= CleanStr($resto);  $resto=ereg_replace("[\r\n]","",$resto);
+	$email= CleanStr($email);  $email=preg_replace("/[\r\n]/","",$email);
+	$sub  = CleanStr($sub);    $sub  =preg_replace("/[\r\n]/","",$sub);
+	$url  = CleanStr($url);    $url  =preg_replace("/[\r\n]/","",$url);
+	$resto= CleanStr($resto);  $resto=preg_replace("/[\r\n]/","",$resto);
 	$com  = CleanStr($com);
 	// Standardize new character lines
 	$com = str_replace( "\r\n",  "\n", $com);
 	$com = str_replace( "\r",  "\n", $com);
 	// Continuous lines
-	$com = ereg_replace("\n((!@| )*\n){3,}","\n",$com);
+	$com = preg_replace("/\n((!@| )*\n){3,}/","\n",$com);
 	$com = nl2br($com);		//newlines get substituted by br tags
 	$com = str_replace("\n",  "", $com);	//\n is erased (is this necessary?)
 
@@ -652,7 +640,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		$com = str_replace($filterin, $filterout, $com);
 	}
 
-	$name=ereg_replace("[\r\n]","",$name);
+	$name=preg_replace("/[\r\n]/","",$name);
 	$names=$name;
 	$name = trim($name);//blankspace removal
 	if (get_magic_quotes_gpc()) {//magic quotes is deleted (?)
@@ -662,13 +650,13 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	$name = str_replace("&amp;", "&", $name);//remove ampersands
 	$name = str_replace(",", "&#44;", $name);//remove commas
 
-	if(ereg("(#|!)(.*)",$names,$regs)){
+	if(preg_match("/(#|!)(.*)/",$names,$regs)){
 		$cap = $regs[2];
 		$cap=strtr($cap,"&amp;", "&");
 		$cap=strtr($cap,"&#44;", ",");
-		$name=ereg_replace("(#|!)(.*)","",$name);
+		$name=preg_replace("/(#|!)(.*)/","",$name);
 		$salt=substr($cap."H.",1,2);
-		$salt=ereg_replace("[^\.-z]",".",$salt);
+		$salt=preg_replace("/[^\.-z]/",".",$salt);
 		$salt=strtr($salt,":;<=>?@[\\]^_`","ABCDEFGabcdef");
 		$name.=TRIPKEY.substr(crypt($cap,$salt),-10)."";
 	}
@@ -760,7 +748,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	setcookie ("pwdc", $c_pass,time()+7*24*3600);  /* 1 week cookie expiration */
 	if(function_exists("mb_internal_encoding")&&function_exists("mb_convert_encoding")
 		&&function_exists("mb_substr")){
-		if(ereg("MSIE|Opera",$_SERVER["HTTP_USER_AGENT"])){
+		if(preg_match("/MSIE|Opera/",$_SERVER["HTTP_USER_AGENT"])){
 			$i=0;$c_name='';
 			mb_internal_encoding("SJIS");
 			while($j=mb_substr($names,$i,1)){
@@ -1119,8 +1107,8 @@ function admindel(){
 		$img_flag = false;
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip,$id)=$row;
 		// Format
-		$now=ereg_replace('.{2}/(.*)$','\1',$now);
-		$now=ereg_replace('\(.*\)',' ',$now);
+		$now=preg_replace('#.{2}/(.*)$#','\1',$now);
+		$now=preg_replace('/\(.*\)/',' ',$now);
 		if(strlen($name) > 10) $name = substr($name,0,9)."...";
 		$name = htmlspecialchars($name);
 		if(strlen($sub) > 10) $sub = substr($sub,0,9)."...";
