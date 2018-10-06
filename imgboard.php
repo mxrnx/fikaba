@@ -156,6 +156,7 @@ function updatelog($resno=0){
 		else $st = 0;
 		$dat.='<form action="'.PHP_SELF.'" method="post">';
 	
+		$p = 0;
 		for($i = $st; $i < $st+PAGE_DEF; $i++){
 			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip,$id)=mysqli_fetch_row($treeline);
 			if(!$no) break;
@@ -449,7 +450,7 @@ function proxy_connect($port){
 }
 
 function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$upfile_name,$resto){
-	global $path,$pwdc,$textonly,$admin;
+	global $con,$path,$pwdc,$textonly,$admin;
 
 	if(isbanned($ip)) error(S_BANRENZOKU);
 	
@@ -673,8 +674,8 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 				$name.=' '.$_SESSION['capcode'];
 
 	// Read the log
-	$query="select time from ".POSTTABLE." where com='".mysqli_escape_string($com)."' ".
-		"and host='".mysqli_escape_string($host)."' ".
+	$query="select time from ".POSTTABLE." where com='".mysqli_escape_string($con, $com)."' ".
+		"and host='".mysqli_escape_string($con, $host)."' ".
 		"and no>".($lastno-20);  //the same
 	if(!$result=mysqli_call($query)){echo S_SQLFAIL;}
 	$row=mysqli_fetch_array($result);
@@ -682,7 +683,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	if($row&&!$upfile_name)error(S_RENZOKU3,$dest);
 
 	$query="select time from ".POSTTABLE." where time>".($time - RENZOKU)." ".
-		"and host='".mysqli_escape_string($host)."' ";  //from precontribution
+		"and host='".mysqli_escape_string($con, $host)."' ";  //from precontribution
 	if(!$result=mysqli_call($query)){echo S_SQLFAIL;}
 	$row=mysqli_fetch_array($result);
 	mysqli_free_result($result);
@@ -692,7 +693,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	if($dest&&file_exists($dest)){
 
 		$query="select time from ".POSTTABLE." where time>".($time - RENZOKU2)." ".
-			"and host='".mysqli_escape_string($host)."' ";  //from precontribution
+			"and host='".mysqli_escape_string($con, $host)."' ";  //from precontribution
 		if(!$result=mysqli_call($query)){echo S_SQLFAIL;}
 	$row=mysqli_fetch_array($result);
 	mysqli_free_result($result);
@@ -724,12 +725,12 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 
 	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fname,fsize,root,resto,ip,id) values (".
 		"'".$now."',".
-		"'".mysqli_escape_string($name)."',".
-		"'".mysqli_escape_string($email)."',".
-		"'".mysqli_escape_string($sub)."',".
-		"'".mysqli_escape_string($com)."',".
-		"'".mysqli_escape_string($host)."',".
-		"'".mysqli_escape_string($pass)."',".
+		"'".mysqli_escape_string($con, $name)."',".
+		"'".mysqli_escape_string($con, $email)."',".
+		"'".mysqli_escape_string($con, $sub)."',".
+		"'".mysqli_escape_string($con, $com)."',".
+		"'".mysqli_escape_string($con, $host)."',".
+		"'".mysqli_escape_string($con, $pass)."',".
 		"'".$ext."',".
 		(int)$W.",".
 		(int)$H.",".
