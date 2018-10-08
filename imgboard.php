@@ -264,7 +264,7 @@ function updatelog($resno=0){
 		<input type="hidden" name="mode" value="usrdel" />'.S_REPDEL.'[<input type="checkbox" name="onlyimgdel" value="on" />'.S_DELPICONLY.']<br />
 		'.S_DELKEY.'<input type="password" name="pwd" size="8" maxlength="8" value="" />
 		<input type="submit" value="'.S_DELETE.'" /></td></tr></table></form>
-		<script type="text/javascript"><!--
+		<script><!--
 	l();
 	//--></script>';
 	
@@ -343,16 +343,16 @@ function head(&$dat){
 <html lang="'.LANGUAGE.'"><head>
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
-<script type="text/javascript" src="js/style.js"></script>';
+<script src="js/style.js"></script>';
 	foreach(STYLES as $stylename => $stylefile){
 		$dat.='<link rel="alternate stylesheet" type="text/css" href="'.$stylefile.'" title="'.$stylename.'" />';
 	}
-	$dat.='<script type="text/javascript">getUserFav("'.CSSDEFAULT.'");</script>
+	$dat.='<script>getUserFav("'.CSSDEFAULT.'");</script>
 <title>'.TITLE.'</title>
-<script type="text/javascript"><!--
+<script><!--
 function l(e){var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document){for(i=0;i<forms.length;i++){if(forms[i].pwd)with(forms[i]){if(!pwd.value)pwd.value=P;}if(forms[i].name)with(forms[i]){if(!name.value)name.value=N;}}}};function getCookie(key, tmp1, tmp2, xx1, xx2, xx3) {tmp1 = " " + document.cookie + ";";xx1 = xx2 = 0;len = tmp1.length;	while (xx1 < len) {xx2 = tmp1.indexOf(";", xx1);tmp2 = tmp1.substring(xx1 + 1, xx2);xx3 = tmp2.indexOf("=");if (tmp2.substring(0, xx3) == key) {return(unescape(tmp2.substring(xx3 + 1, xx2 - xx1 - 1)));}xx1 = xx2 + 1;}return("");}
-//--></script><script type="text/javascript">function addref(postid) {document.getElementById("com").value += ">>" + postid + "\n";}</script>';
-	if(OEKAKI_ENABLED){$dat.='<script type="text/javascript" src="js/ritare/jscolor/jscolor.min.js"></script><script type="text/javascript" src="js/ritare/ritare.js"></script><link rel="stylesheet" type="text/css" href="js/ritare/ritare.css" />';}
+//--></script><script>function addref(postid) {document.getElementById("com").value += ">>" + postid + "\n";}</script>';
+	if(OEKAKI_ENABLED){$dat.='<script src="js/ritare/jscolor/jscolor.min.js"></script><script src="js/ritare/ritare.js"></script><link rel="stylesheet" type="text/css" href="js/ritare/ritare.css" />';}
 	$dat.='</head>
 	<body>
 	<div class="styles"><select>
@@ -397,7 +397,7 @@ function form(&$dat,$resno,$admin="",$manapost=false){
 	<tr><td class="postblock">'.S_SUBJECT.'</td><td><input type="text" name="sub" size="35" />
 	<input type="submit" value="'.S_SUBMIT.'" /></td></tr>
 	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="50" rows="4"></textarea></td></tr>';
-	if(OEKAKI_ENABLED){$dat.='<tr><td class="postblock">'.S_OEKAKI.'</td><td id="oekakiparent"><span id="painter" style="display:none;"><script type="text/javascript">Ritare.start({parentel:"painter",onFinish:function(e){newfield=document.createElement("input");newfield.type="hidden";newfield.name="oekaki";newfield.id="oekakifile";newfield.value=(Ritare.canvas.toDataURL(\'image/png\')); document.getElementById("postform").appendChild(newfield);alert(\'Oekaki saved!\');},width:370,height:300});</script></span><p id="oekakistarter" onclick="document.getElementById(\'painter\').style=\'display:auto;\';var el = document.getElementById(\'oekakistarter\');el.parentNode.removeChild(el);var el = document.getElementById(\'filerow\');el.parentNode.removeChild(el)">'.S_OEKAKILOAD.'</p></td></tr>';}
+	if(OEKAKI_ENABLED){$dat.='<tr><td class="postblock">'.S_OEKAKI.'</td><td id="oekakiparent"><span id="painter" style="display:none;"><script>Ritare.start({parentel:"painter",onFinish:function(e){newfield=document.createElement("input");newfield.type="hidden";newfield.name="oekaki";newfield.id="oekakifile";newfield.value=(Ritare.canvas.toDataURL(\'image/png\')); document.getElementById("postform").appendChild(newfield);alert(\'Oekaki saved!\');},width:370,height:300});</script></span><p id="oekakistarter" onclick="document.getElementById(\'painter\').style=\'display:auto;\';var el = document.getElementById(\'oekakistarter\');el.parentNode.removeChild(el);var el = document.getElementById(\'filerow\');el.parentNode.removeChild(el)">'.S_OEKAKILOAD.'</p></td></tr>';}
 	$dat.='<tr id="filerow"><td class="postblock">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />';
 	if(!$resno && !FORCEIMAGE){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
