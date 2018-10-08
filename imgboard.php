@@ -1,12 +1,12 @@
 <?php
-# Fikaba 170928
+# Fikaba 181008
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, and Futallaby
 
-const VERSION = '170928';
+const VERSION = '181008';
 
 if(!file_exists('config.php')){
 	include "strings/en.php";
