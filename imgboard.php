@@ -1071,13 +1071,13 @@ function admindel(){
 	while($row=mysqli_fetch_row($result)){
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip)=$row;
 		if($onlyimgdel=='on'){
-			if(array_search($no,$delno)){//only a picture is deleted
+			if(array_search($no,$delno) !== false){//only a picture is deleted
 				$delfile = $path.$tim.$ext;	//only a picture is deleted
 				if(is_file($delfile)) unlink($delfile);//delete
 				if(is_file(THUMB_DIR.$tim.'s.jpg')) unlink(THUMB_DIR.$tim.'s.jpg');//delete
 			}
 		}else{
-			if(array_search($no,$delno)){//It is empty when deleting
+			if(array_search($no,$delno) !== false){//It is empty when deleting
 				$find = true;
 				if(!mysqli_call("delete from ".POSTTABLE." where no=".$no)){echo S_SQLFAIL;}
 				$delfile = $path.$tim.$ext;	//Delete file
