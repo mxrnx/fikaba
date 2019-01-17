@@ -30,7 +30,7 @@ const S_DELKEY = '削除キー';
 const S_DELETE = '削除';
 const S_PREV = '前のページ';
 const S_NEXT = '次のページ';
-const S_FOOT = '- <a href="http://php.s3.to" target="_blank">GazouBBS</a> + <a href="http://www.2chan.net/" target="_blank">ふたば</a> + <a href="http://www.1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="https://github.com/knarka/fikaba" target="_blank">fikaba</a> -'; //Prints footer (leave these credits)
+const S_FOOT = '- GazouBBS + <a href="http://www.2chan.net/" target="_blank">ふたば</a> + <a href="http://www.1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="https://github.com/knarka/fikaba" target="_blank">fikaba</a> -'; //Prints footer (leave these credits)
 const S_UPFAIL = 'アップロードに失敗しました<br />サーバがサポートしていない可能性があります';
 const S_NOREC = 'アップロードに失敗しました<br />画像ファイル以外は受け付けません';
 const S_SAMEPIC = 'アップロードに失敗しました<br />同じ画像がありました';

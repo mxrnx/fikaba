@@ -47,7 +47,7 @@ const S_DELKEY = 'Password ';										//Prints text next to password field for 
 const S_DELETE = 'Delete';										//Defines deletion button's name
 const S_PREV = 'Previous';										//Defines previous button
 const S_NEXT = 'Next';											//Defines next button
-const S_FOOT = '- <a href="http://php.s3.to" target="_blank">GazouBBS</a> + <a href="http://www.2chan.net/" target="_blank">futaba</a> + <a href="http://www.1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="https://github.com/knarka/fikaba" target="_blank">fikaba</a> -'; //Prints footer (leave these credits)
+const S_FOOT = '- GazouBBS + <a href="http://www.2chan.net/" target="_blank">futaba</a> + <a href="http://www.1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="https://github.com/knarka/fikaba" target="_blank">fikaba</a> -'; //Prints footer (leave these credits)
 const S_UPFAIL = 'Error: Upload failed.';								//Returns error for failed upload (reason: unknown?)
 const S_NOREC = 'Error: Cannot find record.';								//Returns error when record cannot be found
 const S_SAMEPIC = 'Error: Duplicate md5 checksum detected.';						//Returns error when a md5 checksum dupe is detected

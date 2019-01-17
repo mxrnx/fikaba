@@ -47,7 +47,7 @@ const S_DELKEY = '密码 ';										//Prints text next to password field for de
 const S_DELETE = '删除';										//Defines deletion button's name
 const S_PREV = '向前';										//Defines previous button
 const S_NEXT = '向后';											//Defines next button
-const S_FOOT = '- <a href="http://php.s3.to" target="_blank">GazouBBS</a> + <a href="http://www.2chan.net/" target="_blank">futaba</a> + <a href="http://www.1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="https://github.com/knarka/fikaba" target="_blank">fikaba</a> -'; //Prints footer (leave these credits)
+const S_FOOT = '- GazouBBS + <a href="http://www.2chan.net/" target="_blank">futaba</a> + <a href="http://www.1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="https://github.com/knarka/fikaba" target="_blank">fikaba</a> -'; //Prints footer (leave these credits)
 const S_UPFAIL = '错误：上传失败。';								//Returns error for failed upload (reason: unknown?)
 const S_NOREC = '错误：找不到记录。';								//Returns error when record cannot be found
 const S_SAMEPIC = '错误：检测到重复的md5码。';						//Returns error when a md5 checksum dupe is detected
