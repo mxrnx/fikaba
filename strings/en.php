@@ -19,7 +19,7 @@ const S_COMMENT = 'Comment';										//Describes comment field
 const S_OEKAKI = 'Oekaki';
 const S_OEKAKILOAD = 'Click to load oekaki (don\'t forget to save!)';
 const S_UPLOADFILE = 'File';										//Describes file field
-const S_NOFILE = 'No File';										//Describes file/no file checkbox
+
 const S_DELPASS = 'Password';										//Describes password field
 const S_DELEXPL = '(Password used for file deletion)';							//Prints explanation for password box (to the right)
 const S_RULES = '<ul><li>Supported file types are: GIF, JPG, PNG</li>
