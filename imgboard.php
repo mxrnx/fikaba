@@ -400,7 +400,7 @@ function form(&$dat,$resno,$admin="",$manapost=false){
 	if(OEKAKI_ENABLED){$dat.='<tr><td class="postblock">'.S_OEKAKI.'</td><td id="oekakiparent"><span id="painter" style="display:none;"><script>Ritare.start({parentel:"painter",onFinish:function(e){newfield=document.createElement("input");newfield.type="hidden";newfield.name="oekaki";newfield.id="oekakifile";newfield.value=(Ritare.canvas.toDataURL(\'image/png\')); document.getElementById("postform").appendChild(newfield);alert(\'Oekaki saved!\');},width:370,height:300});</script></span><p id="oekakistarter" onclick="document.getElementById(\'painter\').style=\'display:auto;\';var el = document.getElementById(\'oekakistarter\');el.parentNode.removeChild(el);var el = document.getElementById(\'filerow\');el.parentNode.removeChild(el)">'.S_OEKAKILOAD.'</p></td></tr>';}
 	$dat.='<tr id="filerow"><td class="postblock">'.S_UPLOADFILE.'</td>
 <td><input type="file" name="upfile" size="35" />';
-	if(!$resno && !FORCEIMAGE){$dat.='[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]';}
+	
 	$dat.='</td></tr><tr><td class="postblock">'.S_DELPASS.'</td><td><input type="password" name="pwd" size="18" maxlength="8" value="" /> '.S_DELEXPL.'</td></tr>
 <tr><td colspan="2">
 <div class="rules lefted">';
@@ -574,7 +574,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	if(!$sub||preg_match("/^[ |@|]*$/",$sub))   $sub="";
 
 	if(!isset($oekaki)&&!$resto&&!is_file($dest)){
-		if(FORCEIMAGE||!$textonly) error(S_NOPIC,$dest);
+		if(FORCEIMAGE) error(S_NOPIC,$dest);
 		//else $textonly = "on";
 	}
 	if(!$com&&!is_file($dest)) error(S_NOTEXT,$dest);
