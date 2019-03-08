@@ -11,7 +11,6 @@ const S_SUBMIT = '送信する';
 const S_COMMENT = 'コメント';
 const S_OEKAKI = 'お絵描き';
 const S_UPLOADFILE = '添付File';
-const S_NOFILE = '画像なし';
 const S_DELPASS = '削除キー';
 const S_DELEXPL = '(記事の削除用。英数字で8文字以内)';
 const S_RULES = '<LI>添付可能ファイル：GIF, JPG, PNG ブラウザによっては正常に添付できないことがあります。

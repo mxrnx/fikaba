@@ -19,7 +19,6 @@ const S_COMMENT = '内容';										//Describes comment field
 const S_OEKAKI = 'Oekaki';
 const S_OEKAKILOAD = '点击加载oekaki（请务必要保存！）';
 const S_UPLOADFILE = '文件';										//Describes file field
-const S_NOFILE = '无文件';										//Describes file/no file checkbox
 const S_DELPASS = '密码';										//Describes password field
 const S_DELEXPL = '（密码用于删除文件）';							//Prints explanation for password box (to the right)
 const S_RULES = '<ul><li>支持的文件格式为: GIF, JPG, PNG</li>
