@@ -261,6 +261,9 @@ body>form>table { /* compensate for lack of .doubledash */
 	text-decoration:none;
 	font-size:12px;
 }
+.catcont {
+	word-wrap: break-word;
+}
 .catthread img{
 	max-height:40%;
 	max-width:99%;

@@ -579,7 +579,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	}
 	if(!$com&&!is_file($dest)) error(S_NOTEXT,$dest);
 
-	if(strlen($com) > 1000) error(S_TOOLONG,$dest);
+	if(strlen($com) > 3000) error(S_TOOLONG,$dest);
 	if(strlen($name) > 100) error(S_TOOLONG,$dest);
 	if(strlen($email) > 100) error(S_TOOLONG,$dest);
 	if(strlen($sub) > 100) error(S_TOOLONG,$dest);
