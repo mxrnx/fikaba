@@ -919,6 +919,7 @@ function usrdel($no,$pwd){
 					$delfile = $path.$dtim.$dext;	//path to delete
 					if(!$onlyimgdel){
 						if(!mysqli_call("delete from ".POSTTABLE." where no=".$dno)){echo S_SQLFAIL;} //sql is broke
+						if(!mysqli_call("delete from ".POSTTABLE." where resto=".$dno)){echo S_SQLFAIL;} //sql is broke
 					}
 					if(is_file($delfile)) unlink($delfile);//Deletion
 					if(is_file(THUMB_DIR.$dtim.'s.jpg')) unlink(THUMB_DIR.$dtim.'s.jpg');//Deletion
