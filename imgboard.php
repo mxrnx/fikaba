@@ -1,5 +1,5 @@
 <?php
-# Fikaba 181008
+# Fikaba 190401
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
@@ -579,7 +579,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	}
 	if(!$com&&!is_file($dest)) error(S_NOTEXT,$dest);
 
-	if(strlen($com) > 3000) error(S_TOOLONG,$dest);
+	if(strlen($com) > 10000) error(S_TOOLONG,$dest);
 	if(strlen($name) > 100) error(S_TOOLONG,$dest);
 	if(strlen($email) > 100) error(S_TOOLONG,$dest);
 	if(strlen($sub) > 100) error(S_TOOLONG,$dest);
@@ -712,8 +712,8 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	}
 
 	$restoqu=(int)$resto;
+	$rootqu="now()";
 	if($resto){ //res,root processing
-		$rootqu="0";
 		if(!$resline=mysqli_call("select * from ".POSTTABLE." where resto=".$resto)){echo S_SQLFAIL;}
 		$countres=mysqli_num_rows($resline);
 		mysqli_free_result($resline);
@@ -721,7 +721,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 			$query="update ".POSTTABLE." set root=now() where no=$resto"; //age
 			if(!$result=mysqli_call($query)){echo S_SQLFAIL;}
 		}
-	}else{$rootqu="now()";} //now it is root
+	}
 
 	$query="insert into ".POSTTABLE." (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fname,fsize,root,resto,ip,id) values (".
 		"'".$now."',".
