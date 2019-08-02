@@ -91,4 +91,4 @@ const S_CATALOG = 'カタログモード';
 const S_CATALOGBUTTON = "カタログ";
 const S_MANABANIP = 'IPかポストの番号';
 const S_VERSION = 'のversionは';
-include("strings/en.php");
+include 'strings/en.php';

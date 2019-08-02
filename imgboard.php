@@ -9,12 +9,12 @@
 const VERSION = '181008';
 
 if (!file_exists('config.php')) {
-	include "strings/en.php";
+	include 'strings/en.php';
 	die(S_NOTCONFIGURED);
 }
 
-include "config.php";
-include "strings/".LANGUAGE.".php"; // String resource file
+include 'config.php';
+include 'strings/'.LANGUAGE.'.php'; // String resource file
 
 if (LOCKDOWN) {
 	// if not trying to do something other than managing, die
@@ -27,8 +27,8 @@ extract($_POST, EXTR_SKIP);
 extract($_GET, EXTR_SKIP);
 extract($_COOKIE, EXTR_SKIP);
 if (isset($_FILES["upfile"])) {
-	$upfile_name=$_FILES["upfile"]["name"];
-	$upfile=$_FILES["upfile"]["tmp_name"];
+	$upfile_name = $_FILES["upfile"]["name"];
+	$upfile = $_FILES["upfile"]["tmp_name"];
 }
 
 session_start();
@@ -50,8 +50,10 @@ if (!file_exists(THUMB_DIR) && !is_dir(THUMB_DIR)) {
 	echo(THUMB_DIR.': '.S_FCREATE);
 }
 
-$db_id=mysqli_select_db($con, SQLDB);
-if (!$db_id) {echo S_SQLDBSF;}
+$db_id = mysqli_select_db($con, SQLDB);
+if (!$db_id) {
+	echo S_SQLDBSF;
+}
 
 if (!table_exist(POSTTABLE)) {
 	echo (POSTTABLE.': '.S_TCREATE);
@@ -76,7 +78,9 @@ if (!table_exist(POSTTABLE)) {
 		resto int,
 		ip	text,
 		id	text)");
-	if (!$result) {echo S_TCREATEF;}
+	if (!$result) {
+		echo S_TCREATEF;
+	}
 	updatelog(); // in case of a database wipe or something
 }
 
@@ -121,21 +125,29 @@ function updatelog($resno=0) {
 			$find = mysqli_fetch_row($result);
 			mysqli_free_result($result);
 		}
-		if (!$find) error(S_REPORTERR);
+		if (!$find) {
+			error(S_REPORTERR);
+		}
 	}
 	if ($resno) {
-		if (!$treeline=mysqli_call("select * from ".POSTTABLE." where root>0 and no=".$resno." order by root desc")) {echo S_SQLFAIL;}
+		if (!$treeline=mysqli_call("select * from ".POSTTABLE." where root>0 and no=".$resno." order by root desc")) {
+			echo S_SQLFAIL;
+		}
 	} else {
-		if (!$treeline=mysqli_call("select * from ".POSTTABLE." where root>0 and resto=0 order by root desc")) {echo S_SQLFAIL;}
+		if (!$treeline=mysqli_call("select * from ".POSTTABLE." where root>0 and resto=0 order by root desc")) {
+			echo S_SQLFAIL;
+		}
 	}
 
 	//Finding the last entry number
-	if (!$result=mysqli_call("select max(no) from ".POSTTABLE)) {echo S_SQLFAIL;}
-	$row=mysqli_fetch_array($result);
-	$lastno=(int)$row[0];
+	if (!$result=mysqli_call("select max(no) from ".POSTTABLE)) {
+		echo S_SQLFAIL;
+	}
+	$row = mysqli_fetch_array($result);
+	$lastno = (int)$row[0];
 	mysqli_free_result($result);
 
-	$counttree=mysqli_num_rows($treeline);
+	$counttree = mysqli_num_rows($treeline);
 	if (!$counttree) {
 		$logfilename=PHP_SELF2;
 		$dat = '';
@@ -159,11 +171,17 @@ function updatelog($resno=0) {
 		$p = 0;
 		for ($i = $st; $i < $st+PAGE_DEF; $i++) {
 			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip,$id)=mysqli_fetch_row($treeline);
-			if (!$no) break;
-			if (!$fname) $fname = S_ANOFILE;
+			if (!$no) {
+				break;
+			}
+			if (!$fname) {
+				$fname = S_ANOFILE;
+			}
 
 			// URL and link
-			if ($email) $name = "<a href=\"mailto:$email\">$name</a>";
+			if ($email) {
+				$name = "<a href=\"mailto:$email\">$name</a>";
+			}
 			$com = auto_link($com);
 			$com = preg_replace("/&gt;/i", ">", $com);
 			$com = preg_replace("/\>\>([0-9]+)/i", "<a href='".PHP_SELF."?res=$resto#r\\1'>&gt;&gt;\\1</a>", $com);
@@ -176,7 +194,7 @@ function updatelog($resno=0) {
 			if ($ext && $ext == ".swf") {
 				$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
 				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B, $fname)</span><br />$imgsrc";
-			} else if ($ext) {
+			} elseif ($ext) {
 				$size = $fsize;//file size displayed in alt text
 				if ($w && $h) {//when there is size...
 					if (@is_file(THUMB_DIR.$tim.'s.jpg')) {
@@ -187,7 +205,7 @@ function updatelog($resno=0) {
 				} else {
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"$src\" alt=\"".$size." B\" /></a>";
 				}
-				$dat.="<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B, $fname)</span><br />$imgsrc";
+				$dat .= "<span class=\"filesize\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($size B, $fname)</span><br />$imgsrc";
 			}
 			if (DISP_ID) {
 				$userid = "ID:$id";
@@ -195,40 +213,62 @@ function updatelog($resno=0) {
 				$userid = "";
 			}
 			// Main creation
-			$dat.="<input type=\"checkbox\" name=\"$no\" value=\"delete\" /> <span class=\"filetitle\">$sub</span> ";
-			$dat.="<span class=\"postername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;";
-			if (!$resno) $dat.="[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
-			$dat.="<blockquote>$com</blockquote>";
+			$dat .= "<input type=\"checkbox\" name=\"$no\" value=\"delete\" /> <span class=\"filetitle\">$sub</span> ";
+			$dat .= "<span class=\"postername\">$name</span> $now $userid <a class=\"reflink\" href=\"#r$no\">No.</a> <a class=\"reflink\" href=\"#\" onClick=\"addref('$no');\">$no</a> &nbsp;";
+			if (!$resno) {
+				$dat .= "[<a href=\"".PHP_SELF."?res=$no\">".S_REPLY."</a>]";
+			}
+			$dat .= "<blockquote>$com</blockquote>";
 
-			if (!$resline=mysqli_call("select * from ".POSTTABLE." where resto=".$no." order by no")) echo S_SQLFAIL;
-			$countres=mysqli_num_rows($resline);
+			if (!$resline = mysqli_call("select * from ".POSTTABLE." where resto=".$no." order by no")) {
+				echo S_SQLFAIL;
+			}
+			$countres = mysqli_num_rows($resline);
 
 			if (!$resno) {
-				$s=$countres - COLLAPSENUM;
-				if ($s<0) {$s=0;}
-				elseif ($s>0) {
-					$dat.="<span class=\"omittedposts\">".$s.S_ABBR."</span><br />";
+				$s = $countres - COLLAPSENUM;
+				if ($s < 0) {
+					$s = 0;
+				} elseif ($s>0) {
+					$dat .= "<span class=\"omittedposts\">".$s.S_ABBR."</span><br />";
 				}
-			} else {$s=0;}
+			} else {
+				$s = 0;
+			}
 
-			while ($resrow=mysqli_fetch_row($resline)) {
-				if ($s>0) {$s--;continue;}
+			while ($resrow = mysqli_fetch_row($resline)) {
+				if ($s > 0) {
+					$s--;
+					continue;
+				}
 				list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip,$id)=$resrow;
 
-				if (!$no) {break;}
-				if (!$fname) $fname = S_ANOFILE;
+				if (!$no) {
+					break;
+				}
+				if (!$fname) {
+					$fname = S_ANOFILE;
+				}
 
-				if ($sub) $replytitle = "<span class=\"replytitle\">$sub</span>";
-				else $replytitle = "";
+				if ($sub) {
+					$replytitle = "<span class=\"replytitle\">$sub</span>";
+				} else {
+					$replytitle = "";
+				}
 
 				// URL and e-mail
-				if ($email) $name = "<a href=\"mailto:$email\">$name</a>";
+				if ($email) {
+					$name = "<a href=\"mailto:$email\">$name</a>";
+				}
 				$com = auto_link($com);
 				$com = preg_replace("/&gt;/i", ">", $com);
 				$com = preg_replace("/\>\>([0-9]+)/i", "<a href='".PHP_SELF."?res=$resto#r\\1'>&gt;&gt;\\1</a>", $com);
 				$com = preg_replace("/(^|>)(\>[^<]*)/i", "\\1<span class=\"unkfunc\">\\2</span>", $com);
-				if (DISP_ID) { $userid = "ID:$id"; }
-				else{ $userid = ""; }
+				if (DISP_ID) {
+					$userid = "ID:$id";
+				} else {
+					$userid = "";
+				}
 				// Main creation
 				$dat.="<table id='r$no'><tr><td class=\"doubledash\">&gt;&gt;</td><td class=\"reply\">";
 				$dat.="<span class='intro'><input type=\"checkbox\" name=\"$no\" value=\"delete\" /> $replytitle";
@@ -237,7 +277,7 @@ function updatelog($resno=0) {
 				if ($ext && ($ext == ".swf" || $ext == ".webm")) {
 					$imgsrc = "<a href=\"".$src."\" target=\"_blank\"><img src=\"file.png\" alt=\"".$fsize." B\" /></a>";
 					$dat.="<span class=\"filesize commentfile\">".S_PICNAME."<a href=\"$src\" target=\"_blank\">$tim$ext</a> ($fsize B, $fname)</span><br />$imgsrc";
-				} else if ($ext) {
+				} elseif ($ext) {
 					$size = $fsize;//file size displayed in alt text
 					if ($w && $h) {//when there is size...
 						if (@is_file(THUMB_DIR.$tim.'s.jpg')) {
@@ -333,14 +373,14 @@ function mysqli_call($query) {
 function head(&$dat) {
 	$titlepart = '';
 	if (SHOWTITLEIMG == 1) {
-		$titlepart.= '<img src="'.TITLEIMG.'" alt="'.TITLE.'" />';
+		$titlepart .= '<img src="'.TITLEIMG.'" alt="'.TITLE.'" />';
 		if (SHOWTITLETXT == 1) {$titlepart.= '<br />';}
-	} else if (SHOWTITLEIMG == 2) {
-		$titlepart.= '<img src="'.BANNERS[mt_rand(0, count(BANNERS) - 1)].'" onclick="this.src=this.src;" alt="'.TITLE.'" />';
+	} elseif (SHOWTITLEIMG == 2) {
+		$titlepart .= '<img src="'.BANNERS[mt_rand(0, count(BANNERS) - 1)].'" onclick="this.src=this.src;" alt="'.TITLE.'" />';
 		if (SHOWTITLETXT == 1) {$titlepart.= '<br />';}
 	}
 	if (SHOWTITLETXT == 1) {
-		$titlepart.= TITLE;
+		$titlepart .= TITLE;
 	}
 	$dat.='<!doctype html>
 <html lang="'.LANGUAGE.'"><head>
@@ -746,18 +786,19 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		(int)$resto.",
 		\"".$_SERVER['REMOTE_ADDR']."\",
 		'$posterid')";
-	if (!$result=mysqli_call($query)) {echo S_SQLFAIL;} //post registration
+	if (!$result=mysqli_call($query)) {
+		echo S_SQLFAIL;
+	} // post registration
 
 	//Cookies
 	setcookie ("pwdc", $c_pass,time()+7*24*3600); /* 1 week cookie expiration */
-	if (function_exists("mb_internal_encoding")&&function_exists("mb_convert_encoding")
-		&&function_exists("mb_substr")) {
-		if (preg_match("/MSIE|Opera/",$_SERVER["HTTP_USER_AGENT"])) {
-			$i=0;$c_name = '';
+	if (function_exists("mb_internal_encoding") && function_exists("mb_convert_encoding") && function_exists("mb_substr")) {
+		if (preg_match("/MSIE|Opera/", $_SERVER["HTTP_USER_AGENT"])) {
+			$i = 0; $c_name = '';
 			mb_internal_encoding("SJIS");
-			while ($j=mb_substr($names,$i,1)) {
+			while ($j = mb_substr($names, $i, 1)) {
 				$j = mb_convert_encoding($j, "UTF-16", "SJIS");
-				$c_name.="%u".bin2hex($j);
+				$c_name .= "%u".bin2hex($j);
 				$i++;
 			}
 			header("Set-Cookie: namec=$c_name; expires=".gmdate("D, d-M-Y H:i:s",time()+7*24*3600)." GMT",false);
@@ -767,9 +808,11 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		}
 	}
 
-	if ($dest&&file_exists($dest)) {
+	if ($dest && file_exists($dest)) {
 		rename($dest,$path.$tim.$ext);
-		if (USE_THUMB) {thumb($path,$tim,$ext);}
+		if (USE_THUMB) {
+			thumb($path,$tim,$ext);
+		}
 	}
 	updatelog();
 
@@ -783,36 +826,51 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 }
 
 //thumbnails
-function thumb($path,$tim,$ext) {
-	if (!function_exists("ImageCreate")||!function_exists("ImageCreateFromJPEG"))return;
+function thumb($path, $tim, $ext) {
+	if (!function_exists("ImageCreate")||!function_exists("ImageCreateFromJPEG")) {
+		return;
+	}
 	$fname = $path.$tim.$ext;
 	$thumb_dir = THUMB_DIR; // Thumbnail directory
 	$width = MAX_W; // Output width
 	$height = MAX_H; // Output height
-	// width, height, and type are aquired
+	// width, height, and type are acquired
 	$size = GetImageSize($fname);
 	switch ($size[2]) {
 	case 1:
 		if (function_exists("ImageCreateFromGIF")) {
 			$im_in = @ImageCreateFromGif ($fname);
-			if ($im_in) {break;}
+			if ($im_in) {
+				break;
+			}
 		}
-		if (!file_exists($path.$tim.'.png'))return;
+		if (!file_exists($path.$tim.'.png')) {
+			return;
+		}
 		$im_in = @ImageCreateFromPNG($path.$tim.'.png');
 		unlink($path.$tim.'.png');
-		if (!$im_in)return;
+		if (!$im_in) {
+			return;
+		}
 		break;
 	case 2: $im_in = @ImageCreateFromJPEG($fname);
-		if (!$im_in) {return;} break;
+		if (!$im_in) {
+			return;
+		}
+		break;
 	case 3:
-		if (!function_exists("ImageCreateFromPNG"))return;
+		if (!function_exists("ImageCreateFromPNG")) {
+			return;
+		}
 		$im_in = @ImageCreateFromPNG($fname);
-		if (!$im_in) {return;}
+		if (!$im_in) {
+			return;
+		}
 		break;
 	default : return;
 	}
 	// Resizing
-	if ($size[0] > $width || $size[1] >$height) {
+	if ($size[0] > $width || $size[1] > $height) {
 		$key_w = $width / $size[0];
 		$key_h = $height / $size[1];
 		($key_w < $key_h) ? $keys = $key_w : $keys = $key_h;
@@ -1269,7 +1327,7 @@ function catalog() {
 			if ($ext && $ext == ".swf") {
 				$imgsrc = "<img class='catthumb' src=\"file.png\" width=\"200\" height=\"200\" alt=\"".$fsize." B\" /><br />";
 				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
-			}else if ($ext) {
+			} elseif ($ext) {
 				$size = $fsize;//file size displayed in alt text
 				if ($w && $h) {//when there is size...
 					if (@is_file(THUMB_DIR.$tim.'s.jpg')) {
@@ -1280,9 +1338,11 @@ function catalog() {
 				} else {
 					$imgsrc = "<img class='catthumb' src=\"$src\" alt=\"".$size." B\" /><br />";
 				}
-				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
+				$dat .= "<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
 			}
-			if (strlen($com)>55) $com = substr($com,0,54)."...";
+			if (strlen($com) > 55) {
+				$com = substr($com, 0, 54)."...";
+			}
 			$dat.="<a class='cata' href='".PHP_SELF."?res=$no'><span class='cattitle filetitle'>$sub</span><br /><span class='catcont'>$com</span></a></div>";
 			$i++;
 		}

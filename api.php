@@ -6,8 +6,8 @@
  * See docs/API.md for more information
  */
 
-include('config.php');
-include "strings/".LANGUAGE.".php";
+include 'config.php';
+include 'strings/'.LANGUAGE.'.php';
 
 if (!ENABLEAPI) die(S_NOAPI);
 
