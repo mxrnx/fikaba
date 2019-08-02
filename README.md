@@ -1,4 +1,4 @@
-# Fikaba 
+# Fikaba
 Fikaba is an imageboard engine forked from Futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of Futallaby, since Futallaby has become abandonware.
 
 [See here for info on migrating from Futallaby](https://github.com/knarka/fikaba/blob/master/docs/migrate.md)

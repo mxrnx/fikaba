@@ -4,7 +4,7 @@ const LOCKDOWN = false;				//Set to true to disable page viewing for users (not 
 
 // General settings
 const TITLE = 'Fikaba-powered image board';	//Name of this imageboard
-const SHOWTITLETXT = 1;				//Show TITLE at top (1: yes  0: no)
+const SHOWTITLETXT = 1;				//Show TITLE at top (1: yes, 0: no)
 const SHOWTITLEIMG = 0;				//Show image at top (0: no, 1: single, 2: rotating)
 const BANNERS = array('title1.png', 'title2.png');	// Banners for SHOWTITLEIMG=2
 const TITLEIMG = 'title.png';			//Title image for SHOWTITLEIMG=1
@@ -22,11 +22,11 @@ const SQLDB = 'CHANGEME';			//Database used by image board
 
 // File-related settings
 const IMG_DIR = 'src/';				//Image directory (needs to be 777)
-const THUMB_DIR ='thumb/';			//Thumbnail directory (needs to be 777)
-const HOME =  '../';				//Site home directory (up one level by default
+const THUMB_DIR = 'thumb/';			//Thumbnail directory (needs to be 777)
+const HOME = '../';				//Site home directory (up one level by default
 const MAX_KB = 2000;				//Maximum upload size in KB
-const MAX_W =  250;				//Images exceeding this width will be thumbnailed
-const MAX_H =  250;				//Images exceeding this height will be thumbnailed
+const MAX_W = 250;				//Images exceeding this width will be thumbnailed
+const MAX_H = 250;				//Images exceeding this height will be thumbnailed
 const SWF_ENABLED = false;			//Whether or not upload of Flash files is allowed
 const WEBM_ENABLED = true;			//Whether or not upload of WebM files is allowed
 const OEKAKI_ENABLED = false;			//Whether or not oekaki is enabled
@@ -40,7 +40,7 @@ const THUMBBACK = array(255,255,238);		//Thumbnail background for transp. images
 // Look and behavior
 const ECHOALL = false;				//Do not write index to file, but echo directly (not very stable, not recommended)
 const PAGE_DEF = 5;				//Threads per page
-const THREADLIMIT =  40;			//Maxium number of entries
+const THREADLIMIT = 40;			//Maxium number of entries
 const BUMPLIMIT = 50;				//Maximum topic bumps
 const COLLAPSENUM = 3;				//Number of replies to show in the index
 const TRIPKEY = '#';				//this character is displayed before tripcodes

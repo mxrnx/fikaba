@@ -19,7 +19,7 @@ Number should here be replaced by the post no. of the OP.
 | **attribute**   | **value**      | **description**                | **possible values**                        | **example value**           |
 |:----------------|:---------------|:-------------------------------|:-------------------------------------------|:----------------------------|
 | `no`            | `integer`      | Post number                    | 1-9999999999999                            | `9001`                      |
-| `now`           | `text`         | Human-readable time            | text                                       | `16/10/24(Mon)00:04`        | 
+| `now`           | `text`         | Human-readable time            | text                                       | `16/10/24(Mon)00:04`        |
 | `name`          | `string`       | Name + trip/capcode            | text (may include html)                    | `someguy ## Admin`          |
 | `email`         | `string`       | Email (or `sage`, `nonoko`)    | text                                       | `anon@example.com`, `nonoko`|
 | `sub`           | `string`       | Subject                        | text                                       | `This is a subject`         |

@@ -1,4 +1,8 @@
 <?php
+
+const S_NOAPI = 'APIは現在無効になっています';
+const S_NOTCONFIGURED = '使用前にImageboardを設定する必要があります';
+const S_LOCKDOWN = 'ボードは現在無効になっています。後でもう一度確認してください';
 const S_HOME = 'ホーム';
 const S_ADMIN = '管理用';
 const S_RETURN = '掲示板に戻る';
@@ -91,4 +95,4 @@ const S_CATALOG = 'カタログモード';
 const S_CATALOGBUTTON = "カタログ";
 const S_MANABANIP = 'IPかポストの番号';
 const S_VERSION = 'のversionは';
-include("strings/en.php");
+include 'strings/en.php';
