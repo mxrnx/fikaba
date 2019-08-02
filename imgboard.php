@@ -58,7 +58,7 @@ if (!$db_id) {
 if (!table_exist(POSTTABLE)) {
 	echo (POSTTABLE.': '.S_TCREATE);
 	$result = mysqli_call("create table ".POSTTABLE." (primary key(no),
-		no	int not null auto_increment,
+		no    int not null auto_increment,
 		now   text,
 		name  text,
 		email text,
@@ -67,8 +67,8 @@ if (!table_exist(POSTTABLE)) {
 		host  text,
 		pwd   text,
 		ext   text,
-		w	 int,
-		h	 int,
+		w     int,
+		h     int,
 		tim   text,
 		time  int,
 		md5   text,
@@ -76,8 +76,8 @@ if (!table_exist(POSTTABLE)) {
 		fsize int,
 		root  timestamp,
 		resto int,
-		ip	text,
-		id	text)");
+		ip    text,
+		id    text)");
 	if (!$result) {
 		echo S_TCREATEF;
 	}
