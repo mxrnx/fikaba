@@ -21,16 +21,16 @@ a, a:visited {
 	font-size: 10px;
 	text-decoration: none;
 }
-a:hover,.admddel,.admbban,.admppost,.admaacc {
+a:hover, .admddel, .admbban, .admppost, .admaacc {
 	color: #e8d928 !important;
 }
 .unkfunc {
-	color:#E8D928;
+	color: #E8D928;
 }
 .postblocktitle a, .postblocktitle a:visited {
 	color: #000;
 }
-.postblocktitle a:hover{
+.postblocktitle a:hover {
 	color: #fff;
 }
 .filetitle, .replytitle {
@@ -40,8 +40,8 @@ a:hover,.admddel,.admbban,.admppost,.admaacc {
 	font-weight: 800;
 }
 .filesize {
-	padding-right:10px;
-	margin-left:10px;
+	padding-right: 10px;
+	margin-left: 10px;
 }
 .postername, .commentpostername {
 	color: #D2E7E8;
@@ -81,25 +81,25 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	color: #CCC;
 }
 .adminbar {
-	text-align:right;
-	background:inherit;
-	float:right;
+	text-align: right;
+	background: inherit;
+	float: right;
 }
 .styles {
 	float: left;
 }
 .logo {
-	clear:both;
-	text-align:center;
-	background:inherit;
-	font-size:24pt;
-	width:100%;
+	clear: both;
+	text-align: center;
+	background: inherit;
+	font-size: 24pt;
+	width: 100%;
 	text-transform: uppercase;
 }
 .logo img {
 	margin: 0 auto;
-	clear:both;
-	float:none;
+	clear: both;
+	float: none;
 }
 .reply {
 	border: 1px solid #D2E7E8;
@@ -107,7 +107,7 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	padding: 4px;
 	border-radius: 0px;
 	margin-bottom: 5px;
-	min-width:500px;
+	min-width: 500px;
 }
 .passvalid {
 	width: 45%;
@@ -124,7 +124,7 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	font-size: 14px;
 }
 .doubledash {
-	display:none;
+	display: none;
 }
 .postblock, .managehead {
 	background: #0D1010 none repeat scroll 0% 0% !important;
@@ -134,7 +134,9 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 	text-align: right;
 	font-weight: bold;
 }
-.managehead { text-align: center !important; }
+.managehead {
+	text-align: center !important;
+}
 .leftclear {
 	clear: left;
 }
@@ -152,97 +154,97 @@ input[type="text"], input[type="password"], input[type="number"], textarea {
 }
 .righted {
 	text-align: right;
-	float:right;
+	float: right;
 }
 .footer {
-	text-align:center;
-	font-size:12px;
+	text-align: center;
+	font-size: 12px;
 	margin-top: 45px;
 }
 .delbuttons {
-	background:inherit;
-	text-align:center;
-	padding-bottom:4px;
+	background: inherit;
+	text-align: center;
+	padding-bottom: 4px;
 }
 .dellist {
-	background:inherit;
-	text-align:center;
+	background: inherit;
+	text-align: center;
 }
 .row1 {
-	background:#E04000;
-	font-family:sans-serif;
-	font-size:12px;
-	color:#EEE;
+	background: #E04000;
+	font-family: sans-serif;
+	font-size: 12px;
+	color: #EEE;
 }
 .row2 {
-	background:#0D1010;
-	font-family:sans-serif;
-	font-size:12px;
-	color:#EEE;
+	background: #0D1010;
+	font-family: sans-serif;
+	font-size: 12px;
+	color: #EEE;
 }
 .postlists {
-	background:#EEE;
-	width:100%;
-	padding:0px;
-	color:#800000;
+	background: #EEE;
+	width: 100%;
+	padding: 0px;
+	color: #800000;
 }
-.thumbnailmsg{
-	padding-right:5px;
-	font-size:10px;
+.thumbnailmsg {
+	padding-right: 5px;
+	font-size: 10px;
 }
-.manabuttons{
-	text-align:center;
-	padding-top:6px;
-	font-size:14px !important;
+.manabuttons {
+	text-align: center;
+	padding-top: 6px;
+	font-size: 14px !important;
 }
-.catthread{
-	display:inline-block;
+.catthread {
+	display: inline-block;
 	float: none;
-	max-width:160px;
-	max-height:180px;
-	width:160px;
-	height:180px;
-	border-color:#555;
-	border-style:solid;
-	border-width:2px;
-	text-align:center;
-	font-size:12px;
-	padding-top:10px;
-	vertical-align:top;
-	margin:3px;
+	max-width: 160px;
+	max-height: 180px;
+	width: 160px;
+	height: 180px;
+	border-color: #555;
+	border-style: solid;
+	border-width: 2px;
+	text-align: center;
+	font-size: 12px;
+	padding-top: 10px;
+	vertical-align: top;
+	margin: 3px;
 }
-.cata{
-	font-size:13px;
-	text-transform:none !important;
+.cata {
+	font-size: 13px;
+	text-transform: none !important;
 }
-.catthumb{
-	max-width:160px;
-	max-height:160px;
-	width:auto;
-	height:auto;
+.catthumb {
+	max-width: 160px;
+	max-height: 160px;
+	width: auto;
+	height: auto;
 }
-.cattitle,.cattitle:hover{
-	text-decoration:none;
-	font-size:12px;
+.cattitle, .cattitle:hover {
+	text-decoration: none;
+	font-size: 12px;
 }
 .catcont {
 	word-wrap: break-word;
 }
-.catthread img{
-	max-height:40%;
-	max-width:99%;
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
+.catthread img {
+	max-height: 40%;
+	max-width: 99%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	float: none !important;
 }
-.cattable{
-	width:96%;
-	margin-left:auto;
-	margin-right:auto;
+.cattable {
+	width: 96%;
+	margin-left: auto;
+	margin-right: auto;
 }
 #errormsg {
-	color:red;
-	text-align:center;
-	font-size:20px;
+	color: red;
+	text-align: center;
+	font-size: 20px;
 }

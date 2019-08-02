@@ -3,34 +3,34 @@ html {
 	min-height: 100%;
 }
 body {
-	font-family: arial,helvetica,sans-serif;
-	font-size:10pt;
-	color:#800000;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 10pt;
+	color: #800000;
 	background-color: #FFFEEE;
 	background: linear-gradient(#FED6AF, #FFFFEE 150px) top center repeat-x;
 }
-a       {
-	background:inherit;
-	color:#000080;
-	text-decoration:underline;
+a {
+	background: inherit;
+	color: #000080;
+	text-decoration: underline;
 }
 a:visited {
-	background:inherit;
-	color:#0000EE;
-	text-decoration:underline;
+	background: inherit;
+	color: #0000EE;
+	text-decoration: underline;
 }
-a:hover,.admddel,.admbban,.admppost,.admaacc {
-	color:#DD0000!important;
-	background:inherit;
-	text-decoration:underline;
+a:hover, .admddel, .admbban, .admppost, .admaacc {
+	color: #DD0000!important;
+	background: inherit;
+	text-decoration: underline;
 }
 .reflink, .reflink:visited {
-	color:#800000;
-	text-decoration:none;
+	color: #800000;
+	text-decoration: none;
 }
 .reflink:hover {
-	color:#CC1105;
-	text-decoration:none;
+	color: #CC1105;
+	text-decoration: none;
 }
 img {
 	margin: 4px 10px 10px 10px;
@@ -50,50 +50,50 @@ hr {
 	border-top: 0;
 }
 .adminbar {
-	text-align:right;
-	background:inherit;
-	/*clear:both;*/
-	float:right;
+	text-align: right;
+	background: inherit;
+	/*clear: both;*/
+	float: right;
 }
 .styles {
 	float: left;
 }
 .logo {
-	clear:both;
-	text-align:center;
-	font-size:28pt;
-	color:#800000;
-	text-shadow: 1px 1px 1px rgba(100,0,0,0.6);
-	width:100%;
+	clear: both;
+	text-align: center;
+	font-size: 28pt;
+	color: #800000;
+	text-shadow: 1px 1px 1px rgba(100, 0, 0, 0.6);
+	width: 100%;
 }
 .logo img {
 	margin: 0 auto;
-	clear:both;
-	float:none;
+	clear: both;
+	float: none;
 }
 .theader {
-	background:#0010E0;
-	color:#FFFFFF;
-	width:100%;
+	background: #0010E0;
+	color: #FFFFFF;
+	width: 100%;
 }
 .postarea {
-	background:inherit;
+	background: inherit;
 }
 .rules {
-	font-size:10px;
+	font-size: 10px;
 }
 .postblocktitle {
-	background:#EEAA88;
+	background: #EEAA88;
 	text-align: center;
-	color:#800000;
-	font-weight:800;
+	color: #800000;
+	font-weight: 800;
 }
 .postblock {
-	background:#EEAA88;
-	color:#800000;
+	background: #EEAA88;
+	color: #800000;
 	border: 1px solid #800;
 	padding: 0 5px;
-	font-weight:bold;
+	font-weight: bold;
 }
 input[type="text"], input[type="password"], input[type="number"], textarea {
 	border: 1px solid #AAA !important;
@@ -102,111 +102,110 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"], te
 	border: 1px solid #EA8 !important;
 }
 .footer {
-	text-align:center;
-	font-size:x-small;
+	text-align: center;
+	font-size: x-small;
 	margin-top: 45px;
 }
 .passvalid {
-	background:#EEAA88;
-	text-align:center;
-	width:100%;
-	color:#ffffff;
+	background: #EEAA88;
+	text-align: center;
+	width: 100%;
+	color: #ffffff;
 }
 .dellist {
-	background:inherit;
-	text-align:center;
+	background: inherit;
+	text-align: center;
 }
 .delbuttons {
-	background:inherit;
-	text-align:center;
-	padding-bottom:4px;
-
+	background: inherit;
+	text-align: center;
+	padding-bottom: 4px;
 }
 .managehead {
-	background:#0F8FE1;
-	color:#800000;
-	font-size:14px;
-	padding:0px;
+	background: #0F8FE1;
+	color: #800000;
+	font-size: 14px;
+	padding: 0px;
 }
 .postlists {
-	background:#FFFFFF;
-	width:100%;
-	padding:0px;
-	color:#800000;
+	background: #FFFFFF;
+	width: 100%;
+	padding: 0px;
+	color: #800000;
 }
 .row1 {
-	background:#9AD2F6;
-	font-size:12px;
-	color:#800000;
+	background: #9AD2F6;
+	font-size: 12px;
+	color: #800000;
 }
 .row2 {
-	background:#FFFFFF;
-	font-size:12px;
-	color:#800000;
+	background: #FFFFFF;
+	font-size: 12px;
+	color: #800000;
 }
 .unkfunc {
-	background:inert;
-	color:#789922;
+	background: inert;
+	color: #789922;
 }
 .filesize {
-	font-size:16px;
-	text-decoration:none;
-	padding-right:10px;
-	margin-left:10px;
+	font-size: 16px;
+	text-decoration: none;
+	padding-right: 10px;
+	margin-left: 10px;
 }
 .filetitle {
-	background:inherit;
-	color:#CC1105 !important;
-	font-weight:800;
+	background: inherit;
+	color: #CC1105 !important;
+	font-weight: 800;
 }
 .postername {
-	background:inherit;
-	color:#117743;
-	font-weight:800;
+	background: inherit;
+	color: #117743;
+	font-weight: 800;
 }
 .oldpost {
-	background:inherit;
-	font-size:18px;
-	color:#CC1105;
-	font-weight:800;
+	background: inherit;
+	font-size: 18px;
+	color: #CC1105;
+	font-weight: 800;
 }
 .omittedposts {
-	background:inherit;
-	font-size:18px;
-	color:#070707;
-	font-weight:800;
-	margin-left:30px;
+	background: inherit;
+	font-size: 18px;
+	color: #070707;
+	font-weight: 800;
+	margin-left: 30px;
 }
 .reply {
-	background:#F0E0D6;
+	background: #F0E0D6;
 	border: 1px solid #D9BFB7;
 	border-left: none;
 	border-top: none;
-	color:#800000;
+	color: #800000;
 	min-width: 500px;
 }
 body>form>table { /* compensate for lack of .doubledash */
 	padding-left: 12px;
 }
 .doubledash {
-	display:none;
+	display: none;
 }
 .replytitle {
-	background:inherit;
-	color:#CC1105;
-	font-weight:800;
+	background: inherit;
+	color: #CC1105;
+	font-weight: 800;
 }
 .commentfile {
 }
 .commentpostername {
-	color:#117743;
-	font-weight:bold;
+	color: #117743;
+	font-weight: bold;
 }
 .thumbnailmsg {
-	background:inherit;
-	font-size:9px;
-	color:#800000;
-	padding-right:5px;
+	background: inherit;
+	font-size: 9px;
+	color: #800000;
+	padding-right: 5px;
 }
 .leftclear {
 	clear: left;
@@ -225,60 +224,60 @@ body>form>table { /* compensate for lack of .doubledash */
 }
 .righted {
 	text-align: right;
-	float:right;
+	float: right;
 }
-.manabuttons{
-	text-align:center;
-	padding-top:6px;
+.manabuttons {
+	text-align: center;
+	padding-top: 6px;
 }
-.catthread{
-	display:inline-block;
+.catthread {
+	display: inline-block;
 	float: none;
-	max-width:160px;
-	max-height:180px;
-	width:160px;
-	height:180px;
-	border-color:#a64;
-	border-style:solid;
-	border-width:2px;
-	text-align:center;
-	font-size:12px;
-	padding-top:10px;
-	vertical-align:top;
-	margin:2px;
+	max-width: 160px;
+	max-height: 180px;
+	width: 160px;
+	height: 180px;
+	border-color: #a64;
+	border-style: solid;
+	border-width: 2px;
+	text-align: center;
+	font-size: 12px;
+	padding-top: 10px;
+	vertical-align: top;
+	margin: 2px;
 }
 .cata {
-	text-decoration:none !important;
-	color:#800000 !important;
+	text-decoration: none !important;
+	color: #800000 !important;
 }
-.catthumb{
-	max-width:160px;
-	max-height:160px;
-	width:auto;
-	height:auto;
+.catthumb {
+	max-width: 160px;
+	max-height: 160px;
+	width: auto;
+	height: auto;
 }
-.cattitle,.cattitle:hover{
-	text-decoration:none;
-	font-size:12px;
+.cattitle, .cattitle:hover {
+	text-decoration: none;
+	font-size: 12px;
 }
 .catcont {
 	word-wrap: break-word;
 }
-.catthread img{
-	max-height:40%;
-	max-width:99%;
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
+.catthread img {
+	max-height: 40%;
+	max-width: 99%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	float: none !important;
 }
-.cattable{
-	width:96%;
-	margin-left:auto;
-	margin-right:auto;
+.cattable {
+	width: 96%;
+	margin-left: auto;
+	margin-right: auto;
 }
 #errormsg {
-	color:red;
-	text-align:center;
-	font-size:20pt;
+	color: red;
+	text-align: center;
+	font-size: 20pt;
 }
